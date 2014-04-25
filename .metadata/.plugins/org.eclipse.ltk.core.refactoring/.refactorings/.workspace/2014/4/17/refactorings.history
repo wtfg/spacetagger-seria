@@ -1,3 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">&#x0A;<refactoring comment="Delete resource &apos;spacetagger&apos;" deleteContents="true" description="Delete resource &apos;spacetagger&apos;" element1="/spacetagger" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1398353462420"/>&#x0A;<refactoring comment="Delete 3 resources" deleteContents="true" description="Delete 3 resources" element1="/space-tagger-android" element2="/space-tagger-core" element3="/space-tagger-desktop" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="3" stamp="1398353889445"/>
-</session>

@@ -9,5 +9,6 @@
 	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/space-tagger-core"/>
 	<classpathentry exported="true" kind="lib" path="/space-tagger-core/libs/gdx.jar"/>
 	<classpathentry exported="true" kind="lib" path="/space-tagger-core/libs/SpaceTaggerFramework.jar"/>
+	<classpathentry exported="true" kind="lib" path="/space-tagger-core/libs/commons-collections4-4.0.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>
