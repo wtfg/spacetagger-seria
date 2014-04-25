@@ -10,8 +10,8 @@ Features:
     + EnemyCluster: un nemico che datagli una lista di nemici da costruttore li lega in automatico al centrale
     + EnemyClusterSquare *extends EnemyCluster*: un cluster di nemici a quadrato che gira attorno al nemico
     + EnemyCutter: ha una path a taglierino, molto difficile da colpire
-    + EnemyHead *extends EnemySimple*: la testa del serpentone intermedio, ovvero un nemico con tanti nemici in coda
-    + EnemyTail *extends EnemySimple*: i vari nemici in coda
+    + EnemySnakeHead *extends EnemySimple*: la testa del serpentone intermedio, ovvero un nemico con tanti nemici in coda
+    + EnemySnakeTail *extends EnemySimple*: i vari nemici in coda
 * **6 Nuove Path**
     + Chain Path: una path che lega due nemici, diversa da addChildEntity perche si comporta come un elastico: piu' e' lontano il nemico e piu veloce si muove e viceversa se il nemico e' vicino si rallenta.
     + CircleDownPath: traiettoria circolare unita a traiettoria in basso nella y
