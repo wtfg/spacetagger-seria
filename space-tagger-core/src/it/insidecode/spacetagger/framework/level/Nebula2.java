@@ -3,6 +3,7 @@ package it.insidecode.spacetagger.framework.level;
 import it.insidecode.spacetagger.PropertiesManager;
 import it.insidecode.spacetagger.framework.Framework;
 import it.insidecode.spacetagger.framework.GfxEntity;
+import it.insidecode.spacetagger.logic.Depth;
 import it.insidecode.spacetagger.logic.Direction;
 
 import com.badlogic.gdx.math.Vector2;
@@ -19,6 +20,7 @@ public class Nebula2 extends GfxEntity {
 		super(framework, position, ENERGY_VALUE, SCORE_VALUE, DAMAGE_VALUE,
 				SPEED_VALUE, PropertiesManager.getParameter("nebula2"),
 				PropertiesManager.getParameter("explosion"));
+		setDepth(Depth.BACKGROUND1);
 	}
 
 	@Override

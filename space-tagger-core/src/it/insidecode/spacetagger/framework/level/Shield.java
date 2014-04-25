@@ -12,7 +12,7 @@ public class Shield extends GfxEntity {
 	
 	private static float ENERGY_VALUE = 10;
 	private static int SCORE_VALUE = 0;
-	private static float DAMAGE_VALUE = 0;
+	private static float DAMAGE_VALUE = 10;
 	private static float SPEED_VALUE = 0;
 
 
@@ -28,7 +28,7 @@ public class Shield extends GfxEntity {
 	public void handleContact(DynamicPhysicsEntity x){
 		super.handleContact(x);
 		if(x instanceof Enemy || x instanceof EnemyShot){
-			x.destroy();	
+			x.damage(DAMAGE_VALUE);
 			setEnergy(getEnergy() - x.getDamageValue());	
 		}
 	}

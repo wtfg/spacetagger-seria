@@ -39,9 +39,7 @@ public class FuryShot extends Shot {
 	public List<Shot> instance() {
 		FuryShot s1 = new FuryShot(gameEngine, this.getPosition().add(0,
 				60));		
-		FuryShot s2 = new FuryShot(gameEngine, this.getPosition().add(0,
-				-60));
-		return Arrays.asList(this, (Shot) s1, (Shot)s2);
+		return Arrays.asList(this, (Shot) s1);
 	}
 
 }

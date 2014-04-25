@@ -4,7 +4,6 @@ import it.insidecode.spacetagger.PropertiesManager;
 import it.insidecode.spacetagger.framework.Framework;
 import it.insidecode.spacetagger.framework.GfxPowerUp;
 
-
 import com.badlogic.gdx.math.Vector2;
 
 /**
@@ -37,6 +36,7 @@ public class TripleShotPowerUp extends GfxPowerUp {
 	@Override
 	public void apply() {
 		framework.getShip().setShot(TripleShot.class);
+		framework.getShip().setShotDecorator(BorgLazerShotDecorator.class);
 	}
 
 }
