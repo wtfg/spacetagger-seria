@@ -17,7 +17,7 @@ public class Planet1 extends GfxEntity {
 
 	public Planet1(final Framework framework, Vector2 position) {
 		super(framework, position, ENERGY_VALUE, SCORE_VALUE, DAMAGE_VALUE,
-				SPEED_VALUE, PropertiesManager.getParameter("Planet1"),
+				SPEED_VALUE, PropertiesManager.getParameter("planet1"),
 				PropertiesManager.getParameter("explosion"));
 	}
 

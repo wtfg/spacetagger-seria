@@ -10,7 +10,7 @@ import com.badlogic.gdx.math.Vector2;
 
 
 public class Scene07 extends Scene {
-	public static final String SCENE_NAME = "Scene 0";
+	public static final String SCENE_NAME = "Scene 7";
 	private Enemy head;
 	
 	public Scene07(Framework framework) {
@@ -27,7 +27,7 @@ public class Scene07 extends Scene {
 	public void init() {
 		Gdx.app.log(getName(), "init");
 		
-		framework.setStageMusic(PropertiesManager.getParameter("stage1"));
+		framework.setStageMusic(PropertiesManager.getParameter("stage2Music"));
 
 		head = new EnemyHead(framework, new Vector2(350,650), 20);
 		head.setPath(new IntermediatePath(300,300));

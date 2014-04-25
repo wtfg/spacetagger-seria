@@ -4,6 +4,7 @@ package it.insidecode.spacetagger.framework.level;
 import it.insidecode.spacetagger.PropertiesManager;
 import it.insidecode.spacetagger.framework.Framework;
 import it.insidecode.spacetagger.framework.Scene;
+import it.insidecode.spacetagger.graphics.ParallaxBackground;
 import it.insidecode.spacetagger.logic.Enemy;
 import it.insidecode.spacetagger.path.LineDirection;
 import it.insidecode.spacetagger.path.LinePath;
@@ -13,7 +14,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 
 public class Scene01 extends Scene {
-	public static final String SCENE_NAME = "Scene 0";
+	public static final String SCENE_NAME = "Scene 1";
 
 	
 	public Scene01(Framework framework) {
@@ -28,7 +29,12 @@ public class Scene01 extends Scene {
 	public void init() {
 		Gdx.app.log(getName(), "init");
 		
-		framework.setStageMusic(PropertiesManager.getParameter("stage0"));
+		framework.setStageMusic(PropertiesManager.getParameter("stage1Music"));
+		ParallaxBackground p = new ParallaxBackground();
+		p.setLevel0(PropertiesManager.getParameter("bg"), true);
+		p.setLevel1(PropertiesManager.getParameter("stars"), true);
+		framework.getGameEngine().setBackground(p);
+		
 		
 		EnemySimple f = new EnemySimple(framework, new Vector2(100,750));
 		f.setPath(new LinePath(LineDirection.DOWN, 300));

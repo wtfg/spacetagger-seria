@@ -17,7 +17,7 @@ public class Nebula2 extends GfxEntity {
 
 	public Nebula2(final Framework framework, Vector2 position) {
 		super(framework, position, ENERGY_VALUE, SCORE_VALUE, DAMAGE_VALUE,
-				SPEED_VALUE, PropertiesManager.getParameter("Nebula2"),
+				SPEED_VALUE, PropertiesManager.getParameter("nebula2"),
 				PropertiesManager.getParameter("explosion"));
 	}
 

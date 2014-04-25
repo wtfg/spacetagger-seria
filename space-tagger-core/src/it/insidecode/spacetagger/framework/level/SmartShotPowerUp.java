@@ -30,7 +30,7 @@ public class SmartShotPowerUp extends GfxPowerUp {
 	 *            powerup
 	 */
 	public SmartShotPowerUp(Framework f, Vector2 center) {
-		super(f, center, PropertiesManager.getParameter("SmartShotPowerUp"));
+		super(f, center, PropertiesManager.getParameter("smartShotPowerUp"));
 		this.setCenter(center);
 		this.framework = f;
 	}

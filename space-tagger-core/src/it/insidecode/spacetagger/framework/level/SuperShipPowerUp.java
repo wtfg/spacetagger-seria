@@ -16,7 +16,7 @@ import com.badlogic.gdx.math.Vector2;
 public class SuperShipPowerUp extends GfxPowerUp {
 
 	private Framework framework;
-	private static String fileName = "SuperShipPowerUp";
+	private static String fileName = "superShipPowerUp";
 	
 	/**
 	 * Costruttore di SmartShotPowerUp

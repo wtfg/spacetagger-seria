@@ -14,7 +14,7 @@ import com.badlogic.gdx.math.Vector2;
 
 
 public class Scene03 extends Scene {
-	public static final String SCENE_NAME = "Scene 0";
+	public static final String SCENE_NAME = "Scene 3";
 
 
 	public Scene03(Framework framework) {

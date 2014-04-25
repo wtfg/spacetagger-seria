@@ -14,11 +14,11 @@ public class SuperShip extends GfxShip {
 
 	
 	public SuperShip(Framework framework, Vector2 pos) {
-		super(framework, pos, Animation.createAnimation(PropertiesManager.getParameter("superIdle"), AnimationType.NORMAL), 
-				 Animation.createAnimation(PropertiesManager.getParameter("superFromLeft"), AnimationType.NORMAL),
-				 Animation.createAnimation(PropertiesManager.getParameter("superFromRight"), AnimationType.NORMAL),
-				 Animation.createAnimation(PropertiesManager.getParameter("superLeft"), AnimationType.NORMAL),
-				 Animation.createAnimation(PropertiesManager.getParameter("superRight"), AnimationType.NORMAL),
+		super(framework, pos, Animation.createAnimation(PropertiesManager.getParameter("superShipIdle"), AnimationType.NORMAL), 
+				 Animation.createAnimation(PropertiesManager.getParameter("superShipFromLeft"), AnimationType.NORMAL),
+				 Animation.createAnimation(PropertiesManager.getParameter("superShipFromRight"), AnimationType.NORMAL),
+				 Animation.createAnimation(PropertiesManager.getParameter("superShipLeft"), AnimationType.NORMAL),
+				 Animation.createAnimation(PropertiesManager.getParameter("superShipRight"), AnimationType.NORMAL),
 				 Animation.createAnimation(PropertiesManager.getParameter("explosion"), AnimationType.NORMAL));
 		setShot(TripleShot.class);
 		increaseSpeed(1f);
