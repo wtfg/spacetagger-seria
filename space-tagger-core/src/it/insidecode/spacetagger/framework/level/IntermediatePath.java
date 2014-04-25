@@ -21,6 +21,15 @@ public class IntermediatePath extends Path {
 				};
 		currentPath = pathsArray[current];
 	}
+	
+	public IntermediatePath(int radius, int y, boolean clockwise) {
+
+		pathsArray = new Path[] { 
+				new LinePath(LineDirection.DOWN, y),
+				new CircleDownPath(radius, 0, clockwise)
+				};
+		currentPath = pathsArray[current];
+	}
 
 	@Override
 	public Vector2 getNextPositionIncrement(float speed) {

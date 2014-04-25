@@ -14,7 +14,7 @@ import com.badlogic.gdx.math.Vector2;
 
 
 public class Scene03 extends Scene {
-	public static final String SCENE_NAME = "Scene 3";
+	public static final String SCENE_NAME = "Scene 3 - Smart shot, Clusters & Berzerks";
 
 
 	public Scene03(Framework framework) {
@@ -44,11 +44,11 @@ public class Scene03 extends Scene {
 		
 
 		EnemyClusterSquare f = new EnemyClusterSquare(framework, new Vector2(
-				300, 750), 50);
+				350, 750), 50);
 		f.setPath(new CircleDownPath(60, 2));
 		EnemyClusterSquare g = new EnemyClusterSquare(framework, new Vector2(
 				100, 750), 50);
-		g.setPath(new CircleDownPath(60, 2));
+		g.setPath(new DownSlidePath(300, 250, LineDirection.RIGHT));
 
 		postEnemies(new Enemy[] { f, g }, 1);
 		

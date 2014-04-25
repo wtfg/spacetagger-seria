@@ -28,8 +28,13 @@ public class Shield extends GfxEntity {
 	public void handleContact(DynamicPhysicsEntity x){
 		super.handleContact(x);
 		if(x instanceof Enemy || x instanceof EnemyShot){
-			x.damage(DAMAGE_VALUE);
-			setEnergy(getEnergy() - x.getDamageValue());	
+			if(x instanceof EnemySnakeHead){
+				x.damage(5f);
+				destroy();
+			}else{
+				x.destroy();
+				setEnergy(getEnergy() - x.getDamageValue());	
+			}
 		}
 	}
 	

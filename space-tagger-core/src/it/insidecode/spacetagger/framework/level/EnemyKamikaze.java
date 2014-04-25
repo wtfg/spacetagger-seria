@@ -18,11 +18,11 @@ import com.badlogic.gdx.math.Vector2;
  */
 public class EnemyKamikaze extends GfxEnemy {
 
-	private static float ENERGY_VALUE = 2f;
-	private static int SCORE_VALUE = 900;
-	private static float DAMAGE_VALUE = 3f;
-	private static float SPEED_VALUE = 3f;
-	private static String fileName = "enemyKamikaze";
+	private static final float ENERGY_VALUE = 2f;
+	private static final int SCORE_VALUE = 900;
+	private static final float DAMAGE_VALUE = 3f;
+	private static final float SPEED_VALUE = 3f;
+	private static final String fileName = "enemyKamikaze";
 
 	private boolean canShoot;
 	private int t;

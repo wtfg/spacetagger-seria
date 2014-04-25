@@ -1,0 +1,69 @@
+package it.insidecode.spacetagger.framework.level;
+
+import it.insidecode.spacetagger.framework.Framework;
+import it.insidecode.spacetagger.framework.Scene;
+
+
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.math.Vector2;
+
+
+public class Scene08 extends Scene {
+	public static final String SCENE_NAME = "Scene 8 - Harder Better Faster Stronger";
+
+	
+	public Scene08(Framework framework) {
+		super(framework);
+	}
+
+	public String getName() {
+		return SCENE_NAME;
+	}
+
+	
+	
+	@Override
+	public void init() {
+		Gdx.app.log(getName(), "init");
+
+		EnemySnakeHead head1 = new EnemySnakeHead(framework, new Vector2(380,650), 5);
+		head1.setPath(new FollowShipPath(framework, head1));
+		head1.setSpeed(2f);
+		head1.activate();
+		head1.chainEnemies(4);
+		
+		EnemySnakeHead head2 = new EnemySnakeHead(framework, new Vector2(80,650), 5);
+		head2.setPath(new FollowShipPath(framework, head2));
+		head2.setSpeed(2f);
+		head2.activate();
+		head2.chainEnemies(4);
+		
+		EnemySnakeHead head3 = new EnemySnakeHead(framework, new Vector2(80,950), 5);
+		head3.setPath(new FollowShipPath(framework, head2));
+		head3.setSpeed(3f);
+		head3.activate();
+		head3.chainEnemies(4);
+		
+		
+	}
+	
+
+
+
+	@Override
+	public void dispose() {
+		Gdx.app.log(getName(), "dispose");
+	}
+	
+	
+
+	public void update(float delta) {
+		
+		if (framework.getGameEngine().getEnemies().isEmpty()){
+			getLevel().goToNextScene();
+		}
+
+		super.update(delta);
+	}
+
+}

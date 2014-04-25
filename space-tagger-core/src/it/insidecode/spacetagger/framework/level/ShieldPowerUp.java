@@ -9,11 +9,12 @@ import com.badlogic.gdx.math.Vector2;
 public class ShieldPowerUp extends GfxPowerUp {
 
 	private static float ENERGY = 1;
+	private static final String fileName = "shieldPowerUp";
 
 	private Framework framework;
 
 	public ShieldPowerUp(Framework f, Vector2 center) {
-		super(f, center, PropertiesManager.getParameter("energyPowerUp"));
+		super(f, center, PropertiesManager.getParameter(fileName));
 		this.setCenter(center);
 		this.framework = f;
 	}

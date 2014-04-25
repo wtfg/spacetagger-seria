@@ -1,0 +1,83 @@
+package it.insidecode.spacetagger.framework.level;
+
+import it.insidecode.spacetagger.PropertiesManager;
+import it.insidecode.spacetagger.framework.Framework;
+import it.insidecode.spacetagger.graphics.Animation;
+import it.insidecode.spacetagger.graphics.AnimationType;
+import it.insidecode.spacetagger.graphics.HorizontalBar;
+import it.insidecode.spacetagger.logic.Enemy;
+
+import com.badlogic.gdx.math.Vector2;
+
+/**
+ * La testa del serpentone
+ * 
+ * @author Seria.1616892
+ * 
+ */
+public class EnemySnakeHead extends EnemySimple {
+
+	private static final int SCORE = 10000;
+	private static final String fileName = "enemyHead";
+	private HorizontalBar b;
+	private Framework framework;
+	
+
+	/**
+	 * 
+	 * @param f
+	 *            istanza del framework corrente
+	 * @param position
+	 *            un Vector2 che indica la posizione nella quale il nemico va
+	 *            spawnato
+	 *  @param energy
+	 *            La vita del nemico
+	 */
+	public EnemySnakeHead(Framework f, Vector2 position, float energy) {
+		super(f, position, energy, SCORE);
+		setCenter(position);
+		framework = f;
+		b = new HorizontalBar(framework.getGameEngine(), new Vector2(10,-20), 40, 5, energy);
+		
+		init();
+	}
+	public void chainEnemies(int enemyNum){
+		Enemy old = this;
+		for(int i = 0; i < enemyNum; i++){
+			EnemyTail e = new EnemyTail(framework, new Vector2(200,650+i*60), enemyNum-1-i);
+			e.setPath(new ChainPath(old, e));
+			e.activate();
+			old = e;
+		}
+	}
+	/**
+	 * Imposta i parametri grafici in automatico
+	 */
+	public void init(){
+		setAnimation(Animation.createAnimation(PropertiesManager.getParameter(fileName),AnimationType.LOOP));
+		setShot(EnemyShot.class);
+		setShotDecorator(BorgShotDecorator.class);
+		addChildEntity(b);
+		b.activate();
+	}
+	
+	/**
+	 * Update della barra
+	 */
+	@Override
+	public void update(float delta){
+		b.setValue(getEnergy());
+		super.update(delta);
+	}
+	
+	/**
+	 * Distruzione della barra
+	 */
+	@Override
+	public void destroy(){
+		b.destroy();
+		super.destroy();
+	}
+
+
+}

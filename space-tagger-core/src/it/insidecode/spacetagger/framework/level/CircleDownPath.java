@@ -12,10 +12,38 @@ public class CircleDownPath extends Path {
 	private Path currentPath;
 	private int current = 0;
 	private float ySpeed;
-
+	
+	/**
+	 * Costruttore della path
+	 *  
+	 * @param radius il raggio del cerchio
+	 * @param ySp velocita y
+	 */
 	public CircleDownPath(int radius, float ySp) {
 		ySpeed = ySp;
 		pathsArray = new Path[] { 
+				new HalfCirclePath(Type.LEFTUP, radius*2/3, radius),
+				new HalfCirclePath(Type.RIGHTDOWN, radius*2/3, radius)
+				};
+		currentPath = pathsArray[current];
+	}
+	
+	/**
+	 * Costruttore della path
+	 * 
+	 * @param radius il raggio del cerchio
+	 * @param ySp velocita y
+	 * @param clockwise senso orario o meno?
+	 */
+	public CircleDownPath(int radius, float ySp, boolean clockwise) {
+		ySpeed = ySp;
+		if(clockwise)
+			pathsArray = new Path[] { 
+					new HalfCirclePath(Type.LEFTDOWN, radius*2/3, radius),
+					new HalfCirclePath(Type.RIGHTUP, radius*2/3, radius)
+					};
+		else
+			pathsArray = new Path[] { 
 				new HalfCirclePath(Type.LEFTUP, radius*2/3, radius),
 				new HalfCirclePath(Type.RIGHTDOWN, radius*2/3, radius)
 				};

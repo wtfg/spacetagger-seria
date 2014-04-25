@@ -2,3 +2,9 @@
 1398442513997	Delete elements
 1398442533267	Delete elements
 1398443936582	Copy compilation unit
+1398445640278	Delete element
+1398445901049	Rename local variable 'sp'
+1398448107649	Copy compilation unit
+1398448210821	Rename local variable 'head'
+1398448599848	Rename type 'EnemyHead'
+1398448606662	Rename type 'EnemyTail'

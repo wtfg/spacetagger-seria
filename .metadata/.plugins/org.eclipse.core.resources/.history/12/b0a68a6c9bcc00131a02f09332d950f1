@@ -1,0 +1,68 @@
+package it.insidecode.spacetagger.framework.level;
+
+import it.insidecode.spacetagger.PropertiesManager;
+import it.insidecode.spacetagger.framework.Framework;
+import it.insidecode.spacetagger.graphics.Animation;
+import it.insidecode.spacetagger.graphics.AnimationType;
+import it.insidecode.spacetagger.graphics.HorizontalBar;
+
+import com.badlogic.gdx.math.Vector2;
+
+/**
+ * La testa del serpentone
+ * 
+ * @author Seria.1616892
+ * 
+ */
+public class EnemyHead extends EnemySimple {
+
+
+	private static String fileName = "enemyHead";
+	private HorizontalBar b;
+	private static int SCORE = 10000;
+
+	/**
+	 * 
+	 * @param framework
+	 *            istanza del framework corrente
+	 * @param position
+	 *            un Vector2 che indica la posizione nella quale il nemico va
+	 *            spawnato
+	 *  @param energy
+	 *            La vita del nemico
+	 */
+	public EnemyHead(Framework framework, Vector2 position, float energy) {
+		super(framework, position, energy, SCORE);
+		setCenter(position);
+		b = new HorizontalBar(framework.getGameEngine(), new Vector2(10,-20), 40, 5, energy);
+		init();
+	}
+	
+	/**
+	 * Imposta i parametri grafici in automatico
+	 */
+	public void init(){
+		setAnimation(Animation.createAnimation(PropertiesManager.getParameter(fileName),AnimationType.LOOP));
+		setShot(EnemyShot.class);
+		setShotDecorator(BorgShotDecorator.class);
+		addChildEntity(b);
+		b.activate();
+	}
+	
+	/**
+	 * Updata la barra
+	 */
+	@Override
+	public void update(float delta){
+		b.setValue(getEnergy());
+		super.update(delta);
+	}
+	
+	@Override
+	public void destroy(){
+		b.destroy();
+		super.destroy();
+	}
+
+
+}

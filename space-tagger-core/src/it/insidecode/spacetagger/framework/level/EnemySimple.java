@@ -17,11 +17,15 @@ import com.badlogic.gdx.math.Vector2;
  */
 public class EnemySimple extends GfxEnemy {
 
-	private static float ENERGY_VALUE = 1;
-	private static int SCORE_VALUE = 500;
-	private static float DAMAGE_VALUE = 1f;
-	private static float SPEED_VALUE = 2f;
-	private static String fileName = "enemyA";
+	/**
+	 * Costanti
+	 */
+	private static final float ENERGY_VALUE = 1;
+	private static final int SCORE_VALUE = 500;
+	private static final float DAMAGE_VALUE = 1f;
+	private static final float SPEED_VALUE = 2f;
+	private static final String fileName = "enemyA";
+	
 	private int SHOOT_UPDATE_TIME = 300;
 	// t e limit servono per aggiornare il tempo di sparo
 	private int t;

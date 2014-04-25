@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;space-tagger-android/assets/data/level/images/SuperShipPowerUp-40x40.png&apos; to &apos;ShieldPowerUp-40x40.png&apos;" description="Rename resource &apos;SuperShipPowerUp-40x40.png&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="assets/data/level/images/SuperShipPowerUp-40x40.png" name="ShieldPowerUp-40x40.png" stamp="1398447727266" updateReferences="true"/>
+</session>

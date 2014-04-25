@@ -1,0 +1,70 @@
+package it.insidecode.spacetagger.framework.level;
+
+import it.insidecode.spacetagger.path.HalfCirclePath;
+import it.insidecode.spacetagger.path.Path;
+import it.insidecode.spacetagger.path.Type;
+
+import com.badlogic.gdx.math.Vector2;
+
+public class CircleDownPath extends Path {
+
+	private Path[] pathsArray;
+	private Path currentPath;
+	private int current = 0;
+	private float ySpeed;
+
+	public CircleDownPath(int radius, float ySp) {
+		ySpeed = ySp;
+		pathsArray = new Path[] { 
+				new HalfCirclePath(Type.LEFTUP, radius*2/3, radius),
+				new HalfCirclePath(Type.RIGHTDOWN, radius*2/3, radius)
+				};
+		currentPath = pathsArray[current];
+	}
+	
+	public CircleDownPath(int radius, float ySp, boolean clockwise) {
+		ySpeed = ySp;
+		if(clockwise)
+			pathsArray = new Path[] { 
+					new HalfCirclePath(Type.LEFTUP, radius*2/3, radius),
+					new HalfCirclePath(Type.RIGHTDOWN, radius*2/3, radius)
+					};
+		else
+			
+		currentPath = pathsArray[current];
+	}
+
+	@Override
+	public Vector2 getNextPositionIncrement(float speed) {
+		if (currentPath.isComplete()) {
+			if ((current) >= 1) {
+				for (Path x : pathsArray)
+					x.reset();
+				current = -1;
+			}
+			currentPath = pathsArray[++current];
+		}
+		return currentPath.getNextPositionIncrement(speed+2).sub(0,ySpeed);
+	}
+
+	@Override
+	public float getX(float speed) {
+		return 0;
+	}
+
+	@Override
+	public float getY(float speed) {
+		return 0;
+	}
+
+	@Override
+	public void reset() {
+		current = 0;
+	}
+
+	@Override
+	public boolean isComplete() {
+		return current == pathsArray.length && currentPath.isComplete();
+	}
+
+}

@@ -14,12 +14,12 @@ public class AsteroidCluster extends Asteroid {
 		this.framework = framework;
 		int i = 0;
 		while (i < asteroidNum) {
-			makeAsteroids();
+			makeAsteroid();
 			i++;
 		}
 	}
 
-	void makeAsteroids() {
+	private void makeAsteroid() {
 		AsteroidPointless a = new AsteroidPointless(framework,
 				new Vector2((float) Math.random() * 480 - 240,
 						(float) Math.random() * 100), this);

@@ -55,12 +55,10 @@ public class FollowShipPath extends LinePath {
 	public Vector2 getNextPositionIncrement(float speed) {
 		
 		// evita errori se il nemico non viene istanziato
-		if (enemy == null){
-			
+		if (enemy == null)
 			return super.getNextPositionIncrement(speed);
-		}
-		// ottiene il deltaX sottraendo il proprio centro con quello della
-		// navicella
+		
+		// ottiene il deltaX sottraendo il centri suoi e della navicella
 		float deltaX = enemy.getCenter().x
 				- framework.getGameEngine().getShip().getCenter().x;
 		
@@ -72,9 +70,7 @@ public class FollowShipPath extends LinePath {
 			addedX = 0;
 		
 		return super.getNextPositionIncrement(speed).add(addedX,0);
-		
-		// aggiunge alla X il valore dX
-		//return super.getNextPositionIncrement(speed).add(addedX, 0);
+
 	}
 
 }

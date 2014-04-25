@@ -11,17 +11,16 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Timer;
 
 /**
- * PowerUp furia, spara a raffica un FuryShot TODO colorare lo schermo di rosso
- * ed implementare blinking TODO impostare la velocita' del tutto
+ * PowerUp furia, spara a raffica un FuryShot 
  * 
  * @author Seria.1616892
  * 
  */
 public class FuryPowerUp extends GfxPowerUp {
 
-	private static int MAX_SECONDS = 5;
+	private static int MAX_SECONDS = 15;
 	private Framework framework;
-
+	private static String fileName = "furyPowerUp";
 	/**
 	 * Crea il powerup
 	 * 
@@ -31,7 +30,7 @@ public class FuryPowerUp extends GfxPowerUp {
 	 *            un Vector2 dove deve essere spawnato il powerup
 	 */
 	public FuryPowerUp(Framework f, Vector2 center) {
-		super(f, center, PropertiesManager.getParameter("tripleShotPowerUp"));
+		super(f, center, PropertiesManager.getParameter(fileName));
 		this.setCenter(center);
 		this.framework = f;
 	}
@@ -54,11 +53,13 @@ public class FuryPowerUp extends GfxPowerUp {
 	 * @param framework il framework corrente
 	 * @return il task da eseguire
 	 */
-	private Timer.Task getRestore(final Framework framework, final float sp){
+	private Timer.Task getRestore(final Framework framework, final float sp, final int old){
 		return new Timer.Task(){
 			public void run(){
 				framework.getShip().setShot(SimpleShot.class);
 				framework.getGameEngine().getBackground().setSpeed(sp);
+				framework.getShip().setShotDelay(old);
+				
 			}
 			
 		};
@@ -71,17 +72,25 @@ public class FuryPowerUp extends GfxPowerUp {
 	public void apply() {
 		
 		// ottiene la navicella e imposta i valori
-		final Ship s = framework.getShip();
-		s.setShot(FuryShot.class);
-		s.setEnergy(s.getMaxEnergy());
-		//velocizza
-		float sp = framework.getGameEngine().getBackground().getSpeed();
-		framework.getGameEngine().getBackground().setSpeed(10f);
+		Ship s = framework.getShip();
 		
+		float oldBackgroundSpeed = framework.getGameEngine().getBackground().getSpeed();
+		int oldShotDelay = s.getShotDelay();
+		
+		s.setShot(FuryShot.class);
+		s.setShotDelay(10);
+		s.setEnergy(s.getMaxEnergy());
+		
+		// non casta Ship in GfxShip quindi sono costretto a chiamare getShip
+		framework.getShip().setShotDecorator(BorgShotDecorator.class);
+		//velocizza
+		
+		framework.getGameEngine().getBackground().setSpeed(10f);
+
 		// crea un timer e ripete ogni mezzo secondo lo shoot
 		// rimuovere limitazione tempo nello shot
-		Timer.schedule(getRunning(), 0.5f, 0.5f, 4);
-		Timer.schedule(getRestore(framework, sp), MAX_SECONDS);
+		Timer.schedule(getRunning(), 0.1f, 0.1f, (int) MAX_SECONDS*10);
+		Timer.schedule(getRestore(framework, oldBackgroundSpeed, oldShotDelay), MAX_SECONDS);
 
 		
 	}

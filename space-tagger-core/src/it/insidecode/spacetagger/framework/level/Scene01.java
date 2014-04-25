@@ -13,7 +13,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 
 public class Scene01 extends Scene {
-	public static final String SCENE_NAME = "Scene 1";
+	public static final String SCENE_NAME = "Scene 1 - Simple Enemies";
 
 	
 	public Scene01(Framework framework) {
@@ -29,7 +29,7 @@ public class Scene01 extends Scene {
 		Gdx.app.log(getName(), "init");
 		
 		framework.setStageMusic(PropertiesManager.getParameter("stage1Music"));
-
+	
 		
 		EnemySimple f = new EnemySimple(framework, new Vector2(100,750));
 		f.setPath(new LinePath(LineDirection.DOWN, 300));
