@@ -76,6 +76,7 @@ public class EnemySnakeHead extends EnemySimple {
 	@Override
 	public void destroy(){
 		b.destroy();
+		framework.getGameEngine().getScoreManager().increaseScore(SCORE);
 		super.destroy();
 	}
 

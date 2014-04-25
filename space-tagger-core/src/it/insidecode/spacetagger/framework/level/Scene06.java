@@ -27,7 +27,7 @@ public class Scene06 extends Scene {
 		SuperShipPowerUp e = new SuperShipPowerUp(framework, new Vector2(240,650));
 		e.activate();
 		
-		AsteroidCluster a = new AsteroidCluster(framework, new Vector2(240,800), 6);
+		BlasteroidCluster a = new BlasteroidCluster(framework, new Vector2(240,800), 6);
 		a.activate();
 		
 		Nebula3 n = new Nebula3(framework, new Vector2(10,750));

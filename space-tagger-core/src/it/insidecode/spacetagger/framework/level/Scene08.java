@@ -28,15 +28,18 @@ public class Scene08 extends Scene {
 	public void init() {
 		Gdx.app.log(getName(), "init");
 
+		FuryPowerUp p = new FuryPowerUp(framework, new Vector2(200,650));
+		p.activate();
+		
 		EnemySnakeHead head1 = new EnemySnakeHead(framework, new Vector2(380,950), 5);
 		head1.setPath(new FollowShipPath(framework, head1));
-		head1.setSpeed(3f);
+		head1.setSpeed(2f);
 		head1.activate();
 		head1.chainEnemies(4);
 		
 		EnemySnakeHead head2 = new EnemySnakeHead(framework, new Vector2(80,950), 5);
 		head2.setPath(new FollowShipPath(framework, head2));
-		head2.setSpeed(4f);
+		head2.setSpeed(2f);
 		head2.activate();
 		head2.chainEnemies(4);
 		
@@ -47,6 +50,18 @@ public class Scene08 extends Scene {
 		f.setPath(new DownSlidePath(300, 400, LineDirection.RIGHT));
 		
 		postEnemies(new Enemy[]{e, f}, 2);
+		
+		EnemyBerzerk g = new  EnemyBerzerk(framework, new Vector2(400, 850));
+		g.setPath(new FollowShipPath(framework, g));
+		
+		EnemyBerzerk h = new EnemyBerzerk(framework, new Vector2(100, 850));
+		h.setPath(new FollowShipPath(framework, h));
+		
+		postEnemies(new Enemy[]{g, h}, 2);
+		
+		EnemyKamikaze i = new EnemyKamikaze(framework, new Vector2(0,850));
+		
+		postEnemies(new Enemy[]{i}, 3);
 		
 	}
 	

@@ -36,7 +36,7 @@ public class TripleShotPowerUp extends GfxPowerUp {
 	@Override
 	public void apply() {
 		framework.getShip().setShot(TripleShot.class);
-		framework.getShip().setShotDecorator(BorgLazerShotDecorator.class);
+		framework.getShip().setShotDecorator(SmartShotDecorator.class);
 	}
 
 }

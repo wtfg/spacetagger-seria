@@ -32,7 +32,6 @@ public class TripleShot extends Shot {
 	
 	public TripleShot(GameEngine gameEngine, Vector2 v) {
 		super(gameEngine, v, DAMAGE_VALUE, SPEED_VALUE);
-		
 		setWhatToKill(Enemy.class);
 		setDirection(Direction.UP);
 	}

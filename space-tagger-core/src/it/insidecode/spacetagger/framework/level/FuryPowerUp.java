@@ -18,7 +18,7 @@ import com.badlogic.gdx.utils.Timer;
  */
 public class FuryPowerUp extends GfxPowerUp {
 
-	private static int MAX_SECONDS = 15;
+	private static int MAX_SECONDS = 10;
 	private Framework framework;
 	private static String fileName = "furyPowerUp";
 	/**
@@ -44,6 +44,7 @@ public class FuryPowerUp extends GfxPowerUp {
 			@Override
 			public void run() {
 				framework.getShip().shoot();
+				framework.getShip().setEnergy(framework.getShip().getMaxEnergy());
 			}
 		};
 	}
@@ -59,7 +60,7 @@ public class FuryPowerUp extends GfxPowerUp {
 				framework.getShip().setShot(SimpleShot.class);
 				framework.getGameEngine().getBackground().setSpeed(sp);
 				framework.getShip().setShotDelay(old);
-				
+				framework.getShip().setEnergy(10);
 			}
 			
 		};
@@ -79,19 +80,18 @@ public class FuryPowerUp extends GfxPowerUp {
 		
 		s.setShot(FuryShot.class);
 		s.setShotDelay(10);
-		s.setEnergy(s.getMaxEnergy());
+		
 		
 		// non casta Ship in GfxShip quindi sono costretto a chiamare getShip
 		framework.getShip().setShotDecorator(BorgShotDecorator.class);
 		//velocizza
 		
 		framework.getGameEngine().getBackground().setSpeed(10f);
-
+		
 		// crea un timer e ripete ogni mezzo secondo lo shoot
 		// rimuovere limitazione tempo nello shot
 		Timer.schedule(getRunning(), 0.1f, 0.1f, (int) MAX_SECONDS*10);
 		Timer.schedule(getRestore(framework, oldBackgroundSpeed, oldShotDelay), MAX_SECONDS);
-
 		
 	}
 

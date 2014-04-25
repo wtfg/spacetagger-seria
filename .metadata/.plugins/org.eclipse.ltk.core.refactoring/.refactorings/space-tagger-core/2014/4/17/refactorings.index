@@ -8,3 +8,11 @@
 1398448210821	Rename local variable 'head'
 1398448599848	Rename type 'EnemyHead'
 1398448606662	Rename type 'EnemyTail'
+1398452078210	Copy compilation unit
+1398454936853	Rename type 'Asteroid'
+1398455183845	Rename field 'SCORE_VALUE'
+1398455190518	Rename field 'DAMAGE_VALUE'
+1398455195666	Rename field 'SPEED_VALUE'
+1398455229340	Rename type 'AsteroidPointless'
+1398455234258	Rename type 'BlsteroidPointless'
+1398455243507	Rename type 'AsteroidCluster'

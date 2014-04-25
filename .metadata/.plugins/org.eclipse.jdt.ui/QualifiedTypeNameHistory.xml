@@ -4,4 +4,10 @@
 <fullyQualifiedTypeName name="it.insidecode.spacetagger.logic.Depth"/>
 <fullyQualifiedTypeName name="it.insidecode.spacetagger.decorator.ShotDecorator"/>
 <fullyQualifiedTypeName name="it.insidecode.spacetagger.framework.GfxShip"/>
+<fullyQualifiedTypeName name="it.insidecode.spacetagger.path.LineDirection"/>
+<fullyQualifiedTypeName name="it.insidecode.spacetagger.path.LinePath"/>
+<fullyQualifiedTypeName name="it.insidecode.spacetagger.framework.GfxEnemy"/>
+<fullyQualifiedTypeName name="java.util.Random"/>
+<fullyQualifiedTypeName name="it.insidecode.spacetagger.logic.Direction"/>
+<fullyQualifiedTypeName name="it.insidecode.spacetagger.shots.Shot"/>
 </qualifiedTypeNameHistroy>

@@ -1,6 +1,7 @@
 package it.insidecode.spacetagger.framework.level;
 
 import it.insidecode.spacetagger.framework.Framework;
+import it.insidecode.spacetagger.framework.GfxEnemy;
 import it.insidecode.spacetagger.framework.Scene;
 import it.insidecode.spacetagger.logic.Enemy;
 import it.insidecode.spacetagger.path.LineDirection;
@@ -27,24 +28,20 @@ public class Scene05 extends Scene {
 		
 		
 		
-		EnemyKamikaze f = new EnemyKamikaze(framework, new Vector2(100,650));
+		
 		EnemyBerzerk g = new EnemyBerzerk(framework, new Vector2(50,0));
-		EnemyBerzerk h = new EnemyBerzerk(framework, new Vector2(-50,0));
-		
-		f.addChildEntity(g);
-		f.addChildEntity(h);
+		EnemyBerzerk h = new EnemyBerzerk(framework, new Vector2(-50,0));	
+		EnemyCluster f = new EnemyCluster(framework, new Vector2(100,650), new GfxEnemy[]{g, h});
+		f.setPath(new FollowShipPath(framework, f));
 		f.activate();
-		g.activate();
-		h.activate();
 		
-		EnemyKamikaze i = new EnemyKamikaze(framework, new Vector2(300,650));
+	
 		EnemyBerzerk j = new EnemyBerzerk(framework, new Vector2(50,0));
 		EnemyBerzerk k = new EnemyBerzerk(framework, new Vector2(-50,0));
+		EnemyCluster i = new EnemyCluster(framework, new Vector2(300,650), new GfxEnemy[]{j, k});
+		i.setPath(new FollowShipPath(framework, i));
+		i.activate();
 		
-		i.addChildEntity(j);
-		i.addChildEntity(k);
-		
-		postEnemies(new Enemy[]{i, j, k}, 1);
 		
 		EnemyBerzerk l = new EnemyBerzerk(framework, new Vector2(100,650));
 		l.setPath(new DownSlidePath(200,500, LineDirection.RIGHT));
@@ -53,7 +50,7 @@ public class Scene05 extends Scene {
 		EnemyBerzerk n = new EnemyBerzerk(framework, new Vector2(100,850));
 		n.setPath(new DownSlidePath(200,500, LineDirection.RIGHT));
 		EnemyBerzerk o = new EnemyBerzerk(framework, new Vector2(300,950));
-		o.setPath(new DownSlidePath(200,500, LineDirection.RIGHT));
+		o.setPath(new DownSlidePath(200,500, LineDirection.LEFT));
 		
 		postEnemies(new Enemy[]{l, m, n, o}, 2);
 		
