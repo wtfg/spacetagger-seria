@@ -28,7 +28,7 @@ public class Blasteroid extends GfxEnemy {
 	public Blasteroid(final Framework f, Vector2 position) {
 		super(f, position, ENERGY, SCORE, DAMAGE,
 				SPEED, PropertiesManager.getParameter("blasteroid"),
-				PropertiesManager.getParameter("explosion"),
+				PropertiesManager.getParameter("xplosion"),
 				new SimpleCallback() {
 					@Override
 					public void onComplete() {

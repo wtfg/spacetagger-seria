@@ -16,3 +16,16 @@
 1398455229340	Rename type 'AsteroidPointless'
 1398455234258	Rename type 'BlsteroidPointless'
 1398455243507	Rename type 'AsteroidCluster'
+1398509136758	Copy compilation unit
+1398509379742	Rename local variable 'g'
+1398515870113	Copy compilation unit
+1398516339263	Rename local variable 'framework'
+1398517937738	Rename method 'createEnemy'
+1398517956998	Copy compilation unit
+1398518743614	Copy compilation unit
+1398518750938	Rename type 'Scene12'
+1398523019385	Copy compilation unit
+1398523034105	Rename type 'CopyOfEnemyShot'
+1398524318068	Copy compilation unit
+1398524347773	Copy compilation unit
+1398524421239	Copy compilation unit

@@ -3,7 +3,10 @@ package it.insidecode.spacetagger.framework.level;
 import it.insidecode.spacetagger.PropertiesManager;
 import it.insidecode.spacetagger.framework.Framework;
 import it.insidecode.spacetagger.framework.GfxPowerUp;
+import it.insidecode.spacetagger.framework.GfxText;
+import it.insidecode.spacetagger.util.SimpleCallback;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 
 /**
@@ -29,12 +32,21 @@ public class TripleShotPowerUp extends GfxPowerUp {
 		setCenter(center);
 		framework = f;
 	}
-	
+
+	private void makeText(){
+		GfxText t = new GfxText(framework, "Triple Shot", new SimpleCallback(){
+			public void onComplete(){
+				Gdx.app.log("TripleShot", "Attivato");
+			}
+		});
+		t.activate();
+	}
 	/**
 	 * Applica il nuovo sparo
 	 */
 	@Override
 	public void apply() {
+		makeText();
 		framework.getShip().setShot(TripleShot.class);
 		framework.getShip().setShotDecorator(SmartShotDecorator.class);
 	}

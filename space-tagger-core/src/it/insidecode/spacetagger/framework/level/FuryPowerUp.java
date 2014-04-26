@@ -4,9 +4,12 @@ package it.insidecode.spacetagger.framework.level;
 import it.insidecode.spacetagger.PropertiesManager;
 import it.insidecode.spacetagger.framework.Framework;
 import it.insidecode.spacetagger.framework.GfxPowerUp;
+import it.insidecode.spacetagger.framework.GfxText;
 import it.insidecode.spacetagger.logic.Ship;
 import it.insidecode.spacetagger.shots.SimpleShot;
+import it.insidecode.spacetagger.util.SimpleCallback;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Timer;
 
@@ -66,12 +69,21 @@ public class FuryPowerUp extends GfxPowerUp {
 		};
 	}
 
+	private void makeText(){
+		GfxText t = new GfxText(framework, "FURY!", new SimpleCallback(){
+			public void onComplete(){
+				Gdx.app.log("Fury", "Attivato");
+			}
+		});
+		t.activate();
+	}
+	
 	/**
 	 * Effetti di quando il powerup viene applicato
 	 */
 	@Override
 	public void apply() {
-		
+		makeText();
 		// ottiene la navicella e imposta i valori
 		Ship s = framework.getShip();
 		
@@ -81,9 +93,7 @@ public class FuryPowerUp extends GfxPowerUp {
 		s.setShot(FuryShot.class);
 		s.setShotDelay(10);
 		
-		
-		// non casta Ship in GfxShip quindi sono costretto a chiamare getShip
-		framework.getShip().setShotDecorator(BorgShotDecorator.class);
+
 		//velocizza
 		
 		framework.getGameEngine().getBackground().setSpeed(10f);

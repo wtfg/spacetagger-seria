@@ -20,7 +20,7 @@ public class BlasteroidPointless extends GfxEnemy {
 	public BlasteroidPointless(final Framework framework, Vector2 position, Blasteroid mAsteroid) {
 		super(framework, position, ENERGY_VALUE, SCORE_VALUE, DAMAGE_VALUE,
 				SPEED_VALUE, PropertiesManager.getParameter("blasteroid"),
-				PropertiesManager.getParameter("explosion"));
+				PropertiesManager.getParameter("xplosion"));
 		mainAsteroid = mAsteroid;
 	}
 

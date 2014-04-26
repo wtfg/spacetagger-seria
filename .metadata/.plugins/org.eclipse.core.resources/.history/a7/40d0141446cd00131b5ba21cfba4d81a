@@ -1,0 +1,118 @@
+package it.insidecode.spacetagger.framework.level;
+
+import java.util.Random;
+
+import it.insidecode.spacetagger.PropertiesManager;
+import it.insidecode.spacetagger.framework.Framework;
+import it.insidecode.spacetagger.framework.GfxEnemy;
+import it.insidecode.spacetagger.graphics.HorizontalBar;
+import it.insidecode.spacetagger.logic.Depth;
+import it.insidecode.spacetagger.logic.Direction;
+
+import com.badlogic.gdx.math.Vector2;
+
+/**
+ * Un nemico grosso e cattivo
+ * 
+ * @author Seria.1616892
+ * 
+ */
+public class EnemyBig2 extends GfxEnemy {
+
+	/**
+	 * Costanti
+	 */
+	private static final float ENERGY_VALUE = 20;
+	private static final int SCORE_VALUE = 6000;
+	private static final float DAMAGE_VALUE = 3f;
+	private static final float SPEED_VALUE = 2f;
+	private static final String fileName = "enemyBig2";
+	
+	private int SHOOT_UPDATE_TIME = 1500;
+	private Framework framework;
+	private HorizontalBar b;
+	private Direction currentDirection = Direction.DOWN;
+	
+	// t e limit servono per aggiornare il tempo di sparo
+	private int t;
+	private int limit = new Random().nextInt(SHOOT_UPDATE_TIME);
+
+	/**
+	 * 
+	 * @param f
+	 *            istanza del framework corrente
+	 * @param position
+	 *            un Vector2 che indica la posizione nella quale il nemico va
+	 *            spawnato
+	 */
+	public EnemyBig2(Framework f, Vector2 position) {
+		super(f, position, ENERGY_VALUE, SCORE_VALUE, DAMAGE_VALUE,
+				SPEED_VALUE, PropertiesManager.getParameter(fileName),
+				PropertiesManager.getParameter("xplosion"));
+		framework = f;
+		setShot(EnemyShot.class);
+		setShotDecorator(BorgShotDecorator.class);
+		setShootUpdateTime(100);
+		b = new HorizontalBar(framework.getGameEngine(), new Vector2(20,-20), 70, 5, ENERGY_VALUE);
+		addChildEntity(b);
+		b.activate();
+	}
+	
+
+	/**
+	 * Comportamento classico, inclusi degli spari in un tempo random ogni 300
+	 * frames random
+	 */
+	@Override
+	public void update(float delta) {
+		super.update(delta);		
+		b.setValue(getEnergy());
+		
+		computeMove();
+		
+		t++;
+		if (t > limit) {
+			limit = new Random().nextInt(SHOOT_UPDATE_TIME);
+			t = 0;
+			if (isAlive()){
+				shoot();
+			}
+		}
+
+	}
+	
+	private void computeMove(){
+		float deltaX = framework.getShip().getCenter().x - getCenter().x;
+		if(deltaX>10)
+			move(Direction.RIGHT);
+		else if(deltaX<-10)
+			move(Direction.LEFT);
+		if(this.getPath().isComplete())
+			move(currentDirection);
+		
+		if(getCenter().y < 200 || getCenter().y > 500)
+			switchDirection();
+	}
+	
+	private void switchDirection(){
+		if(currentDirection == Direction.DOWN)
+			currentDirection = Direction.UP;
+		else
+			currentDirection = Direction.DOWN;
+	}
+	
+	/**
+	 * Imposta un range di lontananza per lo sparo
+	 * @param time
+	 */
+	protected void setShootUpdateTime(int time){
+		SHOOT_UPDATE_TIME = time;
+	}
+	
+	@Override
+	public void destroy(){
+		b.destroy();
+		framework.getGameEngine().getScoreManager().increaseScore(SCORE_VALUE);
+		super.destroy();
+	}
+}

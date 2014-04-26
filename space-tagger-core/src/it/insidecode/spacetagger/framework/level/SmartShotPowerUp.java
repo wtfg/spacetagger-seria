@@ -4,8 +4,11 @@ package it.insidecode.spacetagger.framework.level;
 import it.insidecode.spacetagger.PropertiesManager;
 import it.insidecode.spacetagger.framework.Framework;
 import it.insidecode.spacetagger.framework.GfxPowerUp;
+import it.insidecode.spacetagger.framework.GfxText;
 import it.insidecode.spacetagger.shots.SimpleShot;
+import it.insidecode.spacetagger.util.SimpleCallback;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Timer;
 
@@ -50,12 +53,20 @@ public class SmartShotPowerUp extends GfxPowerUp {
 		};
 	}
 
+	private void makeText(){
+		GfxText t = new GfxText(framework, "Smart Shot", new SimpleCallback(){
+			public void onComplete(){
+				Gdx.app.log("SmartShot", "Attivato");
+			}
+		});
+		t.activate();
+	}
 	/**
 	 * Applica il nuovo sparo
 	 */
 	@Override
 	public void apply() {
-
+		makeText();
 		//sostituisce con il super sparo
 		framework.getShip().setShot(SmartShot.class);
 		framework.getShip().setShotDecorator(SmartShotDecorator.class);

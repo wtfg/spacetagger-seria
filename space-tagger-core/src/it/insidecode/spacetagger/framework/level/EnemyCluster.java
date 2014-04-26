@@ -17,7 +17,7 @@ public class EnemyCluster extends GfxEnemy {
 	private static int SCORE_VALUE = 2000;
 	private static float DAMAGE_VALUE = 4f;
 	private static float SPEED_VALUE = 2.5f;
-	private static String fileName = "enemyB";
+	private static String fileName = "enemyCluster";
 	private GfxEnemy[] enemyList;
 
 	/**
@@ -34,7 +34,7 @@ public class EnemyCluster extends GfxEnemy {
 	public EnemyCluster(Framework framework, Vector2 position, GfxEnemy[] g) {
 		super(framework, position, ENERGY_VALUE, SCORE_VALUE, DAMAGE_VALUE,
 				SPEED_VALUE, PropertiesManager.getParameter(fileName),
-				PropertiesManager.getParameter("explosion"));
+				PropertiesManager.getParameter("xplosion"));
 		enemyList = g;
 		setShot(EnemyShot.class);
 		setShotDecorator(BorgShotDecorator.class);

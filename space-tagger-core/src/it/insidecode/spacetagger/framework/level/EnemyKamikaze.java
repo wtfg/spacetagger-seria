@@ -44,7 +44,7 @@ public class EnemyKamikaze extends GfxEnemy {
 	public EnemyKamikaze(Framework framework, Vector2 position) {
 		super(framework, position, ENERGY_VALUE, SCORE_VALUE, DAMAGE_VALUE,
 				SPEED_VALUE, PropertiesManager.getParameter(fileName),
-				PropertiesManager.getParameter("explosion"));
+				PropertiesManager.getParameter("xplosion"));
 		setPath(new FollowShipPath(framework, this));
 		canShoot = false;
 		setShot(EnemyShot.class);

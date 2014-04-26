@@ -4,6 +4,10 @@ package it.insidecode.spacetagger.framework.level;
 import it.insidecode.spacetagger.PropertiesManager;
 import it.insidecode.spacetagger.framework.Framework;
 import it.insidecode.spacetagger.framework.GfxPowerUp;
+import it.insidecode.spacetagger.framework.GfxText;
+import it.insidecode.spacetagger.util.SimpleCallback;
+
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 
 
@@ -34,9 +38,17 @@ public class SuperShipPowerUp extends GfxPowerUp {
 	}
 	
 
+	private void makeText(){
+		GfxText t = new GfxText(framework, "Super Ship", new SimpleCallback(){
+			public void onComplete(){
+				Gdx.app.log("SuperShip", "Attivata");
+			}
+		});
+		t.activate();
+	}
 	@Override
 	public void apply() {
-
+		makeText();
 		//sostituisce con il super sparo
 		framework.setShip(new SuperShip(framework, framework.getShip().getPosition()));
 		framework.getShip().setShot(TripleSmartShot.class);

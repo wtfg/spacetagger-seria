@@ -33,7 +33,7 @@ public class EnemyBerzerk extends GfxEnemy {
 	public EnemyBerzerk(Framework framework, Vector2 position) {
 		super(framework, position, ENERGY_VALUE, SCORE_VALUE, DAMAGE_VALUE,
 				SPEED_VALUE, PropertiesManager.getParameter(fileName),
-				PropertiesManager.getParameter("explosion"));
+				PropertiesManager.getParameter("xplosion"));
 		setShot(EnemyShot.class);
 		setShotDecorator(BorgShotDecorator.class);
 	}

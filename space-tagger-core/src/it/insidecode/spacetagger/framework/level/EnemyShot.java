@@ -31,7 +31,20 @@ public class EnemyShot extends Shot {
 	public EnemyShot(GameEngine gameEngine, Vector2 v) {
 		super(gameEngine, v, DAMAGE_VALUE, SPEED_VALUE);
 	}
-	
+	/**
+	 * Costruttore di EnemyShot
+	 * 
+	 * @param gameEngine
+	 *            istanza del GameEngine ottenibile con
+	 *            framework.getGameEngine()
+	 * @param v
+	 *            un Vector2 che contiene la posizione da cui parte lo sparo
+	 * @param damage
+	 *            danno dello sparo
+	 */
+	public EnemyShot(GameEngine gameEngine, Vector2 v, float damage) {
+		super(gameEngine, v, damage, SPEED_VALUE);
+	}
 	/**
 	 * Ritorna un singletonList con se' stesso
 	 */

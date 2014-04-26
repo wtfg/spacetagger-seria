@@ -21,13 +21,13 @@ public class SuperShip extends GfxShip {
 				 Animation.createAnimation(PropertiesManager.getParameter("superShipRight"), AnimationType.NORMAL),
 				 Animation.createAnimation(PropertiesManager.getParameter("explosion"), AnimationType.NORMAL));
 		setShot(TripleShot.class);
-		increaseSpeed(1f);
+		increaseSpeed(2f);
 	}
 
 
 	public void handleContact(DynamicPhysicsEntity x){
 		super.handleContact(x);
-		if(x instanceof GfxEnemy){
+		if(x instanceof GfxEnemy || x instanceof EnemyShot){
 			float theDamage = x.getDamageValue();
 			setEnergy(getEnergy() + theDamage*2/3);
 		}
