@@ -61,7 +61,7 @@ public class BossBody extends EnemyIntermediate  {
 		e = new ShieldPowerUp(framework, new Vector2(240,450));
 		fp = new FuryPowerUp(framework, new Vector2(240,400));
 
-		b = new HorizontalBar(framework.getGameEngine(), new Vector2(50,-20), 140, 5, ENERGY_VALUE);
+		b = new HorizontalBar(framework.getGameEngine(), new Vector2(50,-20), 70, 5, ENERGY_VALUE);
 		addChildEntity(b);
 		b.activate();
 	}
