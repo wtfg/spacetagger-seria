@@ -21,6 +21,7 @@ public class EnemySnakeHead extends EnemySimple {
 	private static final String fileName = "enemyHead";
 	private HorizontalBar b;
 	private Framework framework;
+	private float DeltaY = 30;
 	
 
 	/**
@@ -41,11 +42,19 @@ public class EnemySnakeHead extends EnemySimple {
 		
 		init();
 	}
+	
+	public void setDeltaY(float y){
+		DeltaY = y;
+	}
+	
+	
 	public void chainEnemies(int enemyNum){
 		Enemy old = this;
 		for(int i = 0; i < enemyNum; i++){
 			EnemySnakeTail e = new EnemySnakeTail(framework, new Vector2(200,650+i*60), enemyNum-i);
-			e.setPath(new ChainPath(old, e));
+			ChainPath c = new ChainPath(old, e);
+			c.setDeltaY(DeltaY);
+			e.setPath(c);
 			e.activate();
 			old = e;
 		}

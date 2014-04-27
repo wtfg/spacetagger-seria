@@ -34,6 +34,8 @@ public class BossHead extends GfxEnemy {
 	// t e limit servono per aggiornare il tempo di sparo
 	private int t;
 	private int limit = SHOOT_UPDATE_TIME;
+	
+	private BossBody body;
 
 	/**
 	 * 
@@ -43,7 +45,7 @@ public class BossHead extends GfxEnemy {
 	 *            un Vector2 che indica la posizione nella quale il nemico va
 	 *            spawnato
 	 */
-	public BossHead(Framework f, Vector2 position) {
+	public BossHead(Framework f, Vector2 position, BossBody bossbody) {
 		super(f, position, ENERGY_VALUE, SCORE_VALUE, DAMAGE_VALUE,
 				SPEED_VALUE, PropertiesManager.getParameter(fileName),
 				PropertiesManager.getParameter("xplosion"));
@@ -51,6 +53,7 @@ public class BossHead extends GfxEnemy {
 		setCenter(position);
 		setShot(EnemyShot.class);
 		setShotDecorator(BorgShotDecorator.class);
+		body = bossbody;
 		b = new HorizontalBar(framework.getGameEngine(), new Vector2(50,-20), 70, 5, ENERGY_VALUE);
 		addChildEntity(b);
 		b.activate();

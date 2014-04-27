@@ -29,15 +29,25 @@ public class Scene12 extends Scene {
 	@Override
 	public void init() {
 		
+		ShieldPowerUp s = new ShieldPowerUp(framework, new Vector2(200,650));
+		s.activate();
+		
+		TripleShotPowerUp t = new TripleShotPowerUp(framework, new Vector2(100,850));
+		t.activate();
+		
+		EnergyPowerUp e = new EnergyPowerUp(framework, new Vector2(300,950));
+		e.activate();
+		
 		BossBody b = new BossBody(framework, new Vector2(140,650));
 		b.setPath(new LinePath(LineDirection.DOWN, 400));
 		b.activate();
 		b.setDepth(Depth.ENTITY2);
 		
-		BossHead h = new BossHead(framework, new Vector2(190,850));
+		BossHead h = new BossHead(framework, new Vector2(190,850), b);
 		h.setPath(new LinePath(LineDirection.DOWN, 400));
 		h.activate();
 		h.setDepth(Depth.ENTITY1);
+		
 		
 	}
 	
