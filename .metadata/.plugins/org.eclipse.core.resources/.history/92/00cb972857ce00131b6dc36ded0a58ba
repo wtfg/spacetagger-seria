@@ -1,0 +1,5 @@
+package it.insidecode.spacetagger.framework.level;
+
+public class EnemyIntermediate {
+
+}

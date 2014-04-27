@@ -1,6 +1,8 @@
 package it.insidecode.spacetagger.framework.level;
 
+import it.insidecode.spacetagger.PropertiesManager;
 import it.insidecode.spacetagger.framework.Framework;
+import it.insidecode.spacetagger.framework.GfxText;
 import it.insidecode.spacetagger.framework.Scene;
 import it.insidecode.spacetagger.logic.Depth;
 import it.insidecode.spacetagger.logic.Enemy;
@@ -14,7 +16,7 @@ import com.badlogic.gdx.math.Vector2;
 
 public class Scene12 extends Scene {
 	public static final String SCENE_NAME = "Scene 11 - Other bigger enemies";
-
+	private static BossHead h;
 	
 	public Scene12(Framework framework) {
 		super(framework);
@@ -28,47 +30,47 @@ public class Scene12 extends Scene {
 	
 	@Override
 	public void init() {
+		GfxText txt = new GfxText(framework, "FINAL BOSS", new SimpleCallback(){
+			public void onComplete(){
+				ShieldPowerUp s = new ShieldPowerUp(framework, new Vector2(240,650));
+				s.activate();
+				TripleShotPowerUp t = new TripleShotPowerUp(framework, new Vector2(140,850));
+				t.activate();
+				EnergyPowerUp e = new EnergyPowerUp(framework, new Vector2(340,950));
+				e.activate();
+				
+				framework.setStageMusic(PropertiesManager.getParameter("bossMusic"));
+			}
+		});
+		txt.activate();
 		
-		ShieldPowerUp s = new ShieldPowerUp(framework, new Vector2(200,650));
-		s.activate();
 		
-		TripleShotPowerUp t = new TripleShotPowerUp(framework, new Vector2(100,850));
-		t.activate();
 		
-		EnergyPowerUp e = new EnergyPowerUp(framework, new Vector2(300,950));
-		e.activate();
-		
-		BossBody b = new BossBody(framework, new Vector2(140,650));
-		b.setPath(new LinePath(LineDirection.DOWN, 400));
+		BossBody b = new BossBody(framework, new Vector2(140,850));
+		b.setPath(new LinePath(LineDirection.DOWN, 600));
 		b.activate();
 		b.setDepth(Depth.ENTITY2);
 		
-		BossHead h = new BossHead(framework, new Vector2(190,850), b);
-		h.setPath(new LinePath(LineDirection.DOWN, 400));
+		h = new BossHead(framework, new Vector2(190,1050), b);
+		h.setPath(new LinePath(LineDirection.DOWN, 600));
 		h.activate();
 		h.setDepth(Depth.ENTITY1);
+		
+		makeArms(5);
+		
+		
 		
 		
 	}
 	
-	/**
-	 * Immette dei nemici dopo un numero di secondi
-	 * Se la navicella muore non c'e il problema del callback
-	 * 
-	 * @param g	array di nemici da postare
-	 * @param delaySeconds	numero di secondi di delay
-	 */
-	public void postEnemies(final Enemy[] g, int delaySeconds){
+	public void makeArms(int k){
+		for(int i = 0; i < k*2; i++){
+			float side = i<k ? -1 : 1.8f;
+			EnemySimple e = new EnemySimple(framework, new Vector2(side*100, (i%k)*50 -250));
+			h.addChildEntity(e);
+			e.activate();
+		}
 		
-		countDown(1000*delaySeconds, new SimpleCallback() {
-			@Override
-			public void onComplete() {
-				for(Enemy f : g){
-					f.activate();
-				}
-
-			}
-		});
 	}
 
 
@@ -81,7 +83,11 @@ public class Scene12 extends Scene {
 
 	public void update(float delta) {
 		
-		if (framework.getGameEngine().getEnemies().isEmpty()){
+		if (!h.isAlive()){
+			for(Enemy e:framework.getGameEngine().getEnemies()){
+				e.destroy();
+			}
+				
 			getLevel().goToNextScene();
 		}
 

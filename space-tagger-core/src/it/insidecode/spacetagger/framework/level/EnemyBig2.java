@@ -65,7 +65,7 @@ public class EnemyBig2 extends GfxEnemy {
 	@Override
 	public void update(float delta) {
 		super.update(delta);		
-		b.setValue(getEnergy());
+		b.setEnergy(getEnergy());
 		
 		computeMove();
 		

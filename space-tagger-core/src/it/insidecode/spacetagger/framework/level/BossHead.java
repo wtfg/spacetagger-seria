@@ -3,7 +3,6 @@ package it.insidecode.spacetagger.framework.level;
 
 import it.insidecode.spacetagger.PropertiesManager;
 import it.insidecode.spacetagger.framework.Framework;
-import it.insidecode.spacetagger.framework.GfxEnemy;
 import it.insidecode.spacetagger.graphics.HorizontalBar;
 import it.insidecode.spacetagger.logic.Depth;
 
@@ -16,18 +15,18 @@ import com.badlogic.gdx.math.Vector2;
  * @author Seria.1616892
  * 
  */
-public class BossHead extends GfxEnemy {
+public class BossHead extends EnemyIntermediate {
 
 	/**
 	 * Costanti
 	 */
-	private static final float ENERGY_VALUE = 50;
+	private static final float ENERGY_VALUE = 600;
 	private static final int SCORE_VALUE = 30000;
 	private static final float DAMAGE_VALUE = 3f;
 	private static final float SPEED_VALUE = 0.5f;
 	private static final String fileName = "bossHead";
 	
-	private int SHOOT_UPDATE_TIME = 1000;
+	private int SHOOT_UPDATE_TIME = 200;
 	private Framework framework;
 	private HorizontalBar b;
 	
@@ -50,11 +49,14 @@ public class BossHead extends GfxEnemy {
 				SPEED_VALUE, PropertiesManager.getParameter(fileName),
 				PropertiesManager.getParameter("xplosion"));
 		framework = f;
-		setCenter(position);
-		setShot(EnemyShot.class);
-		setShotDecorator(BorgShotDecorator.class);
 		body = bossbody;
 		b = new HorizontalBar(framework.getGameEngine(), new Vector2(50,-20), 70, 5, ENERGY_VALUE);
+		
+		setCenter(position);
+		setShot(BossShot.class);
+		setShotDecorator(BorgShotDecorator.class);
+		
+		
 		addChildEntity(b);
 		b.activate();
 	}
@@ -67,15 +69,17 @@ public class BossHead extends GfxEnemy {
 	@Override
 	public void update(float delta) {
 		super.update(delta);		
-		b.setValue(getEnergy());
+		b.setEnergy(getEnergy());
 
-		
-		t++;
-		if (t > limit) {
-			limit = SHOOT_UPDATE_TIME;
-			t = 0;
-			if (isAlive()){
-				spitEnemies();
+		if(getPath().isComplete() && !body.isAlive()){
+			t++;
+			if (t > limit) {
+				limit = SHOOT_UPDATE_TIME;
+				t = 0;
+				if (isAlive()){
+					spitEnemies();
+				}
+				shoot();
 			}
 		}
 

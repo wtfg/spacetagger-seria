@@ -3,10 +3,9 @@ package it.insidecode.spacetagger.framework.level;
 
 import it.insidecode.spacetagger.PropertiesManager;
 import it.insidecode.spacetagger.framework.Framework;
-import it.insidecode.spacetagger.framework.GfxEnemy;
 import it.insidecode.spacetagger.graphics.HorizontalBar;
 import it.insidecode.spacetagger.logic.Depth;
-
+import it.insidecode.spacetagger.util.SimpleCallback;
 
 import com.badlogic.gdx.math.Vector2;
 
@@ -16,20 +15,22 @@ import com.badlogic.gdx.math.Vector2;
  * @author Seria.1616892
  * 
  */
-public class BossBody extends GfxEnemy {
+public class BossBody extends EnemyIntermediate  {
 
 	/**
 	 * Costanti
 	 */
-	private static final float ENERGY_VALUE = 50;
+	private static final float ENERGY_VALUE = 100;
 	private static final int SCORE_VALUE = 30000;
 	private static final float DAMAGE_VALUE = 3f;
 	private static final float SPEED_VALUE = 0.5f;
 	private static final String fileName = "boss";
 	
-	private int SHOOT_UPDATE_TIME = 1000;
+	private int SHOOT_UPDATE_TIME = 50;
 	private Framework framework;
 	private HorizontalBar b;
+	private static FuryPowerUp fp;
+	private static ShieldPowerUp e;
 	
 	// t e limit servono per aggiornare il tempo di sparo
 	private int t;
@@ -46,11 +47,20 @@ public class BossBody extends GfxEnemy {
 	public BossBody(Framework f, Vector2 position) {
 		super(f, position, ENERGY_VALUE, SCORE_VALUE, DAMAGE_VALUE,
 				SPEED_VALUE, PropertiesManager.getParameter(fileName),
-				PropertiesManager.getParameter("xplosion"));
+				PropertiesManager.getParameter("xplosion"), new SimpleCallback(){
+			public void onComplete(){
+				e.activate();
+				fp.activate();
+			}
+		});
+		
 		framework = f;
 		setCenter(position);
-		setShot(EnemyShot.class);
+		setShot(BossShot.class);
 		setShotDecorator(BorgShotDecorator.class);
+		e = new ShieldPowerUp(framework, new Vector2(240,450));
+		fp = new FuryPowerUp(framework, new Vector2(240,400));
+
 		b = new HorizontalBar(framework.getGameEngine(), new Vector2(50,-20), 70, 5, ENERGY_VALUE);
 		addChildEntity(b);
 		b.activate();
@@ -64,15 +74,17 @@ public class BossBody extends GfxEnemy {
 	@Override
 	public void update(float delta) {
 		super.update(delta);		
-		b.setValue(getEnergy());
+		b.setEnergy(getEnergy());
 
-		
-		t++;
-		if (t > limit) {
-			limit = SHOOT_UPDATE_TIME;
-			t = 0;
-			if (isAlive()){
-				spitEnemies();
+		if(getPath().isComplete()){
+			t++;
+			if (t > limit) {
+				limit = SHOOT_UPDATE_TIME;
+				t = 0;
+				if (isAlive()){
+					shoot();
+					spitEnemies();
+				}
 			}
 		}
 

@@ -32,7 +32,7 @@ public class Scene11 extends Scene {
 		EnemyKamikaze d = new EnemyKamikaze(framework, new Vector2(200,650));
 		d.activate();
 		
-		EnemyClusterSquare e = new EnemyClusterSquare (framework, new Vector2(100,650),50);
+		EnemyClusterSquare e = new EnemyClusterSquare (framework, new Vector2(100,750),50);
 		e.setPath(new LinePath(LineDirection.DOWN, 500));
 		
 		EnemyClusterSquare  f = new EnemyClusterSquare (framework, new Vector2(300,750),50);
