@@ -29,6 +29,7 @@ public class Scene01 extends Scene {
 		Gdx.app.log(getName(), "init");
 		
 		framework.setStageMusic(PropertiesManager.getParameter("stage1Music"));
+	
 		
 		EnemySimple f = new EnemySimple(framework, new Vector2(100,750));
 		f.setPath(new LinePath(LineDirection.DOWN, 300));
