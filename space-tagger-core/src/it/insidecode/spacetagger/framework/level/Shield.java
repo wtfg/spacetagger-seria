@@ -10,20 +10,24 @@ import com.badlogic.gdx.math.Vector2;
 
 public class Shield extends GfxEntity {
 	
-	private static float ENERGY_VALUE = 10;
-	private static int SCORE_VALUE = 0;
-	private static float DAMAGE_VALUE = 50;
-	private static float SPEED_VALUE = 0;
+	private static float ENERGY = 10;
+	private static int SCORE = 0;
+	private static float DAMAGE = 50;
+	private static float SPEED = 0;
+	private static final String fileName = "shield";
+	private static final String explosionName = "explosion";
 
 
 	public Shield(Framework framework, Vector2 position) {
-		super(framework, position, ENERGY_VALUE, SCORE_VALUE, DAMAGE_VALUE, SPEED_VALUE,
-				 PropertiesManager.getParameter("shield"), PropertiesManager.getParameter("explosion"));
+		super(framework, position, ENERGY, SCORE, DAMAGE, SPEED,
+				 PropertiesManager.getParameter(fileName), PropertiesManager.getParameter(explosionName));
 		framework.getGameEngine().addCollisionListener(this);
 		setCenter(position);
 	}
 
-
+	/**
+	 * Gestisce la logica di contatto dello scudo
+	 */
 	@Override
 	public void handleContact(DynamicPhysicsEntity x){
 		super.handleContact(x);
@@ -38,12 +42,13 @@ public class Shield extends GfxEntity {
 		}
 	}
 	
+	/**
+	 * Aggiorna
+	 */
 	public void update(float delta){
-
 		super.update(delta);
 		if(getEnergy()<=0)
 			destroy();
-
 	}
 
 }

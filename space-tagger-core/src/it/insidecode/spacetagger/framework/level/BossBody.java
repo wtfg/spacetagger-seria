@@ -10,8 +10,7 @@ import it.insidecode.spacetagger.util.SimpleCallback;
 import com.badlogic.gdx.math.Vector2;
 
 /**
- * Un nemico grosso e cattivo
- * 
+ * Il corpo del boss
  * @author Seria.1616892
  * 
  */
@@ -20,17 +19,32 @@ public class BossBody extends EnemyIntermediate  {
 	/**
 	 * Costanti
 	 */
-	private static final float ENERGY_VALUE = 100;
-	private static final int SCORE_VALUE = 30000;
-	private static final float DAMAGE_VALUE = 3f;
-	private static final float SPEED_VALUE = 0.5f;
+	private static final float ENERGY = 100;
+	private static final int SCORE = 30000;
+	private static final float DAMAGE = 3f;
+	private static final float SPEED = 0.5f;
 	private static final String fileName = "boss";
+	private static final String explosionName = "xplosion";
 	
-	private int SHOOT_UPDATE_TIME = 50;
+	/**
+	 * Costanti di altre classi
+	 */
+	
+	private static final Vector2 shieldPowerUpPos = new Vector2(240,450);
+	private static final Vector2 furyPowerUpPos = new Vector2(240,400);
+	private static final Vector2 barPos = new Vector2(50,-20);
+	private static final Vector2 deltaEnemy = new Vector2(120,0);
+	private static final int barWidth = 140;
+	private static final int barHeight = 5;
+	
+	/**
+	 * Variabili funzionali
+	 */
+	private static int SHOOT_UPDATE_TIME = 50;
 	private Framework framework;
-	private HorizontalBar b;
-	private static FuryPowerUp fp;
-	private static ShieldPowerUp e;
+	private static HorizontalBar bar;
+	private static FuryPowerUp furyPowerUp;
+	private static ShieldPowerUp shieldPowerUp;
 	
 	// t e limit servono per aggiornare il tempo di sparo
 	private int t;
@@ -45,25 +59,27 @@ public class BossBody extends EnemyIntermediate  {
 	 *            spawnato
 	 */
 	public BossBody(Framework f, Vector2 position) {
-		super(f, position, ENERGY_VALUE, SCORE_VALUE, DAMAGE_VALUE,
-				SPEED_VALUE, PropertiesManager.getParameter(fileName),
-				PropertiesManager.getParameter("xplosion"), new SimpleCallback(){
+		super(f, position, ENERGY, SCORE, DAMAGE,
+				SPEED, PropertiesManager.getParameter(fileName),
+				PropertiesManager.getParameter(explosionName), new SimpleCallback(){
 			public void onComplete(){
-				e.activate();
-				fp.activate();
+				shieldPowerUp.activate();
+				furyPowerUp.activate();
 			}
 		});
 		
 		framework = f;
+		
 		setCenter(position);
 		setShot(BossShot.class);
 		setShotDecorator(BorgShotDecorator.class);
-		e = new ShieldPowerUp(framework, new Vector2(240,450));
-		fp = new FuryPowerUp(framework, new Vector2(240,400));
-
-		b = new HorizontalBar(framework.getGameEngine(), new Vector2(50,-20), 140, 5, ENERGY_VALUE);
-		addChildEntity(b);
-		b.activate();
+		
+		shieldPowerUp = new ShieldPowerUp(framework, shieldPowerUpPos);
+		furyPowerUp = new FuryPowerUp(framework, furyPowerUpPos);
+		bar = new HorizontalBar(framework.getGameEngine(), barPos, barWidth, barHeight, ENERGY);
+		
+		addChildEntity(bar);
+		bar.activate();
 	}
 	
 
@@ -73,9 +89,11 @@ public class BossBody extends EnemyIntermediate  {
 	 */
 	@Override
 	public void update(float delta) {
+		
 		super.update(delta);		
-		b.setEnergy(getEnergy());
-
+		bar.setEnergy(getEnergy());
+		
+		// inizia a parlare
 		if(getPath().isComplete()){
 			t++;
 			if (t > limit) {
@@ -91,7 +109,9 @@ public class BossBody extends EnemyIntermediate  {
 	}
 	
 
-	
+	/**
+	 * Spara dei nemici
+	 */
 	private void spitEnemies(){
 		
 		EnemySnakeTail k = new EnemySnakeTail(framework, getPosition(), 1);
@@ -99,17 +119,19 @@ public class BossBody extends EnemyIntermediate  {
 		k.setDepth(Depth.ENTITY1);
 		k.activate(); 
 		
-		EnemySnakeTail i = new EnemySnakeTail(framework, getPosition().add(120,0), 1);
-		i.setSpeed(3f);
+		EnemySnakeTail i = new EnemySnakeTail(framework, getPosition().add(deltaEnemy), 1);
 		i.setPath(new FollowShipPath(framework, i));
 		i.setDepth(Depth.ENTITY1);
 		i.activate();
 	}
 
+	/**
+	 * Se muore aggiungi punteggio e distruggi la barra orizzontale
+	 */
 	@Override
 	public void destroy(){
-		b.destroy();
-		framework.getGameEngine().getScoreManager().increaseScore(SCORE_VALUE);
+		bar.destroy();
+		framework.getGameEngine().getScoreManager().increaseScore(SCORE);
 		super.destroy();
 	}
 }

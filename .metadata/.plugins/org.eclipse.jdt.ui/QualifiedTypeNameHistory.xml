@@ -6,8 +6,15 @@
 <fullyQualifiedTypeName name="it.insidecode.spacetagger.framework.GfxShip"/>
 <fullyQualifiedTypeName name="it.insidecode.spacetagger.path.LineDirection"/>
 <fullyQualifiedTypeName name="it.insidecode.spacetagger.path.LinePath"/>
-<fullyQualifiedTypeName name="it.insidecode.spacetagger.framework.GfxEnemy"/>
 <fullyQualifiedTypeName name="java.util.Random"/>
 <fullyQualifiedTypeName name="it.insidecode.spacetagger.logic.Direction"/>
 <fullyQualifiedTypeName name="it.insidecode.spacetagger.shots.Shot"/>
+<fullyQualifiedTypeName name="java.util.Arrays"/>
+<fullyQualifiedTypeName name="it.insidecode.spacetagger.framework.GfxEnemy"/>
+<fullyQualifiedTypeName name="it.insidecode.spacetagger.util.SimpleCallback"/>
+<fullyQualifiedTypeName name="it.insidecode.spacetagger.framework.GfxText"/>
+<fullyQualifiedTypeName name="it.insidecode.spacetagger.PropertiesManager"/>
+<fullyQualifiedTypeName name="it.insidecode.spacetagger.graphics.AnimationType"/>
+<fullyQualifiedTypeName name="it.insidecode.spacetagger.graphics.Animation"/>
+<fullyQualifiedTypeName name="com.badlogic.gdx.utils.Timer.Task"/>
 </qualifiedTypeNameHistroy>

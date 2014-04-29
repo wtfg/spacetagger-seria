@@ -1,0 +1,48 @@
+package it.insidecode.spacetagger.framework.level;
+
+import it.insidecode.spacetagger.PropertiesManager;
+import it.insidecode.spacetagger.framework.Framework;
+import it.insidecode.spacetagger.framework.GfxPowerUp;
+import it.insidecode.spacetagger.framework.GfxText;
+import it.insidecode.spacetagger.util.SimpleCallback;
+
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.math.Vector2;
+
+/**
+ * Applica lo scudo
+ * @author Mauro
+ *
+ */
+public class ShieldPowerUp extends GfxPowerUp {
+
+	private static float ENERGY = 1;
+	private static final String fileName = "shieldPowerUp";
+	private static final Vector2 shieldPos = new Vector2(10,90);
+	private Framework framework;
+
+	public ShieldPowerUp(Framework f, Vector2 center) {
+		super(f, center, PropertiesManager.getParameter(fileName));
+		this.setCenter(center);
+		this.framework = f;
+	}
+	
+	private void makeText(){
+		GfxText t = new GfxText(framework, "Shield", new SimpleCallback(){
+			public void onComplete(){
+				Gdx.app.log("Shield", "Attivato");
+			}
+		});
+		t.activate();
+	}
+
+	@Override
+	public void apply() {
+		makeText();
+		framework.getShip().setEnergy(framework.getShip().getEnergy() + ENERGY);
+		Shield s = new Shield(framework, shieldPos);
+		s.activate();
+		framework.getShip().addChildEntity(s);
+	}
+
+}

@@ -8,18 +8,25 @@ import it.insidecode.spacetagger.logic.Direction;
 
 import com.badlogic.gdx.math.Vector2;
 
+/**
+ * Nebulosa
+ * @author Mauro
+ *
+ */
 public class Nebula1 extends GfxEntity {
 
-	private static float ENERGY_VALUE = 1;
-	private static int SCORE_VALUE = 0;
-	private static float DAMAGE_VALUE = 0;
-	private static float SPEED_VALUE = .5f;
-
+	private static float ENERGY = 1;
+	private static int SCORE = 0;
+	private static float DAMAGE = 0;
+	private static float SPEED = .5f;
+	
+	private static final String fileName = "nebula1";
+	private static final String explosionName = "explosion";
 
 	public Nebula1(final Framework framework, Vector2 position) {
-		super(framework, position, ENERGY_VALUE, SCORE_VALUE, DAMAGE_VALUE,
-				SPEED_VALUE, PropertiesManager.getParameter("nebula1"),
-				PropertiesManager.getParameter("explosion"));
+		super(framework, position, ENERGY, SCORE, DAMAGE,
+				SPEED, PropertiesManager.getParameter(fileName),
+				PropertiesManager.getParameter(explosionName));
 		setDepth(Depth.BACKGROUND1);
 	}
 

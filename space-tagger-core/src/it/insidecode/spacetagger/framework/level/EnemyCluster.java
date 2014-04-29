@@ -13,11 +13,12 @@ import com.badlogic.gdx.math.Vector2;
  */
 public class EnemyCluster extends GfxEnemy {
 
-	private static float ENERGY_VALUE = 1;
-	private static int SCORE_VALUE = 2000;
-	private static float DAMAGE_VALUE = 4f;
-	private static float SPEED_VALUE = 2.5f;
-	private static String fileName = "enemyCluster";
+	private static final float ENERGY = 1;
+	private static final int SCORE = 2000;
+	private static final float DAMAGE = 4f;
+	private static final float SPEED = 2.5f;
+	private static final String fileName = "enemyCluster";
+	private static final String explosionName = "xplosion";
 	private GfxEnemy[] enemyList;
 
 	/**
@@ -32,9 +33,9 @@ public class EnemyCluster extends GfxEnemy {
 	 *            in automatico
 	 */
 	public EnemyCluster(Framework framework, Vector2 position, GfxEnemy[] g) {
-		super(framework, position, ENERGY_VALUE, SCORE_VALUE, DAMAGE_VALUE,
-				SPEED_VALUE, PropertiesManager.getParameter(fileName),
-				PropertiesManager.getParameter("xplosion"));
+		super(framework, position, ENERGY, SCORE, DAMAGE,
+				SPEED, PropertiesManager.getParameter(fileName),
+				PropertiesManager.getParameter(explosionName));
 		enemyList = g;
 		setShot(EnemyShot.class);
 		setShotDecorator(BorgShotDecorator.class);

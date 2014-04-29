@@ -9,18 +9,18 @@ import it.insidecode.spacetagger.logic.GameEngine;
 import it.insidecode.spacetagger.shots.Shot;
 
 /**
- * Shot indebolito del nemico
+ * Shot quintuplo del boss
  * 
  * @author Seria.1616892
  * 
  */
 public class BossShot extends EnemyShot {
 
-	private static final float DAMAGE_VALUE = 0.2f;
+	private static final float DAMAGE = 0.5f;
 
 
 	/**
-	 * Costruttore di EnemyShot
+	 * Costruttore di BossShot
 	 * 
 	 * @param gameEngine
 	 *            istanza del GameEngine ottenibile con
@@ -29,11 +29,11 @@ public class BossShot extends EnemyShot {
 	 *            un Vector2 che contiene la posizione da cui parte lo sparo
 	 */
 	public BossShot(GameEngine gameEngine, Vector2 v) {
-		super(gameEngine, v, DAMAGE_VALUE);
+		super(gameEngine, v, DAMAGE);
 	}
 	
 	/**
-	 * Ritorna un singletonList con se' stesso
+	 * Ritorna una lista di 5 spari
 	 */
 	@Override
 	public List<Shot> instance() {

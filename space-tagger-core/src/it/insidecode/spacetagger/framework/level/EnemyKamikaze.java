@@ -18,15 +18,17 @@ import com.badlogic.gdx.math.Vector2;
  */
 public class EnemyKamikaze extends GfxEnemy {
 
-	private static final float ENERGY_VALUE = 2f;
-	private static final int SCORE_VALUE = 900;
-	private static final float DAMAGE_VALUE = 3f;
-	private static final float SPEED_VALUE = 3f;
+	private static final float ENERGY = 2f;
+	private static final int SCORE = 900;
+	private static final float DAMAGE = 3f;
+	private static final float SPEED = 3f;
 	private static final String fileName = "enemyKamikaze";
-
+	private static final String explosionName = "xplosion";
+	private static final int SHOOT_TIME = 100;
+	
 	private boolean canShoot;
 	private int t;
-	private int limit = new Random().nextInt(100);
+	private int limit = new Random().nextInt(SHOOT_TIME);
 
 	/**
 	 * Costruttore di EnemyKamikaze, la path viene settata in automatico a
@@ -42,9 +44,9 @@ public class EnemyKamikaze extends GfxEnemy {
 	 *            viene spawnato
 	 */
 	public EnemyKamikaze(Framework framework, Vector2 position) {
-		super(framework, position, ENERGY_VALUE, SCORE_VALUE, DAMAGE_VALUE,
-				SPEED_VALUE, PropertiesManager.getParameter(fileName),
-				PropertiesManager.getParameter("xplosion"));
+		super(framework, position, ENERGY, SCORE, DAMAGE,
+				SPEED, PropertiesManager.getParameter(fileName),
+				PropertiesManager.getParameter(explosionName));
 		setPath(new FollowShipPath(framework, this));
 		canShoot = false;
 		setShot(EnemyShot.class);
@@ -86,7 +88,7 @@ public class EnemyKamikaze extends GfxEnemy {
 	}
 
 	/**
-	 * Il nemico spara a random in un tempo casuale di 100 frames
+	 * Il nemico spara a random in un tempo casuale di 100 updates
 	 * 
 	 * @see it.insidecode.spacetagger.framework.GfxEnemy.update
 	 */
@@ -94,7 +96,7 @@ public class EnemyKamikaze extends GfxEnemy {
 		super.update(delta);
 		t++;
 		if (t > limit && canShoot) {
-			limit = new Random().nextInt(100);
+			limit = new Random().nextInt(SHOOT_TIME);
 			t = 0;
 			if (isAlive())
 				shoot();

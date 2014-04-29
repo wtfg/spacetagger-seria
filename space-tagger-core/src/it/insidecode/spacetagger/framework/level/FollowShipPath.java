@@ -18,11 +18,14 @@ import it.insidecode.spacetagger.path.LinePath;
  */
 public class FollowShipPath extends LinePath {
 
-	private float addedX;
+	private static float SPEED = 1f;
+	private static final int length = 1000;
+	private static final int xTolerance = 10;
+	
+	private float xAdded;
 	private Framework framework;
-	private float SPEED_VALUE = 1f;
-	private Enemy enemy;
-
+	private Enemy theEnemy;
+	
 	/**
 	 * La path che segue la navicella. Siccome deve seguire la navicella non
 	 * servono altri parametri
@@ -31,8 +34,8 @@ public class FollowShipPath extends LinePath {
 	 *            istanza del framework corrente
 	 */
 	public FollowShipPath(Framework f, Enemy e) {
-		super(LineDirection.DOWN, 1000);
-		this.enemy = e;
+		super(LineDirection.DOWN, length);
+		this.theEnemy = e;
 		framework = f;
 	}
 
@@ -44,7 +47,7 @@ public class FollowShipPath extends LinePath {
 	 *            la velocita' (di default e' 1f)
 	 */
 	public void setSpeed(float f) {
-		SPEED_VALUE = f;
+		SPEED = f;
 	}
 
 	/**
@@ -55,21 +58,21 @@ public class FollowShipPath extends LinePath {
 	public Vector2 getNextPositionIncrement(float speed) {
 		
 		// evita errori se il nemico non viene istanziato
-		if (enemy == null)
+		if (theEnemy == null)
 			return super.getNextPositionIncrement(speed);
 		
 		// ottiene il deltaX sottraendo il centri suoi e della navicella
-		float deltaX = enemy.getCenter().x
+		float deltaX = theEnemy.getCenter().x
 				- framework.getGameEngine().getShip().getCenter().x;
 		
-		if (deltaX < -10)
-			addedX = SPEED_VALUE;
-		else if (deltaX > 10)
-			addedX = -SPEED_VALUE;
+		if (deltaX < -xTolerance)
+			xAdded = SPEED;
+		else if (deltaX > xTolerance)
+			xAdded = -SPEED;
 		else
-			addedX = 0;
+			xAdded = 0;
 		
-		return super.getNextPositionIncrement(speed).add(addedX,0);
+		return super.getNextPositionIncrement(speed).add(xAdded,0);
 
 	}
 

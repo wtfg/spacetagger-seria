@@ -1,0 +1,118 @@
+package it.insidecode.spacetagger.framework.level;
+
+import java.util.Random;
+
+import it.insidecode.spacetagger.PropertiesManager;
+import it.insidecode.spacetagger.framework.Framework;
+import it.insidecode.spacetagger.framework.GfxEnemy;
+import it.insidecode.spacetagger.graphics.HorizontalBar;
+import it.insidecode.spacetagger.logic.Direction;
+
+import com.badlogic.gdx.math.Vector2;
+
+/**
+ * Un nemico grosso e cattivo
+ * 
+ * @author Seria.1616892
+ * 
+ */
+public class EnemyBig2 extends GfxEnemy {
+
+	/**
+	 * Costanti
+	 */
+	private static final float ENERGY = 20;
+	private static final int SCORE = 6000;
+	private static final float DAMAGE = 3f;
+	private static final float SPEED = 2f;
+	private static final String fileName = "enemyBig2";
+	private static final String explosionName = "xplosion";
+	
+
+	private static HorizontalBar b;
+	/**
+	 * Altre costanti
+	 */
+	private static final Vector2 barPos = new Vector2(20,-20);
+	
+	
+	private static Direction currentDirection = Direction.DOWN;
+	private int SHOOT_UPDATE_TIME = 100;
+	private Framework framework;
+	
+	// t e limit servono per aggiornare il tempo di sparo
+	private int t;
+	private int limit = new Random().nextInt(SHOOT_UPDATE_TIME);
+
+	/**
+	 * 
+	 * @param f
+	 *            istanza del framework corrente
+	 * @param position
+	 *            un Vector2 che indica la posizione nella quale il nemico va
+	 *            spawnato
+	 */
+	public EnemyBig2(Framework f, Vector2 position) {
+		super(f, position, ENERGY, SCORE, DAMAGE,
+				SPEED, PropertiesManager.getParameter(fileName),
+				PropertiesManager.getParameter(explosionName));
+		framework = f;
+		setShot(EnemyLazerShot.class);
+		setShotDecorator(BorgLazerShotDecorator.class);
+		b = new HorizontalBar(framework.getGameEngine(), barPos, 70, 5, ENERGY);
+		addChildEntity(b);
+		b.activate();
+	}
+	
+
+	/**
+	 * Comportamento classico, inclusi degli spari in un tempo random ogni 300
+	 * frames random
+	 */
+	@Override
+	public void update(float delta) {
+		super.update(delta);		
+		b.setEnergy(getEnergy());
+		
+		computeMove();
+		
+		t++;
+		if (t > limit) {
+			limit = new Random().nextInt(SHOOT_UPDATE_TIME);
+			t = 0;
+			if (isAlive()){
+				shoot();
+			}
+		}
+
+	}
+	
+	private void computeMove(){
+		float deltaX = framework.getShip().getCenter().x - getCenter().x;
+		if(deltaX>10)
+			move(Direction.RIGHT);
+		else if(deltaX<-10)
+			move(Direction.LEFT);
+		if(getPath().isComplete())
+			move(currentDirection);
+		
+		if(getCenter().y < 200 || getCenter().y > 500)
+			switchDirection();
+	}
+	
+	private void switchDirection(){
+		if(currentDirection == Direction.DOWN)
+			currentDirection = Direction.UP;
+		else
+			currentDirection = Direction.DOWN;
+	}
+	
+
+	
+	@Override
+	public void destroy(){
+		b.destroy();
+		framework.getGameEngine().getScoreManager().increaseScore(SCORE);
+		super.destroy();
+	}
+}

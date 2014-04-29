@@ -25,6 +25,7 @@ public class EnemySimple extends GfxEnemy {
 	private static final float DAMAGE_VALUE = 1f;
 	private static final float SPEED_VALUE = 2f;
 	private static final String fileName = "enemySimple";
+	private static final String explosionName = "xplosion";
 	
 	private int SHOOT_UPDATE_TIME = 300;
 	// t e limit servono per aggiornare il tempo di sparo
@@ -42,7 +43,7 @@ public class EnemySimple extends GfxEnemy {
 	public EnemySimple(Framework framework, Vector2 position) {
 		super(framework, position, ENERGY_VALUE, SCORE_VALUE, DAMAGE_VALUE,
 				SPEED_VALUE, PropertiesManager.getParameter(fileName),
-				PropertiesManager.getParameter("xplosion"));
+				PropertiesManager.getParameter(explosionName));
 		setShot(EnemyShot.class);
 		setShotDecorator(BorgShotDecorator.class);
 	}

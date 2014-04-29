@@ -21,9 +21,13 @@ import com.badlogic.gdx.utils.Timer;
  */
 public class FuryPowerUp extends GfxPowerUp {
 
-	private static int MAX_SECONDS = 10;
+	private final int MAX_SECONDS = 10;
+	private static final int SHOOT_DELAY = 10;
+	private static final float shootRate = 0.1f;
+	private static final float BG_SPEED = 10f;
 	private Framework framework;
 	private static String fileName = "furyPowerUp";
+	private static final String powerUpName = "FURY!";
 	/**
 	 * Crea il powerup
 	 * 
@@ -42,7 +46,7 @@ public class FuryPowerUp extends GfxPowerUp {
 	 * Restituisce un Task nel tempo
 	 * @return il task specificato
 	 */
-	private Timer.Task getRunning(){
+	private Timer.Task getRunningTask(){
 		return new Timer.Task() {
 			@Override
 			public void run() {
@@ -57,9 +61,10 @@ public class FuryPowerUp extends GfxPowerUp {
 	 * @param framework il framework corrente
 	 * @return il task da eseguire
 	 */
-	private Timer.Task getRestore(final Framework framework, final float sp, final int old){
-		return new Timer.Task(){
-			public void run(){
+	private Timer.Task getRestoreTask(final Framework framework, final float sp, final int old){
+		return new Timer.Task() {
+			@Override
+			public void run() {
 				framework.getShip().setShot(SimpleShot.class);
 				framework.getGameEngine().getBackground().setSpeed(sp);
 				framework.getShip().setShotDelay(old);
@@ -70,9 +75,9 @@ public class FuryPowerUp extends GfxPowerUp {
 	}
 
 	private void makeText(){
-		GfxText t = new GfxText(framework, "FURY!", new SimpleCallback(){
+		GfxText t = new GfxText(framework, powerUpName, new SimpleCallback(){
 			public void onComplete(){
-				Gdx.app.log("Fury", "Attivato");
+				Gdx.app.log(powerUpName, "Attivato");
 			}
 		});
 		t.activate();
@@ -83,25 +88,22 @@ public class FuryPowerUp extends GfxPowerUp {
 	 */
 	@Override
 	public void apply() {
+		
 		makeText();
 		// ottiene la navicella e imposta i valori
 		Ship s = framework.getShip();
-		
+
 		float oldBackgroundSpeed = framework.getGameEngine().getBackground().getSpeed();
 		int oldShotDelay = s.getShotDelay();
 		
 		s.setShot(FuryShot.class);
-		s.setShotDelay(10);
+		s.setShotDelay(SHOOT_DELAY);
+	
+		framework.getGameEngine().getBackground().setSpeed(BG_SPEED); //velocizza		
 		
-
-		//velocizza
-		
-		framework.getGameEngine().getBackground().setSpeed(10f);
-		
-		// crea un timer e ripete ogni mezzo secondo lo shoot
-		// rimuovere limitazione tempo nello shot
-		Timer.schedule(getRunning(), 0.1f, 0.1f, (int) MAX_SECONDS*10);
-		Timer.schedule(getRestore(framework, oldBackgroundSpeed, oldShotDelay), MAX_SECONDS);
+		// crea un timer ripetuto e innesca la disattivazione
+		Timer.schedule(getRunningTask(), shootRate, shootRate, (int) MAX_SECONDS * SHOOT_DELAY);
+		Timer.schedule(getRestoreTask(framework, oldBackgroundSpeed, oldShotDelay), MAX_SECONDS);
 		
 	}
 

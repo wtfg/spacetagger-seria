@@ -7,17 +7,28 @@ import it.insidecode.spacetagger.graphics.AnimationType;
 import it.insidecode.spacetagger.graphics.GameDecorator;
 import it.insidecode.spacetagger.shots.Shot;
 
+/**
+ * ShotDecoraor dei nemici
+ * @author Mauro
+ *
+ */
 public class BorgShotDecorator extends ShotDecorator {
 
+	private static final String fileName = "borgShot";
+	private static final String explosionName = "explosion";
+	
+	/**
+	 * Costruttore
+	 * @param gameDecorator		istanza del gameDecorator
+	 * @param s					shot a cui e' collegato
+	 */
 	public BorgShotDecorator(GameDecorator gameDecorator, Shot s) {
 		super(gameDecorator, s,
 				Animation.createAnimation(
-				PropertiesManager.getParameter("borgShot"), AnimationType.LOOP),
+				PropertiesManager.getParameter(fileName), AnimationType.LOOP),
 				Animation.createAnimation(
-				PropertiesManager.getParameter("explosion"),
+				PropertiesManager.getParameter(explosionName),
 				AnimationType.LOOP));
-		
-		// TODO Auto-generated constructor stub
 	}
 
 }

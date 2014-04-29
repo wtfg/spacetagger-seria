@@ -21,20 +21,31 @@ public class EnemyBig2 extends GfxEnemy {
 	/**
 	 * Costanti
 	 */
-	private static final float ENERGY_VALUE = 20;
-	private static final int SCORE_VALUE = 6000;
-	private static final float DAMAGE_VALUE = 3f;
-	private static final float SPEED_VALUE = 2f;
+	private static final float ENERGY = 20;
+	private static final int SCORE = 6000;
+	private static final float DAMAGE = 3f;
+	private static final float SPEED = 2f;
 	private static final String fileName = "enemyBig2";
+	private static final String explosionName = "xplosion";
 	
-	private int SHOOT_UPDATE_TIME = 100;
+	/**
+	 * Altre variabili funzionali
+	 */
+	private static HorizontalBar b;
+	private static final Vector2 barPos = new Vector2(20,-20);
+	private static final int barWidth = 70;
+	private static final int barHeight = 5;
+	private static final int yMax = 500;
+	private static final int yMin = 200;
+	
+	
+	private static Direction currentVerticalDirection = Direction.DOWN;
+	private static int SHOOT_UPDATE_TIME = 100;
 	private Framework framework;
-	private HorizontalBar b;
-	private Direction currentDirection = Direction.DOWN;
 	
 	// t e limit servono per aggiornare il tempo di sparo
-	private int t;
-	private int limit = new Random().nextInt(SHOOT_UPDATE_TIME);
+	private static int t;
+	private static int limit = new Random().nextInt(SHOOT_UPDATE_TIME);
 
 	/**
 	 * 
@@ -45,22 +56,22 @@ public class EnemyBig2 extends GfxEnemy {
 	 *            spawnato
 	 */
 	public EnemyBig2(Framework f, Vector2 position) {
-		super(f, position, ENERGY_VALUE, SCORE_VALUE, DAMAGE_VALUE,
-				SPEED_VALUE, PropertiesManager.getParameter(fileName),
-				PropertiesManager.getParameter("xplosion"));
+		super(f, position, ENERGY, SCORE, DAMAGE,
+				SPEED, PropertiesManager.getParameter(fileName),
+				PropertiesManager.getParameter(explosionName));
 		framework = f;
+		
 		setShot(EnemyLazerShot.class);
 		setShotDecorator(BorgLazerShotDecorator.class);
-		setShootUpdateTime(100);
-		b = new HorizontalBar(framework.getGameEngine(), new Vector2(20,-20), 70, 5, ENERGY_VALUE);
+		
+		b = new HorizontalBar(framework.getGameEngine(), barPos, barWidth, barHeight, ENERGY);
 		addChildEntity(b);
 		b.activate();
 	}
 	
 
 	/**
-	 * Comportamento classico, inclusi degli spari in un tempo random ogni 300
-	 * frames random
+	 * Comportamento classico
 	 */
 	@Override
 	public void update(float delta) {
@@ -80,38 +91,39 @@ public class EnemyBig2 extends GfxEnemy {
 
 	}
 	
+	/**
+	 * Muove il nemico in modo aggressivo facendogli fare un ping-pong
+	 */
 	private void computeMove(){
 		float deltaX = framework.getShip().getCenter().x - getCenter().x;
+		
 		if(deltaX>10)
 			move(Direction.RIGHT);
 		else if(deltaX<-10)
 			move(Direction.LEFT);
-		if(getPath().isComplete())
-			move(currentDirection);
 		
-		if(getCenter().y < 200 || getCenter().y > 500)
+		if(getPath().isComplete())
+			move(currentVerticalDirection);
+		
+		if(getCenter().y < yMin || getCenter().y > yMax)
 			switchDirection();
 	}
 	
-	private void switchDirection(){
-		if(currentDirection == Direction.DOWN)
-			currentDirection = Direction.UP;
-		else
-			currentDirection = Direction.DOWN;
-	}
-	
 	/**
-	 * Imposta un range di lontananza per lo sparo
-	 * @param time
+	 * Cambia la direzione verticale
 	 */
-	protected void setShootUpdateTime(int time){
-		SHOOT_UPDATE_TIME = time;
+	private void switchDirection(){
+		currentVerticalDirection = currentVerticalDirection == Direction.DOWN ? Direction.UP : Direction.DOWN;
 	}
 	
+
+	/**
+	 * Distrugge la bara quando muore e aggiunge punteggio
+	 */
 	@Override
 	public void destroy(){
 		b.destroy();
-		framework.getGameEngine().getScoreManager().increaseScore(SCORE_VALUE);
+		framework.getGameEngine().getScoreManager().increaseScore(SCORE);
 		super.destroy();
 	}
 }

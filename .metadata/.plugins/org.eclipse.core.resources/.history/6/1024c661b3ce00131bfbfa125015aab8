@@ -1,0 +1,91 @@
+package it.insidecode.spacetagger.framework.level;
+
+import it.insidecode.spacetagger.path.HalfCirclePath;
+import it.insidecode.spacetagger.path.Path;
+import it.insidecode.spacetagger.path.Type;
+
+import com.badlogic.gdx.math.Vector2;
+
+/**
+ * Implementando l'idea di path multiple segue un giro in cerchio
+ * @author Mauro
+ *
+ */
+public class CircleDownPath extends Path {
+
+	private Path[] pathsArray;
+	private Path currentPath;
+	private static int current = 0;
+	private static float ySpeed;
+	private static float correction = 2/3;
+	/**
+	 * Costruttore della path
+	 *  
+	 * @param radius il raggio del cerchio
+	 * @param ySp velocita y
+	 */
+	public CircleDownPath(int radius, float ySp) {
+		ySpeed = ySp;
+		pathsArray = new Path[] { 
+				new HalfCirclePath(Type.LEFTUP, (int) radius*correction, radius),
+				new HalfCirclePath(Type.RIGHTDOWN, (int) radius*correction, radius)
+				};
+		currentPath = pathsArray[current];
+	}
+	
+	/**
+	 * Costruttore della path
+	 * 
+	 * @param radius il raggio del cerchio
+	 * @param ySp velocita y
+	 * @param clockwise senso orario o meno?
+	 */
+	public CircleDownPath(int radius, float ySp, boolean clockwise) {
+		ySpeed = ySp;
+		if(clockwise)
+			pathsArray = new Path[] { 
+					new HalfCirclePath(Type.LEFTDOWN, radius*2/3, radius),
+					new HalfCirclePath(Type.RIGHTUP, radius*2/3, radius)
+					};
+		else
+			pathsArray = new Path[] { 
+				new HalfCirclePath(Type.LEFTUP, radius*2/3, radius),
+				new HalfCirclePath(Type.RIGHTDOWN, radius*2/3, radius)
+				};
+		currentPath = pathsArray[current];
+	}
+
+	@Override
+	public Vector2 getNextPositionIncrement(float speed) {
+		if (currentPath.isComplete()) {
+			if ((current) >= 1) {
+				for (Path x : pathsArray)
+					x.reset();
+				current = -1;
+			}
+			currentPath = pathsArray[++current];
+		}
+		return currentPath.getNextPositionIncrement(speed+2).sub(0,ySpeed);
+	}
+
+	@Override
+	public float getX(float speed) {
+		return 0;
+	}
+
+	@Override
+	public float getY(float speed) {
+		return 0;
+	}
+
+	@Override
+	public void reset() {
+		current = 0;
+	}
+
+	@Override
+	public boolean isComplete() {
+		return current == pathsArray.length && currentPath.isComplete();
+	}
+
+}

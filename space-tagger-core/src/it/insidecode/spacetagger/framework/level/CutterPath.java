@@ -16,7 +16,7 @@ public class CutterPath extends HorizontalHarmonicPath {
 	/** Il campo deltaY implementa la Y della path */
 	private float deltaY;
 	private float limitHeight;
-	private static float Y_SPEED = 1.5f;
+	private float Y_SPEED = 1.5f;
 
 	/**
 	 * Costruttore della path verticale verso il basso specifica per EnemyCutter

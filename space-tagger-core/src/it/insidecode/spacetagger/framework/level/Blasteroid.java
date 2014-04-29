@@ -13,6 +13,11 @@ import it.insidecode.spacetagger.util.SimpleCallback;
 
 import com.badlogic.gdx.math.Vector2;
 
+/**
+ * Un asteroide stupido che rilascia powerup
+ * @author Mauro
+ *
+ */
 public class Blasteroid extends GfxEnemy {
 
 	private static final float ENERGY = 3;
@@ -22,13 +27,20 @@ public class Blasteroid extends GfxEnemy {
 
 	private static boolean isDestroyed = false;
 	private static PowerUp p;
+	private static final String fileName = "blasteroid";
+	private static final String explosionName = "xplosion";
 
 	private Framework framework;
 
+	/**
+	 * Costruttore
+	 * @param f				istanza del framework corrente
+	 * @param position		posizione asteroide
+	 */
 	public Blasteroid(final Framework f, Vector2 position) {
 		super(f, position, ENERGY, SCORE, DAMAGE,
-				SPEED, PropertiesManager.getParameter("blasteroid"),
-				PropertiesManager.getParameter("xplosion"),
+				SPEED, PropertiesManager.getParameter(fileName),
+				PropertiesManager.getParameter(explosionName),
 				new SimpleCallback() {
 					@Override
 					public void onComplete() {
@@ -39,23 +51,36 @@ public class Blasteroid extends GfxEnemy {
 		framework = f;
 
 	}
-
+	
+	/**
+	 * Movimento aggiornato nell'update
+	 */
 	@Override
 	public void update(float delta) {
 		super.update(delta);
 		move(Direction.DOWN);
 	}
 	
+	/**
+	 * Quando e' effettivamente rimosso dalla vista ritorna true
+	 * @return	true se e' rimosso realmente dal gioco
+	 */
 	public boolean isDestroyed(){
 		return isDestroyed;
 	}
 
+	/**
+	 * Instanzia il powerup e muore
+	 */
 	@Override
 	public void destroy() {
 		p = new ShieldPowerUp(framework, getCenter());
 		super.destroy();
 	}
 
+	/**
+	 * Un asteroide del genere subisce solo colpi dagli spari
+	 */
 	public void handleContact(DynamicPhysicsEntity x){
 		if(x instanceof Ship)
 			x.destroy();

@@ -3,7 +3,6 @@ package it.insidecode.spacetagger.framework.level;
 import it.insidecode.spacetagger.PropertiesManager;
 import it.insidecode.spacetagger.framework.Framework;
 import it.insidecode.spacetagger.framework.GfxEnemy;
-import it.insidecode.spacetagger.util.Constants;
 
 import com.badlogic.gdx.math.Vector2;
 
@@ -15,12 +14,15 @@ import com.badlogic.gdx.math.Vector2;
  */
 public class EnemyCutter extends GfxEnemy {
 
-	private static float ENERGY_VALUE = Constants.ENEMY_A_ENERGY;
-	private static int SCORE_VALUE = 1500;
-	private static float DAMAGE_VALUE = .5f;
-	private static float SPEED_VALUE = Constants.ENEMY_A_SPEED;
-	private static String fileName = "enemyCutter";
+	private static final float ENERGY = 1;
+	private static final int SCORE = 1500;
+	private static final float DAMAGE = .5f;
+	private static float SPEED = 2.0f;
+	private final CutterPath thePath = new CutterPath(50, 15, 1000);
+	private static final String fileName = "enemyCutter";
+	private static final String explosionName = "xplosion";
 
+	
 	/**
 	 * Costruttore di EnemyCutter, la path viene settata in automatico a
 	 * CutterPath con dei parametri graditi di visibilita
@@ -32,10 +34,10 @@ public class EnemyCutter extends GfxEnemy {
 	 *            viene spawnato
 	 */
 	public EnemyCutter(Framework framework, Vector2 position) {
-		super(framework, position, ENERGY_VALUE, SCORE_VALUE, DAMAGE_VALUE,
-				SPEED_VALUE, PropertiesManager.getParameter(fileName),
-				PropertiesManager.getParameter("xplosion"));
-		setPath(new CutterPath(50, 15, 1000));
+		super(framework, position, ENERGY, SCORE, DAMAGE,
+				SPEED, PropertiesManager.getParameter(fileName),
+				PropertiesManager.getParameter(explosionName));
+		setPath(thePath);
 		setShot(EnemyShot.class);
 		setShotDecorator(BorgShotDecorator.class);
 	}

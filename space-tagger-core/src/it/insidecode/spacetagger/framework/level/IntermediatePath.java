@@ -6,15 +6,23 @@ import it.insidecode.spacetagger.path.Path;
 
 import com.badlogic.gdx.math.Vector2;
 
+/**
+ * Path del nemico snake del livello 6
+ * @author Seria.1616892
+ *
+ */
 public class IntermediatePath extends Path {
 
 	private Path[] pathsArray;
 	private Path currentPath;
 	private int current = 0;
 
-
+	/**
+	 * Costruttore
+	 * @param radius	raggio cerchio
+	 * @param y			y in cui deve scendere
+	 */
 	public IntermediatePath(int radius, int y) {
-
 		pathsArray = new Path[] { 
 				new LinePath(LineDirection.DOWN, y),
 				new CircleDownPath(radius, 0)
@@ -22,15 +30,9 @@ public class IntermediatePath extends Path {
 		currentPath = pathsArray[current];
 	}
 	
-	public IntermediatePath(int radius, int y, boolean clockwise) {
-
-		pathsArray = new Path[] { 
-				new LinePath(LineDirection.DOWN, y),
-				new CircleDownPath(radius, 0, clockwise)
-				};
-		currentPath = pathsArray[current];
-	}
-
+	/**
+	 * Aggiorna le path
+	 */
 	@Override
 	public Vector2 getNextPositionIncrement(float speed) {
 		if (currentPath.isComplete()) {
@@ -44,6 +46,9 @@ public class IntermediatePath extends Path {
 		return currentPath.getNextPositionIncrement(speed);
 	}
 
+	/**
+	 * Implementa i metodi della classe astratta
+	 */
 	@Override
 	public float getX(float speed) {
 		return 0;

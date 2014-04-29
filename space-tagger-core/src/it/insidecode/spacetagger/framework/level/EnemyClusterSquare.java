@@ -34,12 +34,12 @@ public class EnemyClusterSquare extends EnemyCluster {
 		
 		GfxEnemy[] square = new GfxEnemy[4];
 		for (int i=0; i<square.length; i++){
-			// variabili per definire gli angoli a cui devono stare
-			// i nemici
+			
+			// variabili per definire gli angoli 
 			int a = i == 0 || i == 3 ? 1 : -1;
 			int b = i < 2 ? 1 : -1;
 			
-			square[i] = new EnemySimple(framework, new Vector2(a*range,b*range));
+			square[i] = new EnemySimple(framework, new Vector2(a*range, b*range));
 			square[i].setPath(new SquarePath(i));
 		}
 		return square;

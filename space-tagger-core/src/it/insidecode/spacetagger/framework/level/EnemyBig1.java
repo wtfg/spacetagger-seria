@@ -1,13 +1,11 @@
 package it.insidecode.spacetagger.framework.level;
 
-
 import it.insidecode.spacetagger.PropertiesManager;
 import it.insidecode.spacetagger.framework.Framework;
 import it.insidecode.spacetagger.framework.GfxEnemy;
 import it.insidecode.spacetagger.graphics.HorizontalBar;
 import it.insidecode.spacetagger.logic.Depth;
 import it.insidecode.spacetagger.logic.Direction;
-
 
 import com.badlogic.gdx.math.Vector2;
 
@@ -22,16 +20,26 @@ public class EnemyBig1 extends GfxEnemy {
 	/**
 	 * Costanti
 	 */
-	private static final float ENERGY_VALUE = 30;
-	private static final int SCORE_VALUE = 3000;
-	private static final float DAMAGE_VALUE = 3f;
-	private static final float SPEED_VALUE = 0.5f;
+	private static final float ENERGY = 30;
+	private static final int SCORE = 3000;
+	private static final float DAMAGE = 3f;
+	private static final float SPEED = 0.5f;
 	private static final String fileName = "enemyBig1";
-	
+	private static final String explosionName = "xplosion";
+
+	/**
+	 * Costanti
+	 */
+	private static final Vector2 barPos = new Vector2(50, -20);
+	private static final Vector2 offsetEnemy = new Vector2(120, 0);
+	private static final int barWidth = 70;
+	private static final int barHeight = 5;
+	private static final int xTolerance = 10;
+
 	private int SHOOT_UPDATE_TIME = 100;
 	private Framework framework;
-	private HorizontalBar b;
-	
+	private static HorizontalBar bar;
+
 	// t e limit servono per aggiornare il tempo di sparo
 	private int t;
 	private int limit = SHOOT_UPDATE_TIME;
@@ -45,68 +53,74 @@ public class EnemyBig1 extends GfxEnemy {
 	 *            spawnato
 	 */
 	public EnemyBig1(Framework f, Vector2 position) {
-		super(f, position, ENERGY_VALUE, SCORE_VALUE, DAMAGE_VALUE,
-				SPEED_VALUE, PropertiesManager.getParameter(fileName),
-				PropertiesManager.getParameter("xplosion"));
+		super(f, position, ENERGY, SCORE, DAMAGE, SPEED, PropertiesManager
+				.getParameter(fileName), PropertiesManager
+				.getParameter(explosionName));
 		framework = f;
+
 		setShot(EnemyShot.class);
 		setShotDecorator(BorgShotDecorator.class);
-		b = new HorizontalBar(framework.getGameEngine(), new Vector2(50,-20), 70, 5, ENERGY_VALUE);
-		addChildEntity(b);
-		b.activate();
+
+		bar = new HorizontalBar(framework.getGameEngine(), barPos, barWidth,
+				barHeight, ENERGY);
+		addChildEntity(bar);
+		bar.activate();
 	}
-	
 
 	/**
-	 * Comportamento classico, inclusi degli spari in un tempo random ogni 300
-	 * frames random
+	 * Comportamento classico
 	 */
 	@Override
 	public void update(float delta) {
-		super.update(delta);		
-		b.setEnergy(getEnergy());
-		
+		super.update(delta);
+		bar.setEnergy(getEnergy());
 		computeMove();
-		
 		t++;
 		if (t > limit) {
 			limit = SHOOT_UPDATE_TIME;
 			t = 0;
-			if (isAlive()){
+			if (isAlive()) {
 				spitEnemies();
 			}
 		}
-
 	}
-	
 
-	
-	private void computeMove(){
-		float deltaX = framework.getShip().getCenter().x - this.getCenter().x;
-		if(deltaX>10)
+	/**
+	 * Computa i movimenti
+	 */
+	private void computeMove() {
+		float deltaX = framework.getShip().getCenter().x - getCenter().x;
+		if (deltaX > xTolerance)
 			move(Direction.RIGHT);
-		else if(deltaX<-10)
+		else if (deltaX < -xTolerance)
 			move(Direction.LEFT);
 	}
-	
-	private void spitEnemies(){
-		
+
+	/**
+	 * Spara i nemici
+	 */
+	private void spitEnemies() {
+
 		EnemySnakeTail k = new EnemySnakeTail(framework, getPosition(), 1);
 		k.setPath(new FollowShipPath(framework, k));
 		k.setDepth(Depth.ENTITY1);
-		k.activate(); 
-		
-		EnemySnakeTail i = new EnemySnakeTail(framework, getPosition().add(120,0), 1);
+		k.activate();
+
+		EnemySnakeTail i = new EnemySnakeTail(framework, getPosition().add(
+				offsetEnemy), 1);
 		i.setSpeed(3f);
 		i.setPath(new FollowShipPath(framework, i));
 		i.setDepth(Depth.ENTITY1);
 		i.activate();
 	}
 
+	/**
+	 * Quando muore distrugge la barra
+	 */
 	@Override
-	public void destroy(){
-		b.destroy();
-		framework.getGameEngine().getScoreManager().increaseScore(SCORE_VALUE);
+	public void destroy() {
+		bar.destroy();
+		framework.getGameEngine().getScoreManager().increaseScore(SCORE);
 		super.destroy();
 	}
 }

@@ -7,17 +7,27 @@ import it.insidecode.spacetagger.graphics.AnimationType;
 import it.insidecode.spacetagger.graphics.GameDecorator;
 import it.insidecode.spacetagger.shots.Shot;
 
+/**
+ * Decora lo Smart Shot
+ * @author Mauro
+ *
+ */
 public class SmartShotDecorator extends ShotDecorator {
 
+	private static final String fileName = "smartShot";
+	private static final String explosionName = "explosion";
+	/**
+	 * Costruttore
+	 * @param gameDecorator		istanza del gameEngine
+	 * @param s					sparo collegato
+	 */
 	public SmartShotDecorator(GameDecorator gameDecorator, Shot s) {
 		super(gameDecorator, s,
 				Animation.createAnimation(
-				PropertiesManager.getParameter("smartShot"), AnimationType.LOOP),
+				PropertiesManager.getParameter(fileName), AnimationType.LOOP),
 				Animation.createAnimation(
-				PropertiesManager.getParameter("explosion"),
+				PropertiesManager.getParameter(explosionName),
 				AnimationType.LOOP));
-		
-		// TODO Auto-generated constructor stub
 	}
 
 }

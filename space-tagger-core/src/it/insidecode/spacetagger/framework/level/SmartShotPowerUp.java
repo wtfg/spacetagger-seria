@@ -5,15 +5,13 @@ import it.insidecode.spacetagger.PropertiesManager;
 import it.insidecode.spacetagger.framework.Framework;
 import it.insidecode.spacetagger.framework.GfxPowerUp;
 import it.insidecode.spacetagger.framework.GfxText;
-import it.insidecode.spacetagger.shots.SimpleShot;
 import it.insidecode.spacetagger.util.SimpleCallback;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.utils.Timer;
 
 /**
- * Un powerup che attiva lo SmartShot per 10 secondi
+ * Un powerup che attiva lo SmartShot
  * 
  * @author Seria.1616892
  * 
@@ -21,8 +19,10 @@ import com.badlogic.gdx.utils.Timer;
 public class SmartShotPowerUp extends GfxPowerUp {
 
 	private Framework framework;
-	private static int EFFECT_TIME = 10;
-
+	private static final String fileName = "smartShotPowerUp";
+	private static final String powerUpName = "Smart Shot";
+	
+	
 	/**
 	 * Costruttore di SmartShotPowerUp
 	 * 
@@ -33,30 +33,18 @@ public class SmartShotPowerUp extends GfxPowerUp {
 	 *            powerup
 	 */
 	public SmartShotPowerUp(Framework f, Vector2 center) {
-		super(f, center, PropertiesManager.getParameter("smartShotPowerUp"));
+		super(f, center, PropertiesManager.getParameter(fileName));
 		this.setCenter(center);
-		this.framework = f;
-	}
-	
-	/**
-	 * Ritorna il task eseguibile dopo aver completato l'effetto
-	 * @param framework il framework corrente
-	 * @return il task specificato per il restore
-	 */
-	
-	private Timer.Task getRestore(final Framework framework){
-		return new Timer.Task(){
-			@Override
-			public void run(){
-				framework.getShip().setShot(SimpleShot.class);
-			}
-		};
+		framework = f;
 	}
 
+	/**
+	 * Fa apparire il testo
+	 */
 	private void makeText(){
-		GfxText t = new GfxText(framework, "Smart Shot", new SimpleCallback(){
+		GfxText t = new GfxText(framework, powerUpName, new SimpleCallback(){
 			public void onComplete(){
-				Gdx.app.log("SmartShot", "Attivato");
+				Gdx.app.log(powerUpName, "Attivato");
 			}
 		});
 		t.activate();
@@ -70,8 +58,7 @@ public class SmartShotPowerUp extends GfxPowerUp {
 		//sostituisce con il super sparo
 		framework.getShip().setShot(SmartShot.class);
 		framework.getShip().setShotDecorator(SmartShotDecorator.class);
-		//crea un GameTimer che dopo 10 secondi ritorna a prima
-		Timer.schedule(getRestore(framework), EFFECT_TIME);
+
 	}
 
 }

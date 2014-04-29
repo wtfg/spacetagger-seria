@@ -18,6 +18,10 @@ import it.insidecode.spacetagger.shots.Shot;
  *
  */
 public class FuryShot extends Shot {
+	
+	private static final float DAMAGE = 3f;
+	private static final float SPEED = 10f;
+	private static final Vector2 delta = new Vector2(0,	60);
 
 	/**
 	 * 
@@ -27,7 +31,7 @@ public class FuryShot extends Shot {
 	 * 			punto dal quale parte lo sparo
 	 */
 	public FuryShot(GameEngine gameEngine, Vector2 v) {
-		super(gameEngine, v, 3f, 10f);
+		super(gameEngine, v, DAMAGE, SPEED);
 		setDirection(Direction.UP);
 		setWhatToKill(Enemy.class);		
 	}
@@ -37,8 +41,7 @@ public class FuryShot extends Shot {
 	 */
 	@Override
 	public List<Shot> instance() {
-		FuryShot s1 = new FuryShot(gameEngine, this.getPosition().add(0,
-				60));		
+		FuryShot s1 = new FuryShot(gameEngine, this.getPosition().add(delta));		
 		return Arrays.asList(this, (Shot) s1);
 	}
 

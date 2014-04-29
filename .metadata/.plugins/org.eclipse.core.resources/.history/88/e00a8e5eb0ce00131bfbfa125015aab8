@@ -1,0 +1,46 @@
+package it.insidecode.spacetagger.framework.level;
+
+import it.insidecode.spacetagger.PropertiesManager;
+import it.insidecode.spacetagger.framework.Framework;
+import it.insidecode.spacetagger.framework.GfxEnemy;
+import it.insidecode.spacetagger.logic.Direction;
+
+import com.badlogic.gdx.math.Vector2;
+
+/**
+ * Un asteroide inutile
+ * @author Mauro
+ *
+ */
+public class BlasteroidPointless extends GfxEnemy {
+
+	private static float ENERGY_VALUE = 3;
+	private static int SCORE_VALUE = 500;
+	private static float DAMAGE_VALUE = 2;
+	private static float SPEED_VALUE = .5f;
+	
+	private Blasteroid mainAsteroid;
+
+	/**
+	 * Un asteroide che dipende dai suoi "master"
+	 * @param framework
+	 * @param position
+	 * @param mAsteroid
+	 */
+	public BlasteroidPointless(final Framework framework, Vector2 position, Blasteroid mAsteroid) {
+		super(framework, position, ENERGY_VALUE, SCORE_VALUE, DAMAGE_VALUE,
+				SPEED_VALUE, PropertiesManager.getParameter("blasteroid"),
+				PropertiesManager.getParameter("xplosion"));
+		mainAsteroid = mAsteroid;
+	}
+
+	@Override
+	public void update(float delta) {
+		super.update(delta);
+		if(mainAsteroid.isDestroyed()){
+			move(Direction.DOWN);
+		}
+	}
+
+
+}

@@ -7,6 +7,11 @@ import com.badlogic.gdx.math.Vector2;
 import it.insidecode.spacetagger.logic.Enemy;
 import it.insidecode.spacetagger.path.Path;
 
+/**
+ * Path per seguire a catena due nemici
+ * @author Mauro
+ *
+ */
 public class ChainPath extends Path {
 	
 	private float sign;
@@ -15,29 +20,52 @@ public class ChainPath extends Path {
 	
 	private static float DeltaY = 30;
 	private static float Tensor = 500;
+	private static final int maxInt = 2000;
+	private static final float SPEED_Y = 2f;
+	private static final float SPEED_X = .5f;
 	
-	
+	/**
+	 * Una path che collega il nemico e2 al nemico e1 in modo
+	 * esteticamente gradevole
+	 * @param e1	nemico testa
+	 * @param e2	nemico coda
+	 */
 	public ChainPath(Enemy e1, Enemy e2){
 
 		this.e1 = e1;
 		this.e2 = e2;
 		
-		sign = new Random().nextInt(2000) - 1000;
+		sign = new Random().nextInt(maxInt) - maxInt/2;
 		sign = sign != 0 ? sign/(Math.abs(sign)) : 1;
 	}
 	
+	/**
+	 * Imposta il deltaY di distanza del calcolo della path
+	 * @param y nuova y
+	 */
 	public void setDeltaY(float y){
 		DeltaY = y;
 	}
 
+	/**
+	 * La path determina l'incremento trattando la distanza
+	 * tra e1 ed e2 come un elastico: piu' e' lontano e piu' 
+	 * deve avvicinarsi velocemente
+	 * 
+	 */
 	public Vector2 getNextPositionIncrement(float speed){
 		
 		if(!e1.isAlive() || e2.getPosition().y < DeltaY)
-			return new Vector2(sign*0.5f,-2f);
+			return new Vector2(sign * SPEED_X, -SPEED_Y);
+		
 		Vector2 delta = e1.getPosition().sub(e2.getPosition());
 		return delta.div(Tensor/(delta.len()));	
 		
 	}
+	
+	/**
+	 * Implementa i metodi della classe astratta Path
+	 */
 	@Override
 	protected float getX(float arg0) {
 		return 0;

@@ -17,7 +17,7 @@ public class EnemySnakeTail extends EnemySimple {
 
 
 	private static final String fileName = "enemyTail";
-
+	private static final int SHOOT_TIME = 1500;
 	/**
 	 * 
 	 * @param framework
@@ -33,7 +33,7 @@ public class EnemySnakeTail extends EnemySimple {
 		setAnimation(Animation.createAnimation(PropertiesManager.getParameter(fileName),AnimationType.LOOP));
 		setShot(EnemyShot.class);
 		setShotDecorator(BorgShotDecorator.class);
-		setShootUpdateTime(1500);
+		setShootUpdateTime(SHOOT_TIME);
 	}
 
 

@@ -18,6 +18,8 @@ public class TripleShotPowerUp extends GfxPowerUp {
 	
 	
 	private Framework framework;
+	private static final String powerUpName = "Triple Shot";
+	private static final String fileName = "tripleShotPowerUp";
 	/**
 	 * Costruttore di TripleShotPowerUp
 	 * 
@@ -28,15 +30,15 @@ public class TripleShotPowerUp extends GfxPowerUp {
 	 *            powerup
 	 */
 	public TripleShotPowerUp(Framework f, Vector2 center) {
-		super(f, center, PropertiesManager.getParameter("tripleShotPowerUp"));
+		super(f, center, PropertiesManager.getParameter(fileName));
 		setCenter(center);
 		framework = f;
 	}
 
 	private void makeText(){
-		GfxText t = new GfxText(framework, "Triple Shot", new SimpleCallback(){
+		GfxText t = new GfxText(framework, powerUpName, new SimpleCallback(){
 			public void onComplete(){
-				Gdx.app.log("TripleShot", "Attivato");
+				Gdx.app.log(powerUpName, "Attivato");
 			}
 		});
 		t.activate();

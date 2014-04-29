@@ -13,7 +13,8 @@ import it.insidecode.spacetagger.logic.GameEngine;
  */
 public class EnemyLazerShot extends EnemyShot {
 
-	private static final float DAMAGE_VALUE = 1f;
+	private static final float DAMAGE = 1f;
+	private static final float SPEED = 8f;
 	/**
 	 * Costruttore di EnemyLazerShot
 	 * 
@@ -24,8 +25,8 @@ public class EnemyLazerShot extends EnemyShot {
 	 *            un Vector2 che contiene la posizione da cui parte lo sparo
 	 */
 	public EnemyLazerShot(GameEngine gameEngine, Vector2 v) {
-		super(gameEngine, v, DAMAGE_VALUE);
-		setSpeed(8f);
+		super(gameEngine, v, DAMAGE);
+		setSpeed(SPEED);
 		
 	}
 

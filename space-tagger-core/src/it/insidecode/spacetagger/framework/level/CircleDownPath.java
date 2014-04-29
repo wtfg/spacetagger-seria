@@ -6,13 +6,19 @@ import it.insidecode.spacetagger.path.Type;
 
 import com.badlogic.gdx.math.Vector2;
 
+/**
+ * Implementando l'idea di path multiple segue un giro in cerchio
+ * @author Mauro
+ *
+ */
 public class CircleDownPath extends Path {
 
 	private Path[] pathsArray;
 	private Path currentPath;
 	private int current = 0;
 	private float ySpeed;
-	
+	//private static final float correction = 2/3;
+	private static final int speedUp = 2;
 	/**
 	 * Costruttore della path
 	 *  
@@ -22,8 +28,8 @@ public class CircleDownPath extends Path {
 	public CircleDownPath(int radius, float ySp) {
 		ySpeed = ySp;
 		pathsArray = new Path[] { 
-				new HalfCirclePath(Type.LEFTUP, radius*2/3, radius),
-				new HalfCirclePath(Type.RIGHTDOWN, radius*2/3, radius)
+				new HalfCirclePath(Type.LEFTUP, (int)(radius*2/3), radius),
+				new HalfCirclePath(Type.RIGHTDOWN, (int)(radius*2/3), radius)
 				};
 		currentPath = pathsArray[current];
 	}
@@ -37,19 +43,19 @@ public class CircleDownPath extends Path {
 	 */
 	public CircleDownPath(int radius, float ySp, boolean clockwise) {
 		ySpeed = ySp;
-		if(clockwise)
-			pathsArray = new Path[] { 
-					new HalfCirclePath(Type.LEFTDOWN, radius*2/3, radius),
-					new HalfCirclePath(Type.RIGHTUP, radius*2/3, radius)
+		Type Type1 = !clockwise ? Type.LEFTDOWN : Type.LEFTUP;
+		Type Type2 = !clockwise ? Type.RIGHTUP : Type.RIGHTDOWN;
+		
+		pathsArray = new Path[] { 
+					new HalfCirclePath(Type1, (int)(radius*2/3), radius),
+					new HalfCirclePath(Type2, (int)(radius*2/3), radius)
 					};
-		else
-			pathsArray = new Path[] { 
-				new HalfCirclePath(Type.LEFTUP, radius*2/3, radius),
-				new HalfCirclePath(Type.RIGHTDOWN, radius*2/3, radius)
-				};
 		currentPath = pathsArray[current];
 	}
-
+	
+	/**
+	 * Cicla tra le path
+	 */
 	@Override
 	public Vector2 getNextPositionIncrement(float speed) {
 		if (currentPath.isComplete()) {
@@ -60,9 +66,12 @@ public class CircleDownPath extends Path {
 			}
 			currentPath = pathsArray[++current];
 		}
-		return currentPath.getNextPositionIncrement(speed+2).sub(0,ySpeed);
+		return currentPath.getNextPositionIncrement(speed + speedUp).sub(0,ySpeed);
 	}
 
+	/**
+	 * Implementa i metodi della classe astratta
+	 */
 	@Override
 	public float getX(float speed) {
 		return 0;

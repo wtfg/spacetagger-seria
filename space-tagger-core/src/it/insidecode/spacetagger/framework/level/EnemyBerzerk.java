@@ -16,12 +16,14 @@ import com.badlogic.gdx.math.Vector2;
  */
 public class EnemyBerzerk extends GfxEnemy {
 
-	private static float ENERGY_VALUE = Constants.ENEMY_A_ENERGY;
-	private static int SCORE_VALUE = 1200;
-	private static float DAMAGE_VALUE = .1f;
-	private static float SPEED_VALUE = Constants.ENEMY_A_SPEED;
-	private static String fileName = "enemyBerzerk";
+	private static final float ENERGY = Constants.ENEMY_A_ENERGY;
+	private static final int SCORE = 1200;
+	private static final float DAMAGE = .1f;
+	private static final float SPEED = Constants.ENEMY_A_SPEED;
+	private static final String fileName = "enemyBerzerk";
+	private static final String explosionName = "xplosion";
 
+	
 	/**
 	 * Costruttore di EnemyBerzerk
 	 * 
@@ -31,9 +33,9 @@ public class EnemyBerzerk extends GfxEnemy {
 	 *            la posizione con il quale deve essere spawnato
 	 */
 	public EnemyBerzerk(Framework framework, Vector2 position) {
-		super(framework, position, ENERGY_VALUE, SCORE_VALUE, DAMAGE_VALUE,
-				SPEED_VALUE, PropertiesManager.getParameter(fileName),
-				PropertiesManager.getParameter("xplosion"));
+		super(framework, position, ENERGY, SCORE, DAMAGE,
+				SPEED, PropertiesManager.getParameter(fileName),
+				PropertiesManager.getParameter(explosionName));
 		setShot(EnemyShot.class);
 		setShotDecorator(BorgShotDecorator.class);
 	}
@@ -41,9 +43,8 @@ public class EnemyBerzerk extends GfxEnemy {
 	@Override
 	public void update(float delta) {
 		super.update(delta);
-		// il tempo di sparo e' limitato dal framework, quindi posso sparare ad
+		// il tempo di sparo e' limitato dalla costante di default, quindi posso sparare ad
 		// ogni update
-		
 		if (isAlive())
 			shoot();
 	}

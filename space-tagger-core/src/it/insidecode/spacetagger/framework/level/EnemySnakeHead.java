@@ -19,7 +19,15 @@ public class EnemySnakeHead extends EnemySimple {
 
 	private static final int SCORE = 10000;
 	private static final String fileName = "enemyHead";
-	private HorizontalBar b;
+	// barra
+	private static final Vector2 barPos = new Vector2(10,-20);
+	private static final int barWidth = 40;
+	private static final int barHeight = 5;
+	// per spawnare i nemici
+	private static final int topScreen = 650;
+	private static final int deltaSpawn = 60;
+	
+	private HorizontalBar bar;
 	private Framework framework;
 	private float DeltaY = 30;
 	
@@ -38,7 +46,7 @@ public class EnemySnakeHead extends EnemySimple {
 		super(f, position, energy, SCORE);
 		setCenter(position);
 		framework = f;
-		b = new HorizontalBar(framework.getGameEngine(), new Vector2(10,-20), 40, 5, energy);
+		bar = new HorizontalBar(framework.getGameEngine(), barPos, barWidth, barHeight, energy);
 		
 		init();
 	}
@@ -51,7 +59,7 @@ public class EnemySnakeHead extends EnemySimple {
 	public void chainEnemies(int enemyNum){
 		Enemy old = this;
 		for(int i = 0; i < enemyNum; i++){
-			EnemySnakeTail e = new EnemySnakeTail(framework, new Vector2(200,650+i*60), enemyNum-i);
+			EnemySnakeTail e = new EnemySnakeTail(framework, new Vector2(getCenter().x, topScreen + i*deltaSpawn), enemyNum-i);
 			ChainPath c = new ChainPath(old, e);
 			c.setDeltaY(DeltaY);
 			e.setPath(c);
@@ -66,8 +74,8 @@ public class EnemySnakeHead extends EnemySimple {
 		setAnimation(Animation.createAnimation(PropertiesManager.getParameter(fileName),AnimationType.LOOP));
 		setShot(EnemyShot.class);
 		setShotDecorator(BorgShotDecorator.class);
-		addChildEntity(b);
-		b.activate();
+		addChildEntity(bar);
+		bar.activate();
 	}
 	
 	/**
@@ -75,7 +83,7 @@ public class EnemySnakeHead extends EnemySimple {
 	 */
 	@Override
 	public void update(float delta){
-		b.setEnergy(getEnergy());
+		bar.setEnergy(getEnergy());
 		super.update(delta);
 	}
 	
@@ -84,7 +92,7 @@ public class EnemySnakeHead extends EnemySimple {
 	 */
 	@Override
 	public void destroy(){
-		b.destroy();
+		bar.destroy();
 		framework.getGameEngine().getScoreManager().increaseScore(SCORE);
 		super.destroy();
 	}

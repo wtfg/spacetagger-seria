@@ -21,7 +21,7 @@ public class SuperShipPowerUp extends GfxPowerUp {
 
 	private Framework framework;
 	private static String fileName = "superShipPowerUp";
-	
+	private static String powerUpName = "Super Ship";
 	/**
 	 * Costruttore di SmartShotPowerUp
 	 * 
@@ -37,15 +37,20 @@ public class SuperShipPowerUp extends GfxPowerUp {
 		this.framework = f;
 	}
 	
-
+	/**
+	 * Applica il testo
+	 */
 	private void makeText(){
-		GfxText t = new GfxText(framework, "Super Ship", new SimpleCallback(){
+		GfxText t = new GfxText(framework, powerUpName, new SimpleCallback(){
 			public void onComplete(){
-				Gdx.app.log("SuperShip", "Attivata");
+				Gdx.app.log(powerUpName, "Attivata");
 			}
 		});
 		t.activate();
 	}
+	/**
+	 * Applica il powerUp
+	 */
 	@Override
 	public void apply() {
 		makeText();

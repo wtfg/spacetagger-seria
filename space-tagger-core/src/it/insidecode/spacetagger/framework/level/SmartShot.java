@@ -19,9 +19,11 @@ public class SmartShot extends Shot {
 
 	private float addedX;
 	private Collection<?> linkedEnemies;
-	private static float ADJUST_VALUE = 0.4f;
-	private static float DAMAGE_VALUE = 3f;
-	private static float SPEED_VALUE  = 6f;
+	private static final float ADJUST = 0.4f;
+	private static final float DAMAGE = 3f;
+	private static final float SPEED  = 6f;
+	private static final int yTolerance = 100;
+	private static final int xTolerance = 5;
 	
 	/**
 	 * Costruttore dello SmartShot
@@ -32,7 +34,7 @@ public class SmartShot extends Shot {
 	 */
 	public SmartShot(GameEngine gameEngine, Vector2 v) {
 		// chiamata a supercostruttore
-		super(gameEngine, v, DAMAGE_VALUE, SPEED_VALUE);
+		super(gameEngine, v, DAMAGE, SPEED);
 		//setDirection(Direction.UP);
 		setWhatToKill(Enemy.class);
 		// ottiene i nemici
@@ -49,7 +51,7 @@ public class SmartShot extends Shot {
 	 */
 	public SmartShot(GameEngine gameEngine, Vector2 v, float damage) {
 		// chiamata a supercostruttore
-		super(gameEngine, v, damage, SPEED_VALUE);
+		super(gameEngine, v, damage, SPEED);
 		//setDirection(Direction.UP);
 		setWhatToKill(Enemy.class);
 		// ottiene i nemici
@@ -95,10 +97,12 @@ public class SmartShot extends Shot {
 	 * 			il deltaX considerato
 	 */
 	private void adjustDelta(float deltaX){
-		if(deltaX>5)
-			addedX += ADJUST_VALUE;
-		else if (deltaX<-5)
-			addedX -= ADJUST_VALUE;
+		if(deltaX > xTolerance)
+			addedX += ADJUST;
+		else if (deltaX < -xTolerance)
+			addedX -= ADJUST;
+		else
+			addedX = 0;
 	}
 	
 	@Override
@@ -110,7 +114,7 @@ public class SmartShot extends Shot {
 			Vector2 enemyPos = getFirstEnemy().getPosition();
 			
 			// se il nemico e' troppo vicino
-			if (getDeltaFromShip(enemyPos) - 100 < 0){
+			if (getDeltaFromShip(enemyPos) < yTolerance){
 				// cambia obiettivo
 				linkedEnemies.remove(getFirstEnemy());
 				update(f);

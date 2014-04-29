@@ -16,8 +16,8 @@ import it.insidecode.spacetagger.shots.Shot;
  */
 public class EnemyShot extends Shot {
 
-	private static final float DAMAGE_VALUE = 0.5f;
-	private static final float SPEED_VALUE = 4.5f;
+	private static final float DAMAGE = 0.5f;
+	private static final float SPEED = 4.5f;
 
 	/**
 	 * Costruttore di EnemyShot
@@ -29,7 +29,7 @@ public class EnemyShot extends Shot {
 	 *            un Vector2 che contiene la posizione da cui parte lo sparo
 	 */
 	public EnemyShot(GameEngine gameEngine, Vector2 v) {
-		super(gameEngine, v, DAMAGE_VALUE, SPEED_VALUE);
+		super(gameEngine, v, DAMAGE, SPEED);
 	}
 	
 	/**
@@ -44,7 +44,7 @@ public class EnemyShot extends Shot {
 	 */
 	
 	public EnemyShot(GameEngine gameEngine, Vector2 v, float damage) {
-		super(gameEngine, v, damage, SPEED_VALUE);
+		super(gameEngine, v, damage, SPEED);
 	}
 	
 	/**

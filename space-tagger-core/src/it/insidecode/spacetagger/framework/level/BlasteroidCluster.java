@@ -4,14 +4,28 @@ import it.insidecode.spacetagger.framework.Framework;
 
 import com.badlogic.gdx.math.Vector2;
 
+/**
+ * Classe che chiama un insieme di asteroidi
+ * @author Mauro
+ * @see	Blasteroid
+ */
 public class BlasteroidCluster extends Blasteroid {
 
 	private Framework framework;
+	private static final int tensorX = 480;
+	private static final int tensorY = 100;
 
-	public BlasteroidCluster(final Framework framework, Vector2 position,
+	/**
+	 * Costruttore
+	 * @param f		istanza del framework corrente
+	 * @param position		Vector2 con le coordinate
+	 * @param asteroidNum	quanti asteroidi creare
+	 */
+	public BlasteroidCluster(final Framework f, Vector2 position,
 			int asteroidNum) {
-		super(framework, position);
-		this.framework = framework;
+		super(f, position);
+		framework = f;
+		
 		int i = 0;
 		while (i < asteroidNum) {
 			makeAsteroid();
@@ -19,10 +33,13 @@ public class BlasteroidCluster extends Blasteroid {
 		}
 	}
 
+	/**
+	 * Accoda gli asteroidi come child di se' in modo casuale
+	 */
 	private void makeAsteroid() {
 		BlasteroidPointless a = new BlasteroidPointless(framework,
-				new Vector2((float) Math.random() * 480 - 240,
-						(float) Math.random() * 100), this);
+				new Vector2((float) Math.random() * tensorX - tensorX/2,
+						(float) Math.random() * tensorY), this);
 		addChildEntity(a);
 		a.activate();
 	}

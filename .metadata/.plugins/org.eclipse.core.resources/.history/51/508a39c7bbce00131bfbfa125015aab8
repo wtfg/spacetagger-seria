@@ -1,0 +1,34 @@
+package it.insidecode.spacetagger.framework.level;
+
+import it.insidecode.spacetagger.PropertiesManager;
+import it.insidecode.spacetagger.framework.Framework;
+import it.insidecode.spacetagger.framework.GfxEntity;
+import it.insidecode.spacetagger.logic.Depth;
+import it.insidecode.spacetagger.logic.Direction;
+
+import com.badlogic.gdx.math.Vector2;
+
+public class Nebula1 extends GfxEntity {
+
+	private static float ENERGY = 1;
+	private static int SCORE = 0;
+	private static float DAMAGE = 0;
+	private static float SPEED = .5f;
+	
+	private static final String fileName = "nebula1";
+	private static final String explosionName = "explosion";
+
+	public Nebula1(final Framework framework, Vector2 position) {
+		super(framework, position, ENERGY, SCORE, DAMAGE,
+				SPEED, PropertiesManager.getParameter(fileName),
+				PropertiesManager.getParameter(explosionName));
+		setDepth(Depth.BACKGROUND1);
+	}
+
+	@Override
+	public void update(float delta) {
+		super.update(delta);
+		move(Direction.DOWN);
+	}
+	
+}

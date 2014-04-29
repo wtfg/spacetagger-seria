@@ -27,12 +27,14 @@ public class TripleShot extends Shot {
 	 * 			un Vector2 che indica il punto dove parte lo sparo
 	 */
 
-	private static float DAMAGE_VALUE = 1f;
-	private static float SPEED_VALUE = 6f;
+	private static float DAMAGE = 1f;
+	private static float SPEED = 6f;
+	private static final Vector2 shot1Offset = new Vector2(50,50);
+	private static final Vector2 shot2Offset = new Vector2(-50,50);
 
 	
 	public TripleShot(GameEngine gameEngine, Vector2 v) {
-		super(gameEngine, v, DAMAGE_VALUE, SPEED_VALUE);
+		super(gameEngine, v, DAMAGE, SPEED);
 		setWhatToKill(Enemy.class);
 		setDirection(Direction.UP);
 
@@ -44,10 +46,8 @@ public class TripleShot extends Shot {
 	 */
 	@Override
 	public List<Shot> instance() {
-		TripleShot s1 = new TripleShot(gameEngine, this.getPosition().add(50,
-				50));	
-		TripleShot s2 = new TripleShot(gameEngine, this.getPosition().add(-50,
-				50));
+		TripleShot s1 = new TripleShot(gameEngine, this.getPosition().add(shot1Offset));	
+		TripleShot s2 = new TripleShot(gameEngine, this.getPosition().add(shot2Offset));
 		return Arrays.asList(this, (Shot) s1, (Shot) s2);
 	}
 
