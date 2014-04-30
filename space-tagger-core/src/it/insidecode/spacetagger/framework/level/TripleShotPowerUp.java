@@ -20,14 +20,18 @@ public class TripleShotPowerUp extends GfxPowerUp {
 	private Framework framework;
 	private static final String powerUpName = "Triple Shot";
 	private static final String fileName = "tripleShotPowerUp";
+	
+
+
 	/**
-	 * Costruttore di TripleShotPowerUp
+	 * Inizializza il powerUp alla posizione descritta da 
+	 * <i>center</i>, per attivarlo  bisogna chiamare il metodo
+	 * <b>activate()</b>
 	 * 
 	 * @param f
 	 *            istanza del framework corrente
 	 * @param center
-	 *            un Vector2 che indica il punto dove deve essere spawnato il
-	 *            powerup
+	 *            un Vector2 dove deve essere spawnato il powerup
 	 */
 	public TripleShotPowerUp(Framework f, Vector2 center) {
 		super(f, center, PropertiesManager.getParameter(fileName));

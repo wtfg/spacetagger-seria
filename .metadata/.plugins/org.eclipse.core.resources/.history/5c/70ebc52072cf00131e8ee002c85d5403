@@ -1,0 +1,134 @@
+package it.insidecode.spacetagger.framework.level;
+
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+
+import com.badlogic.gdx.math.Vector2;
+
+import it.insidecode.spacetagger.logic.Enemy;
+import it.insidecode.spacetagger.logic.GameEngine;
+import it.insidecode.spacetagger.shots.Shot;
+
+/**
+ * Sparo intelligente che perseguita il primo nemico che incontra
+ * @author Seria.1616892
+ *
+ */
+public class SmartShot extends Shot {
+
+	private float addedX;
+	private Collection<?> linkedEnemies;
+	private static final float ADJUST = 0.4f;
+	private static final float DAMAGE = 3f;
+	private static final float SPEED  = 6f;
+	private static final int yTolerance = 100;
+	private static final int xTolerance = 5;
+	
+	/**
+	 * Costruttore dello SmartShot
+	 * @param gameEngine
+	 * 			istanza del GameEngine ottenibile con framework.getGameEngine()
+	 * @param v
+	 * 			un Vector2 che contiene la posizione da cui parte lo sparo
+	 */
+	public SmartShot(GameEngine gameEngine, Vector2 v) {
+		// chiamata a supercostruttore
+		super(gameEngine, v, DAMAGE, SPEED);
+		//setDirection(Direction.UP);
+		setWhatToKill(Enemy.class);
+		// ottiene i nemici
+		linkedEnemies = gameEngine.getListeningEnemies();
+		
+		
+	}
+	/**
+	 * Costruttore Overload dello SmartShot
+	 * @param gameEngine
+	 * 			istanza del GameEngine ottenibile con framework.getGameEngine()
+	 * @param v
+	 * 			un Vector2 che contiene la posizione da cui parte lo sparo
+	 */
+	public SmartShot(GameEngine gameEngine, Vector2 v, float damage) {
+		// chiamata a supercostruttore
+		super(gameEngine, v, damage, SPEED);
+		//setDirection(Direction.UP);
+		setWhatToKill(Enemy.class);
+		// ottiene i nemici
+		linkedEnemies = gameEngine.getListeningEnemies();
+		
+		
+	}
+	
+	/**
+	 * Ottiene il primo nemico che ha davanti
+	 * @return
+	 * 			Una entity col primo nemico presente
+	 */
+	public Enemy getFirstEnemy(){
+		return ((Enemy) linkedEnemies.toArray()[0]);
+	}
+	
+	/**
+	 * Ottiene il deltaY della nave rispetto ad un vettore.
+	 * @param v
+	 * 			il vettore della posizione
+	 * @return
+	 * 			il delta effettivo (anche negativo)
+	 */
+	private float getDeltaFromShip(Vector2 v){
+		return v.y - gameEngine.getShip().getPosition().y;
+	}
+	
+	/**
+	 * Ottiene il deltaX dello sparo rispetto ad un vettore
+	 * @param v
+	 * 			il vettore della posizione
+	 * @return
+	 * 			il delta effettivo (anche negativo)
+	 */
+	private float getDeltaX(Vector2 v){
+		return v.x - getPosition().x;
+	}
+	
+	/**
+	 * Confronta il delta e aggiunge al vettore di supporto per correggere il tiro
+	 * @param deltaX
+	 * 			il deltaX considerato
+	 */
+	private void adjustDelta(float deltaX){
+		if(deltaX > xTolerance)
+			addedX += ADJUST;
+		else if (deltaX < -xTolerance)
+			addedX -= ADJUST;
+		else
+			addedX = 0;
+	}
+	
+	/**
+	 * Aggiorna lo sparo, 
+	 */
+	@Override
+	public void update(float f){
+		super.update(f);
+		
+		if(linkedEnemies.toArray().length > 0){ //controlla se i nemici ci sono	
+			Vector2 enemyPos = getFirstEnemy().getPosition(); // posizione nemico	
+			// se il nemico e' troppo vicino
+			if (getDeltaFromShip(enemyPos) < yTolerance){
+				linkedEnemies.remove(getFirstEnemy()); // cambia obiettivo
+				update(f);
+			}else{
+				adjustDelta(getDeltaX(enemyPos)); // altrimenti vai in cerca del marrano			
+				this.setPosition( this.getPosition().add(addedX,0));
+			}
+		}
+		
+	}
+
+	@Override
+	public List<Shot> instance() {
+		return Collections.singletonList((Shot)this);
+	}
+
+}

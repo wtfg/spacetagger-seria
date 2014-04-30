@@ -8,7 +8,7 @@ import com.badlogic.gdx.math.Vector2;
 
 /**
  * Una path che va in basso e poi scorre ai lati
- * @author Mauro
+ * @author Seria.1616892
  *
  */
 public class DownSlidePath extends Path {
@@ -18,7 +18,10 @@ public class DownSlidePath extends Path {
 	private int current = 0;
 
 	/**
-	 * Costruttore
+	 * Inizializza la path che prima scorre dall'alto in basso,
+	 * terminata la corsa va a zig zag in orizzontale secondo
+	 * il verso verse1
+	 * 
 	 * @param w		larghezza orizzontale
 	 * @param h		altezza verticale della linea iniziale
 	 * @param verse1	verso

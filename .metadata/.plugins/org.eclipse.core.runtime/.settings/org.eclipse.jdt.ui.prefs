@@ -1,3 +1,4 @@
+command=C\:\\Program Files\\Java\\jdk1.7.0_55\\bin\\javadoc.exe
 content_assist_lru_history=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?><history maxLHS\="100" maxRHS\="10"><lhs name\="java.lang.Enum"><rhs name\="it.insidecode.spacetagger.logic.Depth"/></lhs><lhs name\="com.badlogic.gdx.graphics.g2d.Animation"><rhs name\="it.insidecode.spacetagger.graphics.Animation"/></lhs><lhs name\="it.insidecode.spacetagger.graphics.Animation"><rhs name\="it.insidecode.spacetagger.graphics.Animation"/></lhs></history>
 content_assist_number_of_computers=13
 content_assist_proposals_background=255,255,255

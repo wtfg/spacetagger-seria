@@ -40,6 +40,9 @@ public class EnemyBerzerk extends GfxEnemy {
 		setShotDecorator(BorgShotDecorator.class);
 	}
 
+	/**
+	 * Update e spara
+	 */
 	@Override
 	public void update(float delta) {
 		super.update(delta);

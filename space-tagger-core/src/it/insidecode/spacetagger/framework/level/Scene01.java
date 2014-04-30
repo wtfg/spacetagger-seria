@@ -12,10 +12,18 @@ import it.insidecode.spacetagger.util.SimpleCallback;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 
+/**
+ * Prima scenetta
+ * @author Seria.1616892
+ *
+ */
 public class Scene01 extends Scene {
 	public static final String SCENE_NAME = "Scene 1 - Simple Enemies";
 
-	
+	/**
+	 * Costruttore della scena
+	 * @param framework
+	 */
 	public Scene01(Framework framework) {
 		super(framework);
 	}
@@ -24,6 +32,9 @@ public class Scene01 extends Scene {
 		return SCENE_NAME;
 	}
 
+	/**
+	 * Init scena, istanzia i nemici
+	 */
 	@Override
 	public void init() {
 		Gdx.app.log(getName(), "init");
@@ -49,8 +60,7 @@ public class Scene01 extends Scene {
 		
 		postEnemies(new Enemy[]{new EnemyKamikaze(framework, new Vector2(200,650))}, 2);
 		Nebula2 n = new Nebula2(framework, new Vector2(10,750));
-		n.activate();
-		
+		n.activate();		
 		
 	}
 	
@@ -73,6 +83,7 @@ public class Scene01 extends Scene {
 			}
 		});
 	}
+	
 	
 	
 	

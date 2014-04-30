@@ -7,8 +7,9 @@ import it.insidecode.spacetagger.path.Type;
 import com.badlogic.gdx.math.Vector2;
 
 /**
- * Implementando l'idea di path multiple segue un giro in cerchio
- * @author Mauro
+ * Implementando l'idea di path multiple, questa segue un giro in cerchio
+ * mentre scorre in basso
+ * @author Seria.1616892
  *
  */
 public class CircleDownPath extends Path {
@@ -17,10 +18,12 @@ public class CircleDownPath extends Path {
 	private Path currentPath;
 	private int current = 0;
 	private float ySpeed;
-	//private static final float correction = 2/3;
 	private static final int speedUp = 2;
+	
 	/**
-	 * Costruttore della path
+	 * Costruttore della path, inizializza la path
+	 * con raggio <b>radius</b> e velocita <b>ySp</b>
+	 * segue un giro in cerchio mentre scorre in basso
 	 *  
 	 * @param radius il raggio del cerchio
 	 * @param ySp velocita y
@@ -35,11 +38,13 @@ public class CircleDownPath extends Path {
 	}
 	
 	/**
-	 * Costruttore della path
-	 * 
+	 * Costruttore della path, inizializza la path
+	 * con raggio <b>radius</b> e velocita <b>ySp</b>
+	 * e la boolean <b>clockwise</b> per specificare
+	 * segue un giro in cerchio mentre scorre in basso
+	 *  
 	 * @param radius il raggio del cerchio
 	 * @param ySp velocita y
-	 * @param clockwise senso orario o meno?
 	 */
 	public CircleDownPath(int radius, float ySp, boolean clockwise) {
 		ySpeed = ySp;
@@ -54,7 +59,10 @@ public class CircleDownPath extends Path {
 	}
 	
 	/**
-	 * Cicla tra le path
+	 * Decide la prossima posizone ciclando tra le due HalfCirclePath
+	 * gia' definite
+	 * 
+	 * @param speed		velocita' (parametro autorichiamato dal framework)
 	 */
 	@Override
 	public Vector2 getNextPositionIncrement(float speed) {

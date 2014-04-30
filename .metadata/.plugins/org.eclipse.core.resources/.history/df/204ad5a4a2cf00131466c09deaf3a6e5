@@ -1,0 +1,97 @@
+package it.insidecode.spacetagger.framework.level;
+
+import it.insidecode.spacetagger.path.HalfCirclePath;
+import it.insidecode.spacetagger.path.Path;
+import it.insidecode.spacetagger.path.Type;
+
+import com.badlogic.gdx.math.Vector2;
+
+/**
+ * Implementando l'idea di path multiple, questa segue un giro in cerchio
+ * mentre scorre in basso
+ * @author Seria.1616892
+ *
+ */
+public class CircleDownPath extends Path {
+
+	private Path[] pathsArray;
+	private Path currentPath;
+	private int current = 0;
+	private float ySpeed;
+	private static final int speedUp = 2;
+	
+	/**
+	 * Costruttore della path, inizializza la path
+	 * con raggio <b>radius</b> e velocita <b>ySp</b>
+	 *  
+	 * @param radius il raggio del cerchio
+	 * @param ySp velocita y
+	 */
+	public CircleDownPath(int radius, float ySp) {
+		ySpeed = ySp;
+		pathsArray = new Path[] { 
+				new HalfCirclePath(Type.LEFTUP, (int)(radius*2/3), radius),
+				new HalfCirclePath(Type.RIGHTDOWN, (int)(radius*2/3), radius)
+				};
+		currentPath = pathsArray[current];
+	}
+	
+	/**
+	 * Costruttore della path, inizializza la path
+	 * con raggio <b>radius</b> e velocita <b>ySp</b>
+	 *  
+	 * @param radius il raggio del cerchio
+	 * @param ySp velocita y
+	 */
+	public CircleDownPath(int radius, float ySp, boolean clockwise) {
+		ySpeed = ySp;
+		Type Type1 = !clockwise ? Type.LEFTDOWN : Type.LEFTUP;
+		Type Type2 = !clockwise ? Type.RIGHTUP : Type.RIGHTDOWN;
+		
+		pathsArray = new Path[] { 
+					new HalfCirclePath(Type1, (int)(radius*2/3), radius),
+					new HalfCirclePath(Type2, (int)(radius*2/3), radius)
+					};
+		currentPath = pathsArray[current];
+	}
+	
+	/**
+	 * Cicla tra le path
+	 */
+	@Override
+	public Vector2 getNextPositionIncrement(float speed) {
+		if (currentPath.isComplete()) {
+			if ((current) >= 1) {
+				for (Path x : pathsArray)
+					x.reset();
+				current = -1;
+			}
+			currentPath = pathsArray[++current];
+		}
+		return currentPath.getNextPositionIncrement(speed + speedUp).sub(0,ySpeed);
+	}
+
+	/**
+	 * Implementa i metodi della classe astratta
+	 */
+	@Override
+	public float getX(float speed) {
+		return 0;
+	}
+
+	@Override
+	public float getY(float speed) {
+		return 0;
+	}
+
+	@Override
+	public void reset() {
+		current = 0;
+	}
+
+	@Override
+	public boolean isComplete() {
+		return current == pathsArray.length && currentPath.isComplete();
+	}
+
+}

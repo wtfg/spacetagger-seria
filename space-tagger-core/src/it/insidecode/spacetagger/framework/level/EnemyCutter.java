@@ -25,7 +25,9 @@ public class EnemyCutter extends GfxEnemy {
 	
 	/**
 	 * Costruttore di EnemyCutter, la path viene settata in automatico a
-	 * CutterPath con dei parametri graditi di visibilita
+	 * CutterPath con dei parametri graditi di visibilita.  Lo spawnaalla
+	 * posizione descritta da <i>position</i>, per attivarlo
+	 * bisogna chiamare il metodo <b>activate()</b>
 	 * 
 	 * @param framework
 	 *            istanza corrente del framework

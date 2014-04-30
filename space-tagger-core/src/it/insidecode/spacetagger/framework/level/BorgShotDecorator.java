@@ -8,8 +8,8 @@ import it.insidecode.spacetagger.graphics.GameDecorator;
 import it.insidecode.spacetagger.shots.Shot;
 
 /**
- * ShotDecoraor dei nemici
- * @author Mauro
+ * ShotDecoraor dello sparo dei nemici
+ * @author Seria.1616892
  *
  */
 public class BorgShotDecorator extends ShotDecorator {
@@ -18,7 +18,10 @@ public class BorgShotDecorator extends ShotDecorator {
 	private static final String explosionName = "explosion";
 	
 	/**
-	 * Costruttore
+	 * Inizializza il decoratore con l'animazione, presente
+	 * nei campi della classe. Il gioco lo inizializza tramite
+	 * reflection.
+	 * 
 	 * @param gameDecorator		istanza del gameDecorator
 	 * @param s					shot a cui e' collegato
 	 */

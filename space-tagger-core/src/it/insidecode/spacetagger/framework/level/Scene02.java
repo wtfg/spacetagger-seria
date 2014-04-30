@@ -24,11 +24,12 @@ public class Scene02 extends Scene {
 		return SCENE_NAME;
 	}
 
+	/**
+	 * Init scena, istanzia i nemici
+	 */
 	@Override
 	public void init() {
 		Gdx.app.log(getName(), "init");
-		
-	
 		
 		EnemyKamikaze f = new EnemyKamikaze(framework, new Vector2(50,750));
 		EnemyKamikaze g = new EnemyKamikaze(framework, new Vector2(200,650));
@@ -54,7 +55,6 @@ public class Scene02 extends Scene {
 		
 		postEnemies(new Enemy[]{x, y, z}, 2);
 
-		
 	}
 	
 	/**

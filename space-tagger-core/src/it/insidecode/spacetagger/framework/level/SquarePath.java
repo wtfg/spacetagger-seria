@@ -7,12 +7,38 @@ import it.insidecode.spacetagger.path.Path;
 
 import com.badlogic.gdx.math.Vector2;
 
+/**
+ * Path che fa muovere a quadrato
+ * @author Seria.1616892
+ *
+ */
 public class SquarePath extends Path {
 
 	private Path[] pathsArray;
 	private Path delegate;
 	private int current = 0;
 
+	/**
+	 * Inizializza la path all'angolo corrente
+	 * TODO impostare curr con un enum
+	 * 
+	 * <ul>
+	 * <li>
+	 * <b>1</b> in alto a destra
+	 * </li>
+	 * <li>
+	 * <b>2</b> in alto a sinistra
+	 * </li>
+	 * <li>
+	 * <b>3</b> in basso a sinistra
+	 * </li>
+	 * <li>
+	 * <b>4</b> in basso a destra
+	 * </li>
+	 * </ul>
+	 * 
+	 * @param curr 		angolo corrente 
+	 */
 	public SquarePath(int curr) {
 		super();
 		current = curr;
@@ -23,12 +49,19 @@ public class SquarePath extends Path {
 		delegate = pathsArray[current];
 	}
 
+	/**
+	 * Resetta le paths
+	 */
 	private void resetPaths(){
 		for	(Path p : pathsArray){
 			p.reset();
 		}
 		
 	}
+	
+	/**
+	 * Ritorna il ciclo tra le path
+	 */
 	@Override
 	public Vector2 getNextPositionIncrement(float speed) {
 		if (delegate.isComplete()) {

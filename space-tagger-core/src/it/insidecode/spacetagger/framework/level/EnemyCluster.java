@@ -22,7 +22,10 @@ public class EnemyCluster extends GfxEnemy {
 	private GfxEnemy[] enemyList;
 
 	/**
-	 * Costruttore del nemico grappolato, al quale attaccare tutto
+	 * Costruttore del nemico grappolato, al quale attaccare i nemici
+	 * passati tramite array GfxEnemy[] g alla
+	 * posizione descritta da <i>position</i>, per attivarlo
+	 * bisogna chiamare il metodo <b>activate()</b>
 	 * 
 	 * @param framework
 	 *            l'istanza del framework attuale

@@ -24,7 +24,9 @@ public class Scene10 extends Scene {
 	}
 
 	
-	
+	/**
+	 * Init scena, istanzia i nemici
+	 */
 	@Override
 	public void init() {
 		Gdx.app.log(getName(), "init");
@@ -63,14 +65,11 @@ public class Scene10 extends Scene {
 		});
 	}
 
-
 	@Override
 	public void dispose() {
 		Gdx.app.log(getName(), "dispose");
 	}
 	
-	
-
 	public void update(float delta) {
 		
 		if (framework.getGameEngine().getEnemies().isEmpty()){

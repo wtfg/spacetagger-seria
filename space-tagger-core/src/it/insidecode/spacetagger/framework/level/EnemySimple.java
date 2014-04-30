@@ -33,6 +33,9 @@ public class EnemySimple extends GfxEnemy {
 	private int limit = new Random().nextInt(SHOOT_UPDATE_TIME);
 
 	/**
+	 * Un nemico semplice spawnato alla
+	 * posizione descritta da <i>position</i>, per attivarlo
+	 * bisogna chiamare il metodo <b>activate()</b> 
 	 * 
 	 * @param framework
 	 *            istanza del framework corrente

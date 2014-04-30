@@ -9,7 +9,7 @@ import it.insidecode.spacetagger.path.LinePath;
 
 
 /**
- * Path che segue la navicella, implementata con un vettore deltaX che indica lo
+ * Path che segue la navicella, implementata con un vettore xAdded che indica lo
  * spostamento Implementata con un'estensione di LinePath a cui modifica la X in
  * base al centro della navicella
  * 

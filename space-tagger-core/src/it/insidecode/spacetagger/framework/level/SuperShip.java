@@ -12,7 +12,13 @@ import it.insidecode.spacetagger.logic.DynamicPhysicsEntity;
 
 public class SuperShip extends GfxShip {
 
-	
+	/**
+	 * Inizializza la super navicella alla posizione <b>pos</b>
+	 * la sua velocita' aumenta di 2 e il suo shot e' TripleShot
+	 * 
+	 * @param framework
+	 * @param pos
+	 */
 	public SuperShip(Framework framework, Vector2 pos) {
 		super(framework, pos, Animation.createAnimation(PropertiesManager.getParameter("superShipIdle"), AnimationType.NORMAL), 
 				 Animation.createAnimation(PropertiesManager.getParameter("superShipFromLeft"), AnimationType.NORMAL),
@@ -25,6 +31,9 @@ public class SuperShip extends GfxShip {
 	}
 
 
+	/**
+	 * Gestisce il contatto tra nemici e spari
+	 */
 	public void handleContact(DynamicPhysicsEntity x){
 		super.handleContact(x);
 		if(x instanceof GfxEnemy || x instanceof EnemyShot){

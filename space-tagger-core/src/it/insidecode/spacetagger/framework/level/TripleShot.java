@@ -18,21 +18,20 @@ import it.insidecode.spacetagger.shots.Shot;
  */
 public class TripleShot extends Shot {
 
+	private static float DAMAGE = 1f;
+	private static float SPEED = 6f;
+	private static final Vector2 shot1Offset = new Vector2(50,50);
+	private static final Vector2 shot2Offset = new Vector2(-50,50);
+
 	/**
-	 * Costruttore del TripleShot
+	 * Costruttore del TripleShot che restituisce tre volte
+	 * se' stesso
 	 * 
 	 * @param gameEngine
 	 * 			istanza del GameEngine ottenibile tramite framework.getGameEngine()
 	 * @param v
 	 * 			un Vector2 che indica il punto dove parte lo sparo
 	 */
-
-	private static float DAMAGE = 1f;
-	private static float SPEED = 6f;
-	private static final Vector2 shot1Offset = new Vector2(50,50);
-	private static final Vector2 shot2Offset = new Vector2(-50,50);
-
-	
 	public TripleShot(GameEngine gameEngine, Vector2 v) {
 		super(gameEngine, v, DAMAGE, SPEED);
 		setWhatToKill(Enemy.class);
@@ -42,7 +41,7 @@ public class TripleShot extends Shot {
 	
 	/**
 	 * Restituisce una lista con tre TripleShot
-	 * Spostati di 50px in alto e ai lati
+	 * Spostati di shot1Offset in alto e ai lati
 	 */
 	@Override
 	public List<Shot> instance() {

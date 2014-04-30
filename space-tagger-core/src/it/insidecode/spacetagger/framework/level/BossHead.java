@@ -28,7 +28,7 @@ public class BossHead extends EnemyIntermediate {
 	
 	private int SHOOT_UPDATE_TIME = 200;
 	private Framework framework;
-	private HorizontalBar b;
+	private HorizontalBar bar;
 	
 	// t e limit servono per aggiornare il tempo di sparo
 	private int t;
@@ -37,6 +37,9 @@ public class BossHead extends EnemyIntermediate {
 	private BossBody body;
 
 	/**
+	 * Costruttore, inizializza la testa del boss nella posizione
+	 * specificata da <b>position</b> e attiva la barra di energia
+	 * del boss.
 	 * 
 	 * @param f
 	 *            istanza del framework corrente
@@ -50,26 +53,28 @@ public class BossHead extends EnemyIntermediate {
 				PropertiesManager.getParameter("xplosion"));
 		framework = f;
 		body = bossbody;
-		b = new HorizontalBar(framework.getGameEngine(), new Vector2(50,-20), 70, 5, ENERGY_VALUE);
+		bar = new HorizontalBar(framework.getGameEngine(), new Vector2(50,-20), 70, 5, ENERGY_VALUE);
 		
 		setCenter(position);
 		setShot(BossShot.class);
 		setShotDecorator(BorgShotDecorator.class);
 		
-		
-		addChildEntity(b);
-		b.activate();
+		addChildEntity(bar);
+		bar.activate();
 	}
 	
 
 	/**
-	 * Comportamento classico, inclusi degli spari in un tempo random ogni 300
-	 * frames random
+	 * Il boss ogni 200 frames spara il suo colpo
+	 * e spara via i nemici con il metodo spitEnemies
+	 * e spara il suo colpo. Questo dopo aver completato la sua
+	 * path
+	 *  
 	 */
 	@Override
 	public void update(float delta) {
 		super.update(delta);		
-		b.setEnergy(getEnergy());
+		bar.setEnergy(getEnergy());
 
 		if(getPath().isComplete() && !body.isAlive()){
 			t++;
@@ -78,15 +83,19 @@ public class BossHead extends EnemyIntermediate {
 				t = 0;
 				if (isAlive()){
 					spitEnemies();
+					shoot();
 				}
-				shoot();
 			}
 		}
 
 	}
-	
 
-	
+	/**
+	 * Questo metodo genera dei nemici che attaccano la navicella
+	 * sputandoli dai due lati, il primo e' l'angolo in basso a sinistra
+	 * e il secondo e' impostato dal campo <b>deltaEnemy</b>
+	 * 
+	 */
 	private void spitEnemies(){
 		
 		EnemySnakeTail k = new EnemySnakeTail(framework, getPosition(), 1);
@@ -100,10 +109,13 @@ public class BossHead extends EnemyIntermediate {
 		i.setDepth(Depth.ENTITY1);
 		i.activate();
 	}
-
+	
+	/**
+	 * Se muore aggiunge il punteggio e distrugge la barra orizzontale
+	 */
 	@Override
 	public void destroy(){
-		b.destroy();
+		bar.destroy();
 		framework.getGameEngine().getScoreManager().increaseScore(SCORE_VALUE);
 		super.destroy();
 	}

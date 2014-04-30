@@ -105,22 +105,22 @@ public class SmartShot extends Shot {
 			addedX = 0;
 	}
 	
+	/**
+	 * Aggiorna i movimenti dello sparo. I movimenti dello sparo
+	 * seguono il primo nemico che spawna e gli va addosso uccidendolo
+	 * Utilizza i sottometodi di computazione privati
+	 */
 	@Override
 	public void update(float f){
 		super.update(f);
-		//controlla se i nemici ci sono
-		if(linkedEnemies.toArray().length > 0){
-			// posizione nemico
-			Vector2 enemyPos = getFirstEnemy().getPosition();
-			
-			// se il nemico e' troppo vicino
-			if (getDeltaFromShip(enemyPos) < yTolerance){
-				// cambia obiettivo
-				linkedEnemies.remove(getFirstEnemy());
-				update(f);
+		
+		if(linkedEnemies.toArray().length > 0){ 				//controlla se i nemici ci sono	
+			Vector2 enemyPos = getFirstEnemy().getPosition(); 	// posizione nemico	
+			if (getDeltaFromShip(enemyPos) < yTolerance){ 		// se il nemico e' troppo vicino
+				linkedEnemies.remove(getFirstEnemy()); 			// cambia obiettivo
+				update(f); 										//richiama il metodo per computare un altro movimento
 			}else{
-				// altrimenti vai in cerca del marrano
-				adjustDelta(getDeltaX(enemyPos));			
+				adjustDelta(getDeltaX(enemyPos)); 				// altrimenti vai in cerca del marrano			
 				this.setPosition( this.getPosition().add(addedX,0));
 			}
 		}

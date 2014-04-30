@@ -18,6 +18,13 @@ public class Shield extends GfxEntity {
 	private static final String explosionName = "explosion";
 
 
+	/**
+	 * Istanzia uno scudo alla posizione <b>position</b>
+	 *  
+	 * 
+	 * @param framework
+	 * @param position
+	 */
 	public Shield(Framework framework, Vector2 position) {
 		super(framework, position, ENERGY, SCORE, DAMAGE, SPEED,
 				 PropertiesManager.getParameter(fileName), PropertiesManager.getParameter(explosionName));
@@ -26,7 +33,11 @@ public class Shield extends GfxEntity {
 	}
 
 	/**
-	 * Gestisce la logica di contatto dello scudo
+	 * Gestisce la logica di contatto dello scudo, viene
+	 * distrutto se incontra un nemico intermedio che eredita
+	 * EnemyIntermediate o se e' istanziata da EnemySnakeHead
+	 * o altrimenti distrugge i nemici che incontra
+	 * 
 	 */
 	@Override
 	public void handleContact(DynamicPhysicsEntity x){

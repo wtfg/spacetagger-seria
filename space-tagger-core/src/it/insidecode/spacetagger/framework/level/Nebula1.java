@@ -10,11 +10,14 @@ import com.badlogic.gdx.math.Vector2;
 
 /**
  * Nebulosa
- * @author Mauro
+ * @author Seria.1616892
  *
  */
 public class Nebula1 extends GfxEntity {
 
+	/**
+	 * Costanti
+	 */
 	private static float ENERGY = 1;
 	private static int SCORE = 0;
 	private static float DAMAGE = 0;
@@ -22,7 +25,13 @@ public class Nebula1 extends GfxEntity {
 	
 	private static final String fileName = "nebula1";
 	private static final String explosionName = "explosion";
-
+	
+	/**
+	 * Inizializza questa istanza alla posizione <b>position</b>
+	 * 
+	 * @param framework		istanza del framework corrente
+	 * @param position		posizione dove spawnarla
+	 */
 	public Nebula1(final Framework framework, Vector2 position) {
 		super(framework, position, ENERGY, SCORE, DAMAGE,
 				SPEED, PropertiesManager.getParameter(fileName),

@@ -1,0 +1,58 @@
+package it.insidecode.spacetagger.framework.level;
+
+import it.insidecode.spacetagger.framework.Framework;
+import it.insidecode.spacetagger.logic.Direction;
+
+import com.badlogic.gdx.math.Vector2;
+
+/**
+ * Una fascia di asteroidi
+ * @author Seria.1616892
+ * @see	BlasteroidPowerUp
+ */
+public class BlasteroidCluster extends BlasteroidPowerUp {
+
+	private Framework framework;
+	private static final int tensorX = 480;
+	private static final int tensorY = 100;
+	private static Blasteroid[] children;
+
+	/**
+	 * Costruttore del gruppo di asteroidi: inizializza l'oggetto principale
+	 * e attorno ad esso un numero asteroidNum di asteroidi casuali (classe BlasteroidPointless) 
+	 * 
+	 * @param f		istanza del framework corrente
+	 * @param position		Vector2 con le coordinate del prinicpale
+	 * @param asteroidNum	quanti asteroidi creare
+	 */
+	public BlasteroidCluster(final Framework f, Vector2 position,
+			int asteroidNum) {
+		super(f, position);
+		framework = f;
+		children = new Blasteroid[asteroidNum];
+		int i = 0;
+		while (i < asteroidNum) {
+			children[i] = makeAsteroid();
+			i++;
+		}
+	}
+
+	/**
+	 * Accoda gli asteroidi come child di se' in modo casuale
+	 */
+	private Blasteroid makeAsteroid() {
+		Blasteroid a = new Blasteroid(framework,
+				new Vector2((float) Math.random() * tensorX - tensorX/2,
+						(float) Math.random() * tensorY));
+		addChildEntity(a);
+		a.activate();
+		return a;
+	}
+	
+	public void update(){
+		for(Blasteroid b : children){
+			b.move(Direction.UP);
+		}
+	}
+
+}

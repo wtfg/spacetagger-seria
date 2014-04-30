@@ -22,10 +22,12 @@ public class Scene04 extends Scene {
 		return SCENE_NAME;
 	}
 
+	/**
+	 * Init scena, istanzia i nemici
+	 */
 	@Override
 	public void init() {
 		Gdx.app.log(getName(), "init");
-		
 		
 		TripleShotPowerUp e = new TripleShotPowerUp(framework, new Vector2(240,1050));
 		e.activate();
@@ -47,7 +49,6 @@ public class Scene04 extends Scene {
 		
 		Planet1 p = new Planet1(framework, new Vector2(200,750));
 		p.activate();
-		
 		
 	}
 	
@@ -71,8 +72,6 @@ public class Scene04 extends Scene {
 			}
 		});
 	}
-	
-	
 	
 
 	@Override

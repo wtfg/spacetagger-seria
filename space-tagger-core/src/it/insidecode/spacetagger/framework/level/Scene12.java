@@ -15,6 +15,9 @@ import com.badlogic.gdx.math.Vector2;
 
 
 public class Scene12 extends Scene {
+	
+	public static final int difference = 50;
+	public static final float delta = 1.8f;
 	public static final String SCENE_NAME = "Scene 11 - Other bigger enemies";
 	private static BossHead h;
 	
@@ -27,9 +30,12 @@ public class Scene12 extends Scene {
 	}
 
 	
-	
+	/**
+	 * Init scena, istanzia i nemici
+	 */
 	@Override
 	public void init() {
+		
 		GfxText txt = new GfxText(framework, "FINAL BOSS", new SimpleCallback(){
 			public void onComplete(){
 				ShieldPowerUp s = new ShieldPowerUp(framework, new Vector2(240,650));
@@ -44,8 +50,6 @@ public class Scene12 extends Scene {
 		});
 		txt.activate();
 		
-		
-		
 		BossBody b = new BossBody(framework, new Vector2(140,850));
 		b.setPath(new LinePath(LineDirection.DOWN, 600));
 		b.activate();
@@ -58,15 +62,17 @@ public class Scene12 extends Scene {
 		
 		makeArms(5);
 		
-		
-		
-		
 	}
 	
+	/**
+	 * Costruisce le braccia mettendo in ciclo
+	 * 
+	 * @param k
+	 */
 	public void makeArms(int k){
 		for(int i = 0; i < k*2; i++){
-			float side = i<k ? -1 : 1.8f;
-			EnemySimple e = new EnemySimple(framework, new Vector2(side*100, (i%k)*50 -250));
+			float side = i<k ? -1 : delta;
+			EnemySimple e = new EnemySimple(framework, new Vector2(side*2*difference, (i%k)*difference - 5*difference));
 			h.addChildEntity(e);
 			e.activate();
 		}
@@ -80,7 +86,6 @@ public class Scene12 extends Scene {
 	}
 	
 	
-
 	public void update(float delta) {
 		
 		if (!h.isAlive()){

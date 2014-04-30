@@ -18,7 +18,10 @@ public class IntermediatePath extends Path {
 	private int current = 0;
 
 	/**
-	 * Costruttore
+	 * Costruttore della path del serpente intermedio, di raggio
+	 * <b>radius</b> dopo essere sceso per una linea dritta di 
+	 * altezza <b>y</b>
+	 * 
 	 * @param radius	raggio cerchio
 	 * @param y			y in cui deve scendere
 	 */

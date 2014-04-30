@@ -1,0 +1,52 @@
+package it.insidecode.spacetagger.framework.level;
+
+import java.util.Arrays;
+import java.util.List;
+
+import com.badlogic.gdx.math.Vector2;
+
+import it.insidecode.spacetagger.logic.Direction;
+import it.insidecode.spacetagger.logic.Enemy;
+import it.insidecode.spacetagger.logic.GameEngine;
+import it.insidecode.spacetagger.shots.Shot;
+
+/**
+ * Sparo triplo!
+ * Inizialmente e' dei buoni, uccide i nemici
+ * @author Seria.1616892
+ *
+ */
+public class TripleShot extends Shot {
+
+	private static float DAMAGE = 1f;
+	private static float SPEED = 6f;
+	private static final Vector2 shot1Offset = new Vector2(50,50);
+	private static final Vector2 shot2Offset = new Vector2(-50,50);
+
+	/**
+	 * Costruttore del TripleShot che
+	 * 
+	 * @param gameEngine
+	 * 			istanza del GameEngine ottenibile tramite framework.getGameEngine()
+	 * @param v
+	 * 			un Vector2 che indica il punto dove parte lo sparo
+	 */
+	public TripleShot(GameEngine gameEngine, Vector2 v) {
+		super(gameEngine, v, DAMAGE, SPEED);
+		setWhatToKill(Enemy.class);
+		setDirection(Direction.UP);
+
+	}
+	
+	/**
+	 * Restituisce una lista con tre TripleShot
+	 * Spostati di 50px in alto e ai lati
+	 */
+	@Override
+	public List<Shot> instance() {
+		TripleShot s1 = new TripleShot(gameEngine, this.getPosition().add(shot1Offset));	
+		TripleShot s2 = new TripleShot(gameEngine, this.getPosition().add(shot2Offset));
+		return Arrays.asList(this, (Shot) s1, (Shot) s2);
+	}
+
+}

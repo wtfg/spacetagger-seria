@@ -45,6 +45,9 @@ public class EnemyBig1 extends GfxEnemy {
 	private int limit = SHOOT_UPDATE_TIME;
 
 	/**
+	 * Inizializza il nemico EnemyBig1 alla
+	 * posizione descritta da <i>position</i>, per attivarlo
+	 * bisogna chiamare il metodo <b>activate()</b>
 	 * 
 	 * @param f
 	 *            istanza del framework corrente

@@ -63,3 +63,6 @@
 1398682560358	Rename field 'SPEED_VALUE'
 1398682711496	Rename field 'DAMAGE_VALUE'
 1398684405125	Rename field 'b'
+1398758478519	Rename type 'Blasteroid'
+1398758484197	Rename type 'BlasteroidPointless'
+1398777910326	Rename field 'b'

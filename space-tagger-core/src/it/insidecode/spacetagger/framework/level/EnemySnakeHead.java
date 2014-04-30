@@ -33,6 +33,10 @@ public class EnemySnakeHead extends EnemySimple {
 	
 
 	/**
+	 * Inizializza il nemico intermedio con la testa da serpente alla
+	 * posizione descritta da <i>position</i>, per attivarlo
+	 * bisogna chiamare il metodo <b>activate()</b> e inizializza
+	 * la barra
 	 * 
 	 * @param f
 	 *            istanza del framework corrente
@@ -51,11 +55,19 @@ public class EnemySnakeHead extends EnemySimple {
 		init();
 	}
 	
+	/**
+	 * Imposta il deltaY dei serpenti
+	 * @param y		il nuovo valore di deltaY
+	 */
 	public void setDeltaY(float y){
 		DeltaY = y;
 	}
 	
-	
+	/**
+	 * Concatena in coda <b>enemyNum</b> istanze di <i>EnemySnakeTail</i>
+	 * 
+	 * @param enemyNum
+	 */
 	public void chainEnemies(int enemyNum){
 		Enemy old = this;
 		for(int i = 0; i < enemyNum; i++){
@@ -67,6 +79,7 @@ public class EnemySnakeHead extends EnemySimple {
 			old = e;
 		}
 	}
+	
 	/**
 	 * Imposta i parametri grafici in automatico
 	 */

@@ -32,7 +32,9 @@ public class EnemyKamikaze extends GfxEnemy {
 
 	/**
 	 * Costruttore di EnemyKamikaze, la path viene settata in automatico a
-	 * KamikazePath
+	 * KamikazePath. Inizializza il kamikaze alla
+	 * posizione descritta da <i>position</i>, per attivarlo
+	 * bisogna chiamare il metodo <b>activate()</b>
 	 * 
 	 * Il nemico EnemyKamikaze non spara di default. Lo sparo puo' essere
 	 * attivato con il metodo canShoot(true)

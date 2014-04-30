@@ -24,6 +24,7 @@ public class FuryShot extends Shot {
 	private static final Vector2 delta = new Vector2(0,	60);
 
 	/**
+	 * Sparo del furyPowerUp, piu veloce e con piu danni
 	 * 
 	 * @param gameEngine
 	 * 			istanza del GameEngine ottenibile con framework.getGameEngine()

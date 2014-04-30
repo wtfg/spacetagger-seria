@@ -28,8 +28,11 @@ public class FuryPowerUp extends GfxPowerUp {
 	private Framework framework;
 	private static String fileName = "furyPowerUp";
 	private static final String powerUpName = "FURY!";
+	
 	/**
-	 * Crea il powerup
+	 * Inizializza il powerUp furia per il tempo <b>MAX_SECONDS</b> alla
+	 * posizione descritta da <i>center</i>, per attivarlo 
+	 * bisogna chiamare il metodo <b>activate()</b>
 	 * 
 	 * @param f
 	 *            istanza del framework corrente
@@ -74,6 +77,9 @@ public class FuryPowerUp extends GfxPowerUp {
 		};
 	}
 
+	/**
+	 * Inserisce il testo
+	 */
 	private void makeText(){
 		GfxText t = new GfxText(framework, powerUpName, new SimpleCallback(){
 			public void onComplete(){
@@ -84,7 +90,8 @@ public class FuryPowerUp extends GfxPowerUp {
 	}
 	
 	/**
-	 * Effetti di quando il powerup viene applicato
+	 * Quando il powerup viene applicato setta un
+	 * timeout per ristabilire il tutto
 	 */
 	@Override
 	public void apply() {
@@ -98,7 +105,7 @@ public class FuryPowerUp extends GfxPowerUp {
 		
 		s.setShot(FuryShot.class);
 		s.setShotDelay(SHOOT_DELAY);
-	
+		
 		framework.getGameEngine().getBackground().setSpeed(BG_SPEED); //velocizza		
 		
 		// crea un timer ripetuto e innesca la disattivazione

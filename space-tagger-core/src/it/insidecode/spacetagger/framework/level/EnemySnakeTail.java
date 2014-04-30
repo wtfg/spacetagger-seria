@@ -19,6 +19,9 @@ public class EnemySnakeTail extends EnemySimple {
 	private static final String fileName = "enemyTail";
 	private static final int SHOOT_TIME = 1500;
 	/**
+	 * Inizializza il nemico coda alla
+	 * posizione descritta da <i>position</i>, per attivarlo
+	 * bisogna chiamare il metodo <b>activate()</b>
 	 * 
 	 * @param framework
 	 *            istanza del framework corrente

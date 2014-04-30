@@ -16,7 +16,10 @@ import com.badlogic.gdx.math.Vector2;
 public class EnemyClusterSquare extends EnemyCluster {
 
 	/**
-	 * Costruttore
+	 * Inizializza il nemico a grappolo  alla
+	 * posizione descritta da <i>position</i>, per attivarlo
+	 * bisogna chiamare il metodo <b>activate()</b>
+	 * 
 	 * @param framework	istanza del framework corrente
 	 * @param position	posizione di spawn del nemico
 	 * @param range		distanza dei nemici
@@ -26,7 +29,9 @@ public class EnemyClusterSquare extends EnemyCluster {
 	}
 	
 	/**
-	 * Metodo che passa al costruttore i valori da impostare
+	 * Metodo chiamato dal costruttore che restituisce
+	 * al costruttore la lista gfxEnemy[] da impostare 
+	 * 
 	 * @param framework
 	 * @return
 	 */

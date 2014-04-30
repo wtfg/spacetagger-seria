@@ -23,9 +23,14 @@ public class ShieldPowerUp extends GfxPowerUp {
 	private Framework framework;
 
 	/**
-	 * Costruttore
-	 * @param f			istanza del framework corrente
-	 * @param center	vector2 con la posizione
+	 * Inizializza il powerUp alla posizione descritta da 
+	 * <i>center</i>, per attivarlo  bisogna chiamare il metodo
+	 * <b>activate()</b>
+	 * 
+	 * @param f
+	 *            istanza del framework corrente
+	 * @param center
+	 *            un Vector2 dove deve essere spawnato il powerup
 	 */
 	public ShieldPowerUp(Framework f, Vector2 center) {
 		super(f, center, PropertiesManager.getParameter(fileName));

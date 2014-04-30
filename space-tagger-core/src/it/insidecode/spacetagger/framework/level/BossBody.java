@@ -29,7 +29,6 @@ public class BossBody extends EnemyIntermediate  {
 	/**
 	 * Costanti di altre classi
 	 */
-	
 	private static final Vector2 shieldPowerUpPos = new Vector2(240,450);
 	private static final Vector2 furyPowerUpPos = new Vector2(240,400);
 	private static final Vector2 barPos = new Vector2(50,-20);
@@ -51,6 +50,11 @@ public class BossBody extends EnemyIntermediate  {
 	private int limit = SHOOT_UPDATE_TIME;
 
 	/**
+	 * Costruttore, inizializza il corpo del boss
+	 * alle coordinate specificate da position.
+	 * Inizializza anche barra orizzontale e powerUps
+	 * Alla sua morte attiva due powerUp fondamentali
+	 * al giocatore per uccidere la testa del boss
 	 * 
 	 * @param f
 	 *            istanza del framework corrente
@@ -62,6 +66,7 @@ public class BossBody extends EnemyIntermediate  {
 		super(f, position, ENERGY, SCORE, DAMAGE,
 				SPEED, PropertiesManager.getParameter(fileName),
 				PropertiesManager.getParameter(explosionName), new SimpleCallback(){
+			@Override
 			public void onComplete(){
 				shieldPowerUp.activate();
 				furyPowerUp.activate();
@@ -84,8 +89,9 @@ public class BossBody extends EnemyIntermediate  {
 	
 
 	/**
-	 * Comportamento classico, inclusi degli spari in un tempo random ogni 300
-	 * frames random
+	 * Il boss ogni 300 frames spara il suo colpo
+	 * e spara via i nemici con il metodo spitEnemies
+	 *  
 	 */
 	@Override
 	public void update(float delta) {
@@ -110,7 +116,10 @@ public class BossBody extends EnemyIntermediate  {
 	
 
 	/**
-	 * Spara dei nemici
+	 * Questo metodo genera dei nemici che attaccano la navicella
+	 * sputandoli dai due lati, il primo e' l'angolo in basso a sinistra
+	 * e il secondo e' impostato dal campo <b>deltaEnemy</b>
+	 * 
 	 */
 	private void spitEnemies(){
 		
@@ -126,7 +135,7 @@ public class BossBody extends EnemyIntermediate  {
 	}
 
 	/**
-	 * Se muore aggiungi punteggio e distruggi la barra orizzontale
+	 * Se muore aggiunge il punteggio e distrugge la barra orizzontale
 	 */
 	@Override
 	public void destroy(){

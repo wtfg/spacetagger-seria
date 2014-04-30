@@ -20,6 +20,9 @@ public class CutterPath extends HorizontalHarmonicPath {
 
 	/**
 	 * Costruttore della path verticale verso il basso specifica per EnemyCutter
+	 * Implementta con una HorizontalHarmonicPath che si muove in verticale
+	 * Con <b>width</b> si specifica l'ampiezza della path. Con <b>speed</b>
+	 * si specifica la velocita' della path e con height la lunghezza della path
 	 * 
 	 * @param width
 	 *            L'ampiezza della path
@@ -56,6 +59,7 @@ public class CutterPath extends HorizontalHarmonicPath {
 
 	/**
 	 * Ritorna la nuova posizione della Path
+	 * Implementata aggiungendo la Y al vettore
 	 * 
 	 * @return la nuova posizione
 	 */
@@ -64,11 +68,7 @@ public class CutterPath extends HorizontalHarmonicPath {
 		return super.getNextPositionIncrement(speed).sub(0,  Y_SPEED);
 	}
 
-	/**
-	 * Verifica se la path e' completa o meno
-	 * 
-	 * @return true se e' completa, false se non e' completa
-	 */
+
 	@Override
 	public boolean isComplete() {
 		return deltaY == limitHeight;

@@ -22,26 +22,24 @@ public class Scene05 extends Scene {
 		return SCENE_NAME;
 	}
 
+	/**
+	 * Init scena, istanzia i nemici
+	 */
 	@Override
 	public void init() {
 		Gdx.app.log(getName(), "init");
-		
-		
-		
 		
 		EnemyBerzerk g = new EnemyBerzerk(framework, new Vector2(50,0));
 		EnemyBerzerk h = new EnemyBerzerk(framework, new Vector2(-50,0));	
 		EnemyCluster f = new EnemyCluster(framework, new Vector2(100,650), new GfxEnemy[]{g, h});
 		f.setPath(new FollowShipPath(framework, f));
 		f.activate();
-		
 	
 		EnemyBerzerk j = new EnemyBerzerk(framework, new Vector2(50,0));
 		EnemyBerzerk k = new EnemyBerzerk(framework, new Vector2(-50,0));
 		EnemyCluster i = new EnemyCluster(framework, new Vector2(300,650), new GfxEnemy[]{j, k});
 		i.setPath(new FollowShipPath(framework, i));
 		i.activate();
-		
 		
 		EnemyBerzerk l = new EnemyBerzerk(framework, new Vector2(100,650));
 		l.setPath(new DownSlidePath(200,500, LineDirection.RIGHT));
@@ -56,7 +54,6 @@ public class Scene05 extends Scene {
 		
 		Planet2 p = new Planet2(framework, new Vector2(320,750));
 		p.activate();
-		
 		
 	}
 	

@@ -16,7 +16,7 @@ public class EnemyLazerShot extends EnemyShot {
 	private static final float DAMAGE = 1f;
 	private static final float SPEED = 8f;
 	/**
-	 * Costruttore di EnemyLazerShot
+	 * Costruttore di EnemyLazerShot 
 	 * 
 	 * @param gameEngine
 	 *            istanza del GameEngine ottenibile con

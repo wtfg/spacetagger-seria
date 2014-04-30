@@ -9,7 +9,7 @@ import it.insidecode.spacetagger.shots.Shot;
 
 /**
  * ShotDecorator del laser Borg
- * @author Mauro
+ * @author Seria.1616892
  *
  */
 public class BorgLazerShotDecorator extends ShotDecorator {
@@ -17,7 +17,10 @@ public class BorgLazerShotDecorator extends ShotDecorator {
 	private static final String explosionName = "explosion";
 	
 	/**
-	 * Costruttore
+	 * Inizializza il decoratore con l'animazione, presente
+	 * nei campi della classe. Il gioco lo inizializza tramite
+	 * reflection.
+	 * 
 	 * @param gameDecorator		istanza del gameDecorator
 	 * @param s					shot a cui e' collegato
 	 */

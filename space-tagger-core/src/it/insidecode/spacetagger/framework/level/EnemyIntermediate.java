@@ -10,7 +10,7 @@ import it.insidecode.spacetagger.util.SimpleCallback;
  * Classe astratta che definisce i nemici intermedi
  * serve per dare un parent comune ai nemici boss
  * e per definire computeMove()
- * @author Mauro
+ * @author Seria.1616892
  *
  */
 public abstract class EnemyIntermediate extends GfxEnemy{

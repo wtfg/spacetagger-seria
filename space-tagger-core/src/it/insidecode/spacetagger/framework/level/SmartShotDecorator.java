@@ -17,7 +17,8 @@ public class SmartShotDecorator extends ShotDecorator {
 	private static final String fileName = "smartShot";
 	private static final String explosionName = "explosion";
 	/**
-	 * Costruttore
+	 * Costruttore dello ShotDecorator dello SmartShot
+	 * 
 	 * @param gameDecorator		istanza del gameEngine
 	 * @param s					sparo collegato
 	 */

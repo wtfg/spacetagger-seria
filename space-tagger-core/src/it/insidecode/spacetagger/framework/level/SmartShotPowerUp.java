@@ -24,13 +24,14 @@ public class SmartShotPowerUp extends GfxPowerUp {
 	
 	
 	/**
-	 * Costruttore di SmartShotPowerUp
+	 * Inizializza il powerUp alla posizione descritta da 
+	 * <i>center</i>, per attivarlo  bisogna chiamare il metodo
+	 * <b>activate()</b>
 	 * 
 	 * @param f
 	 *            istanza del framework corrente
 	 * @param center
-	 *            un Vector2 che indica il punto dove deve essere spawnato il
-	 *            powerup
+	 *            un Vector2 dove deve essere spawnato il powerup
 	 */
 	public SmartShotPowerUp(Framework f, Vector2 center) {
 		super(f, center, PropertiesManager.getParameter(fileName));

@@ -1,0 +1,46 @@
+package it.insidecode.spacetagger.framework.level;
+
+import com.badlogic.gdx.math.Vector2;
+
+import it.insidecode.spacetagger.PropertiesManager;
+import it.insidecode.spacetagger.framework.Framework;
+import it.insidecode.spacetagger.framework.GfxEnemy;
+import it.insidecode.spacetagger.framework.GfxShip;
+import it.insidecode.spacetagger.graphics.Animation;
+import it.insidecode.spacetagger.graphics.AnimationType;
+import it.insidecode.spacetagger.logic.DynamicPhysicsEntity;
+
+public class SuperShip extends GfxShip {
+
+	/**
+	 * Inizializza la super navicella alla posizione <b>pos</b>
+	 * la sua velocita' aumenta di 2 e il suo shot e' TripleShot
+	 * 
+	 * @param framework
+	 * @param pos
+	 */
+	public SuperShip(Framework framework, Vector2 pos) {
+		super(framework, pos, Animation.createAnimation(PropertiesManager.getParameter("superShipIdle"), AnimationType.NORMAL), 
+				 Animation.createAnimation(PropertiesManager.getParameter("superShipFromLeft"), AnimationType.NORMAL),
+				 Animation.createAnimation(PropertiesManager.getParameter("superShipFromRight"), AnimationType.NORMAL),
+				 Animation.createAnimation(PropertiesManager.getParameter("superShipLeft"), AnimationType.NORMAL),
+				 Animation.createAnimation(PropertiesManager.getParameter("superShipRight"), AnimationType.NORMAL),
+				 Animation.createAnimation(PropertiesManager.getParameter("explosion"), AnimationType.NORMAL));
+		setShot(TripleShot.class);
+		increaseSpeed(2f);
+	}
+
+
+	/**
+	 * Gestisce il contact 
+	 */
+	public void handleContact(DynamicPhysicsEntity x){
+		super.handleContact(x);
+		if(x instanceof GfxEnemy || x instanceof EnemyShot){
+			float theDamage = x.getDamageValue();
+			setEnergy(getEnergy() + theDamage*2/3);
+		}
+		
+	}
+
+}

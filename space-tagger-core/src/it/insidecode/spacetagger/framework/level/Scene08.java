@@ -22,8 +22,9 @@ public class Scene08 extends Scene {
 		return SCENE_NAME;
 	}
 
-	
-	
+	/**
+	 * Init scena, istanzia i nemici
+	 */
 	@Override
 	public void init() {
 		Gdx.app.log(getName(), "init");

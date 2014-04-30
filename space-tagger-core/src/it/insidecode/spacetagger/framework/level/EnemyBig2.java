@@ -48,6 +48,9 @@ public class EnemyBig2 extends GfxEnemy {
 	private static int limit = new Random().nextInt(SHOOT_UPDATE_TIME);
 
 	/**
+	 * Inizializza il nemico intermedio EnemyBig2 alla
+	 * posizione descritta da <i>position</i>, per attivarlo
+	 * bisogna chiamare il metodo <b>activate()</b>
 	 * 
 	 * @param f
 	 *            istanza del framework corrente

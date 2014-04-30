@@ -17,10 +17,13 @@ import it.insidecode.spacetagger.shots.Shot;
 public class BossShot extends EnemyShot {
 
 	private static final float DAMAGE = 0.5f;
-
+	private static final int delta1 = 60;
+	private static final int delta2 = 100;
 
 	/**
-	 * Costruttore di BossShot
+	 * Costruttore di BossShot, inizializza lo sparo
+	 * nella posizione <b>v</b> e viene inizializzato
+	 * tramite Reflection
 	 * 
 	 * @param gameEngine
 	 *            istanza del GameEngine ottenibile con
@@ -33,14 +36,14 @@ public class BossShot extends EnemyShot {
 	}
 	
 	/**
-	 * Ritorna una lista di 5 spari
+	 * Ritorna una lista di 5 spari 
 	 */
 	@Override
 	public List<Shot> instance() {
-		BossShot s1 = new BossShot(gameEngine, getPosition().add(60,0));
-		BossShot s2 = new BossShot(gameEngine, getPosition().add(-60,0));
-		BossShot s3 = new BossShot(gameEngine, getPosition().add(100,0));
-		BossShot s4 = new BossShot(gameEngine, getPosition().add(-100,0));
+		BossShot s1 = new BossShot(gameEngine, getPosition().add(delta1,0));
+		BossShot s2 = new BossShot(gameEngine, getPosition().add(-delta1,0));
+		BossShot s3 = new BossShot(gameEngine, getPosition().add(delta2,0));
+		BossShot s4 = new BossShot(gameEngine, getPosition().add(-delta2,0));
 		return Arrays.asList((Shot) this, (Shot) s1,(Shot) s2, (Shot) s3,(Shot) s4);
 	}
 
